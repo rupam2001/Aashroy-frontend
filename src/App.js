@@ -1,24 +1,19 @@
-import React, { useContext } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-import { AuthContext } from './contexts/auth.context';
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthContext } from "./contexts/auth.context";
+import GeneralUserLogin from "./routes/generalUserLogin";
 
-import Landing from './routes/landing'
+import Landing from "./routes/landing";
+/*global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider*/
 
 function App() {
   return (
     <div>
-      <GlobalRoutes/>
-      <AuthSecureRoutes/>
+      <GlobalRoutes />
+      <AuthSecureRoutes />
     </div>
   );
 }
-
-
-
 
 function GlobalRoutes() {
   /**
@@ -28,27 +23,23 @@ function GlobalRoutes() {
     <Router>
       <Switch>
         <Route path="/" exact component={Landing} />
+        <Route path="/general/login" component={GeneralUserLogin} />
       </Switch>
     </Router>
-  )
+  );
 }
 
 function AuthSecureRoutes() {
   /**
    * Place all the secure routes here
    */
-  const authcontext = useContext(AuthContext)
-  if(!authcontext.isLoggedIn) return <></>
+  const authcontext = useContext(AuthContext);
+  if (!authcontext.isLoggedIn) return <></>;
   return (
     <Router>
-      <Switch>
-      </Switch>
+      <Switch></Switch>
     </Router>
-  )
+  );
 }
-
-
-
-
 
 export default App;
