@@ -4,7 +4,7 @@ import DefaultLayout from "../layouts/default.layout";
 export default function Landing() {
   return (
     <DefaultLayout>
-      <div>Landing route</div>
+      <div>Hello route</div>
     </DefaultLayout>
   );
 }

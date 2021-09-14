@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthContext } from "./contexts/auth.context";
 import GeneralUserLogin from "./routes/generalUserLogin";
+import NGORegistration from "./routes/ngo/registration";
 
 import Landing from "./routes/landing";
-/*global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider*/
+// global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function GlobalRoutes() {
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/general/login" component={GeneralUserLogin} />
+        <Route path="/ngo/registration" component={NGORegistration} />
       </Switch>
     </Router>
   );
