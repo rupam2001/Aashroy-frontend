@@ -5,6 +5,7 @@ import GeneralUserLogin from "./routes/generalUserLogin";
 import NGORegistration from "./routes/ngo/registration";
 
 import Landing from "./routes/landing";
+import NgoHome from "./routes/ngo/home";
 // global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
 
 function App() {
@@ -26,6 +27,7 @@ function GlobalRoutes() {
         <Route path="/" exact component={Landing} />
         <Route path="/general/login" component={GeneralUserLogin} />
         <Route path="/ngo/registration" component={NGORegistration} />
+        <Route path="/ngo/home" component={NgoHome} />
       </Switch>
     </Router>
   );
