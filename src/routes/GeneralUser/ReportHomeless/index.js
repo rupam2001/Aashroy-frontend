@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import UserLayout from "../../../layouts/UserLayout";
 import TextField from "../../../components/TextField";
 import imageSizeReducer from "../../../utils/imageSizeReducer";
-import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/general-user-form.constants";
+import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/generalUserForm.constants";
+
+import { useHistory } from "react-router-dom";
 
 function ReportHomeless() {
+  const history = useHistory();
+
   const [media, setMedia] = useState([]);
   const [address, setAddress] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState(1);
@@ -13,9 +17,17 @@ function ReportHomeless() {
     // function to handle if new files are selected
     let files = e.target.files;
 
-    if (files) {
+    if (files)
+      // reduce size and store them in media
       imageSizeReducer(files, setMedia, HOMELESS_REPORT_PHOTO_LIMIT);
-    }
+  };
+
+  const submitHandler = () => {
+    // submits the form and froward to user to the additional data form
+    // submit form and receive the parent id
+    // const parentId =
+    // forward with reference to parent
+    // history.push('/general/report-homeless/additional-info', {parentId: parentId})
   };
 
   return (
@@ -72,7 +84,10 @@ function ReportHomeless() {
           </span>
 
           {/* next button */}
-          <button className="flex justify-center items-center text-white rounded bg-blue-500 m-3 p-3 text-lg">
+          <button
+            onClick={submitHandler}
+            className="flex justify-center items-center text-white rounded bg-blue-500 m-3 p-3 text-lg"
+          >
             Next&nbsp;
           </button>
         </div>
