@@ -3,6 +3,7 @@ import UserLayout from "../../../layouts/UserLayout";
 import TextField from "../../../components/TextField";
 import imageSizeReducer from "../../../utils/imageSizeReducer";
 import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/generalUserForm.constants";
+import { reportHomeless } from "../../../api/reportHomeless.api";
 
 import { useHistory } from "react-router-dom";
 
@@ -22,10 +23,10 @@ function ReportHomeless() {
       imageSizeReducer(files, setMedia, HOMELESS_REPORT_PHOTO_LIMIT);
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     // submits the form and froward to user to the additional data form
     // submit form and receive the parent id
-    // const parentId =
+    // const parentId = await reportHomeless();
     // forward with reference to parent
     // history.push('/general/report-homeless/additional-info', {parentId: parentId})
   };
@@ -43,7 +44,7 @@ function ReportHomeless() {
           Map
         </div>
         <div id="report-form-container" className="flex flex-col lg:w-2/4">
-          <h1 className="text-blue-500 rounded m-3 p-3 text-lg font-bold">
+          <h1 className="text-blue-500 rounded m-3 mt-0 p-3 text-lg font-bold">
             Report Homeless
           </h1>
 

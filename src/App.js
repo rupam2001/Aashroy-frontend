@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import { AuthContext } from "./contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "./utils/storage";
 
@@ -23,6 +25,7 @@ function App() {
     <div>
       <GlobalRoutes />
       <AuthSecureRoutes />
+      <ToastContainer />
     </div>
   );
 }

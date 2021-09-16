@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import styles from "./style.module.css";
 import { AuthContext } from "../../contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "../../utils/storage";
+import UserNavbar from "../../components/UserNavbar";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -24,7 +25,12 @@ function UserLayout({ children }) {
     }
   }, [authcontext.isLoggedIn]);
 
-  return <div className={`${styles.container} `}>{children}</div>;
+  return (
+    <div className={`${styles.container} `}>
+      <UserNavbar />
+      {children}
+    </div>
+  );
 }
 
 export default UserLayout;
