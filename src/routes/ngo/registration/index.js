@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import TextField from "../../../components/TextField";
+import PasswordField from "../../../components/PasswordField";
 import "./style.css";
 
-const LoginFormSection = () => (
+const LoginFormSection = ({ emailState, passwordState }) => (
   <div className="container w-96 pb-20">
     <p className="text-2xl mb-2 font-bold">Login to Aashroy</p>
     <p className="mb-6">
@@ -9,20 +11,21 @@ const LoginFormSection = () => (
       <span className="text-red-300 font-bold">Create account</span>
     </p>
     <div className="flex flex-col">
-      <input
-        placeholder="Email address"
-        className="rounded shadow-md px-4 py-3 mb-5"
-      ></input>
-      <input
+      <TextField
+        placeholder="Email Address"
+        containerClass="mb-5"
+        state={emailState}
+      />
+      <PasswordField
         placeholder="Password"
-        type="password"
-        className="rounded shadow-md px-4 py-3 mb-5"
-      ></input>
+        containerClass="mb-5"
+        state={passwordState}
+      />
     </div>
-    <button className="py-3 mb-4 w-96 bg-blue-500 text-white rounded font-bold text-sm hover:bg-blue-600 transition duration-100">
+    <button className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100">
       LOGIN
     </button>
-    <p className="text-gray-500 text-sm">Forgot password?</p>
+    <p className="text-gray-500 text-sm cursor-pointer select-none">Forgot password?</p>
   </div>
 );
 
@@ -53,12 +56,18 @@ const FootLinks = ({ links }) => (
 );
 
 const Registration = () => {
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <div className="flex ngo-registration-root">
-      <div className="bg-gray-100 lg:w-3/5 w-full px-20 py-16">
+    <div className="flex ngo-registration-root bg-blue-600">
+      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-16">
         <p className="text-3xl font-bold text-blue-600">Aashroy</p>
         <div className="w-full h-full flex items-center justify-center">
-          <LoginFormSection />
+          <LoginFormSection
+            emailState={[emailAddress, setEmailAddress]}
+            passwordState={[password, setPassword]}
+          />
         </div>
         {/* <FootLinks
           links={[

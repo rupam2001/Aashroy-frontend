@@ -1,3 +1,7 @@
 .ngo-registration-root{
-    height: 53rem;
+    height: 100vh;
+}
+
+.main-form-section {
+    border-radius: 0 0 8rem 0;
 }
