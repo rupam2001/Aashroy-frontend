@@ -7,10 +7,12 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
+ *  head: takes react component for rendering as label/head 
  *
  *  example:
  *      const [password, setPassword] = React.useState("James Bond")
  *      <PasswordField
+ *          head={<Icon name="example" size={20}/>}
  *          state={[password, setPassword]}
  *          placeholder="Enter password"
  *          containerClass="margin-bottom-12"

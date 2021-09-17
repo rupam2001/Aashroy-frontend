@@ -6,10 +6,12 @@ import React from "react";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
+ *  head: takes react component for rendering as label/head 
  *
  *  example:
  *      const [name, setName] = React.useState("James Bond")
  *      <TextField
+ *          head={<Icon name="example" size={20}/>}
  *          state={[name, setName]}
  *          placeholder="Enter name"
  *          containerClass="margin-bottom-12"
