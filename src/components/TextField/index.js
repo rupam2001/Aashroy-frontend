@@ -6,15 +6,15 @@ import React from "react";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
- * 
- *  example: 
+ *
+ *  example:
  *      const [name, setName] = React.useState("James Bond")
- *      <TextField 
+ *      <TextField
  *          state={[name, setName]}
  *          placeholder="Enter name"
  *          containerClass="margin-bottom-12"
  *      />
- * 
+ *
  */
 
 const TextField = ({ placeholder, containerClass, state }) => {

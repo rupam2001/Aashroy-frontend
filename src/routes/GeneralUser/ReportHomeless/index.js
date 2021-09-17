@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import UserLayout from "../../../layouts/UserLayout";
 import TextField from "../../../components/TextField";
 import imageSizeReducer from "../../../utils/imageSizeReducer";
 import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/generalUserForm.constants";
+import { FaArrowAltCircleRight, FaFileUpload } from "react-icons/fa";
 import { reportHomeless } from "../../../api/reportHomeless.api";
 
 import { useHistory } from "react-router-dom";
@@ -28,22 +29,25 @@ function ReportHomeless() {
     // submit form and receive the parent id
     // const parentId = await reportHomeless();
     // forward with reference to parent
-    // history.push('/general/report-homeless/additional-info', {parentId: parentId})
+    history.push("/general/report-homeless/additional-info", {
+      parentId: null,
+    });
   };
 
   return (
     <UserLayout>
       <div
         id="report-container"
-        className="flex flex-col lg:justify-evenly lg:flex-row-reverse w-screen h-screen"
+        className="flex flex-col lg:justify-evenly lg:flex-row-reverse h-full w-full lg:items-center"
       >
         <div
           id="map-container"
-          className="bg-gray-700 h-1/2 lg:h-full w-full text-white"
+          className="bg-gray-700 h-60 lg:h-full w-full text-white"
         >
+          {/* contains map */}
           Map
         </div>
-        <div id="report-form-container" className="flex flex-col lg:w-2/4">
+        <div id="report-form-container" className="flex flex-col lg:w-1/3">
           <h1 className="text-blue-500 rounded m-3 mt-0 p-3 text-lg font-bold">
             Report Homeless
           </h1>
@@ -54,6 +58,7 @@ function ReportHomeless() {
             placeholder="Address"
             containerClass="m-3"
           />
+
           {/* show images preview if any */}
           {media.length > 0 && (
             <div className="m-3 p-1 flex overflow-x-scroll">
@@ -68,9 +73,17 @@ function ReportHomeless() {
           {/* upload/capture images */}
           {media.length < HOMELESS_REPORT_PHOTO_LIMIT && (
             <>
+              <label
+                for="file-upload"
+                className="flex justify-center cursor-pointer items-center text-gray-700 border-2 h-20 border-dotted m-3 p-3"
+              >
+                Upload photos&nbsp;
+                <FaFileUpload />
+              </label>
               <input
+                id="file-upload"
                 type="file"
-                className="shadow-md px-4 py-3 border-dotted m-3 p-3"
+                className="hidden"
                 placeholder="photo"
                 multiple
                 accept="image/*"
@@ -87,9 +100,10 @@ function ReportHomeless() {
           {/* next button */}
           <button
             onClick={submitHandler}
-            className="flex justify-center items-center text-white rounded bg-blue-500 m-3 p-3 text-lg"
+            className="flex justify-center items-center text-white rounded bg-blue-500 focus:bg-blue-700 m-3 p-3 text-lg"
           >
             Next&nbsp;
+            <FaArrowAltCircleRight className="text-md" />
           </button>
         </div>
       </div>

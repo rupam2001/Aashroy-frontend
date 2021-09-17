@@ -1,10 +1,26 @@
 import React, { useContext, useEffect } from "react";
-import styles from "./style.module.css";
 import { AuthContext } from "../../contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "../../utils/storage";
 import UserNavbar from "../../components/UserNavbar";
 
+import { FaHome, FaExclamationCircle, FaPeopleCarry } from "react-icons/fa";
+import { MdPersonAdd } from "react-icons/md";
 import { useHistory, useLocation } from "react-router-dom";
+
+const NavbarLinks = [
+  { icon: <FaHome className="text-base" />, name: "Home", link: "/general" },
+  {
+    icon: <MdPersonAdd className="text-base" />,
+    name: "Report Homeless",
+    link: "/general/report-homeless",
+  },
+  {
+    icon: <FaExclamationCircle className="text-base" />,
+    name: "Report Crime",
+    link: "#",
+  },
+  { icon: <FaPeopleCarry className="text-base" />, name: "Donate", link: "#" },
+];
 
 function UserLayout({ children }) {
   const location = useLocation();
@@ -26,8 +42,8 @@ function UserLayout({ children }) {
   }, [authcontext.isLoggedIn]);
 
   return (
-    <div className={`${styles.container} `}>
-      <UserNavbar />
+    <div className="flex flex-col w-full min-h-screen">
+      <UserNavbar NavbarLinks={NavbarLinks} />
       {children}
     </div>
   );

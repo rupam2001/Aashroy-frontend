@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { AuthContext } from "./contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "./utils/storage";
@@ -8,6 +9,7 @@ import { getAccessToken, getRefreshToken } from "./utils/storage";
 import GeneralUser from "./routes/GeneralUser";
 import GeneralUserLogin from "./routes/GeneralUser/GeneralUserLogin";
 import ReportHomeless from "./routes/GeneralUser/ReportHomeless";
+import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
 
 import NGORegistration from "./routes/ngo/registration";
 
@@ -25,7 +27,17 @@ function App() {
     <div>
       <GlobalRoutes />
       <AuthSecureRoutes />
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
@@ -59,6 +71,11 @@ function AuthSecureRoutes() {
           path="/general/report-homeless"
           exact
           component={ReportHomeless}
+        />
+        <Route
+          path="/general/report-homeless/additional-info"
+          exact
+          component={ReportAdditionalInfo}
         />
       </Switch>
     </Router>
