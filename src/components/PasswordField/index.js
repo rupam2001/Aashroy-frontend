@@ -18,13 +18,18 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
  *
  */
 
-const PasswordField = ({ placeholder, containerClass, state }) => {
+const PasswordField = ({ placeholder, containerClass, state, head }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div
       className={`rounded shadow-md w-full bg-white flex justify-between ${containerClass}`}
     >
+      {head ? (
+        <div className="flex justify-center flex-col pl-4 pr-3 select-none">
+          {head}
+        </div>
+      ) : null}
       <input
         placeholder={placeholder}
         type={showPassword ? "text" : "password"}
