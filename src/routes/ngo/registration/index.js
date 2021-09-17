@@ -12,7 +12,7 @@ import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
 
-const LoginFormSection = () => {
+const RegistrationFormSection = () => {
   // Contants
   const ICON_SIZE = 16;
 
@@ -122,7 +122,7 @@ const Registration = () => {
       <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-10">
         <p className="text-3xl font-bold text-blue-600 mb-16">Aashroy</p>
         <div className="w-full flex justify-center">
-          <LoginFormSection />
+          <RegistrationFormSection />
         </div>
       </div>
       <div className="container bg-blue-600 w-2/5 lg:block hidden">
