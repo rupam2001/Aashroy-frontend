@@ -7,6 +7,7 @@ import NGOLogin from "./routes/ngo/login";
 import TestComponent from "./routes/test";
 
 import Landing from "./routes/landing";
+import NgoHome from "./routes/ngo/home";
 // global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
 
 function App() {
@@ -30,6 +31,7 @@ function GlobalRoutes() {
         <Route path="/ngo/registration" component={NGORegistration} />
         <Route path="/ngo/login" component={NGOLogin} />
         <Route path="/testing" component={TestComponent} />
+        <Route path="/ngo/home" component={NgoHome} />
       </Switch>
     </Router>
   );
