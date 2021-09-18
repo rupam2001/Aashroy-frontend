@@ -31,6 +31,27 @@ const fakeNgo = {
     },
     ,
   ],
+  members: [
+    {
+      name: "Dave Mustain",
+      role: "CEO",
+      joined_at: "Thu Sep 17 2020 11:54:24 GMT+0530 (India Standard Time)",
+      profile_pic:
+        "https://media.pitchfork.com/photos/5e382b44bafc1600083bb633/16:9/w_2064,h_1161,c_limit/Dave-Mustaine-Megadeth.jpg",
+      about:
+        "David Scott Mustaine (born September 13, 1961) is an American musician best known as the co-founder, vocalist, guitarist, and primary songwriter of thrash metal band Megadeth",
+    },
+    {
+      name: "Kiko Loureiro",
+      role: "Senior manager",
+      joined_at: "Fri Jan 1 2021 11:54:24 GMT+0530 (India Standard Time)",
+      profile_pic:
+        "https://upload.wikimedia.org/wikipedia/commons/8/8e/KikoLoureiro2020.png",
+      about:
+        'Pedro Henrique "Kiko" Loureiro is a Brazilian guitarist. He has been a member of several heavy metal bands, including Angra and Megadeth.',
+    },
+  ],
+  website: "https://www.smilefoundation.org",
 };
 
 export { fakeNgo };

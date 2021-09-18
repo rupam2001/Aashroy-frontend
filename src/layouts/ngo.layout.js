@@ -45,7 +45,7 @@ export default function NgoLayout({ children }) {
               <Link to="/ngo/home">
                 <a
                   href="#"
-                  class=" outline-none flex flex-row items-center h-12 hover:bg-gray-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
+                  class=" outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                     <FaWindowMaximize className="text-blue-900" />
@@ -58,7 +58,7 @@ export default function NgoLayout({ children }) {
               <Link to="/ngo/home">
                 <a
                   href="#"
-                  class="outline-none flex flex-row items-center h-12 hover:bg-gray-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
+                  class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                     <FaDonate className="text-blue-900" />
@@ -71,7 +71,7 @@ export default function NgoLayout({ children }) {
               <Link to="/ngo/home">
                 <a
                   href="#"
-                  class="outline-none flex flex-row items-center h-12 hover:bg-gray-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
+                  class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                     <FaWalking className="text-blue-900" />
@@ -84,7 +84,7 @@ export default function NgoLayout({ children }) {
               <Link to="/ngo/home">
                 <a
                   href="#"
-                  class="outline-none flex flex-row items-center h-12 hover:bg-gray-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
+                  class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
                   <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                     <MdError className="text-blue-900" />
@@ -96,7 +96,7 @@ export default function NgoLayout({ children }) {
             <li>
               <a
                 href="#"
-                class="outline-none flex flex-row items-center h-12 hover:bg-gray-100 py-8 border-l-4 hover:border-red-500 border-transparent"
+                class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-red-500 border-transparent"
               >
                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                   <FaSignOutAlt className="text-red-500" />

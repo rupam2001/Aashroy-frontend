@@ -4,6 +4,7 @@ import "./style.css";
 import IconInput from "../IconInput/IconInput.component";
 import { FaUpload, FaTrash } from "react-icons/fa";
 import Resizer from "react-image-file-resizer";
+import NgoMembers from "../ngoMembers/NgoMembers.component";
 
 export default function NgoDetails({}) {
   const ngocontext = useContext(NgoContext);
@@ -12,6 +13,7 @@ export default function NgoDetails({}) {
   const [phone, setPhone] = useState(null);
   const [about, setAbout] = useState(null);
   const [media_urls, setMedia_urls] = useState([]);
+  const [website, setWebsite] = useState(null);
   const modelRef = useRef(null);
   const [currenModelData, setCurrenModelData] = useState(null);
   const fileInuputRef = useRef(null);
@@ -24,6 +26,7 @@ export default function NgoDetails({}) {
     setEmail(ngocontext.ngoDetails.email);
     setPhone(ngocontext.ngoDetails.phone);
     setAbout(ngocontext.ngoDetails.about);
+    setWebsite(ngocontext.ngoDetails.website);
   };
 
   const showModel = () => {
@@ -65,6 +68,9 @@ export default function NgoDetails({}) {
   return (
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white">
+        <div className="container border-b-2 border-gray-100 h-28 mb-4">
+          Map goes here
+        </div>
         <IconInput
           placeholder={name}
           textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 font-bold"
@@ -81,8 +87,13 @@ export default function NgoDetails({}) {
           addedClass="text-blue-600"
           onChangeText={(text) => setPhone(text)}
         />
+        <IconInput
+          placeholder={website}
+          addedClass="text-blue-600 text-sx"
+          onChangeText={(text) => setWebsite(text)}
+        />
         <textarea
-          className="min-w-full h-60 bg-transparent about focus:outline-none font-light"
+          className="min-w-full h-60 bg-transparent about focus:outline-none "
           value={about || ""}
           onChange={(e) => setAbout(e.target.value)}
         />
@@ -93,6 +104,8 @@ export default function NgoDetails({}) {
           </button>
         </div>
       </div>
+
+      <NgoMembers membersList={ngocontext.ngoDetails.members} />
 
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
         <div className="md:py-10 p-4 flex justify-between items-center">
@@ -127,6 +140,7 @@ export default function NgoDetails({}) {
           ))}
         </div>
       </div>
+
       <div
         id="myModal"
         className="modal flex justify-center items-center py-10"
