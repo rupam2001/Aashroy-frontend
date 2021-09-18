@@ -7,6 +7,7 @@ import { FaArrowAltCircleRight, FaFileUpload } from "react-icons/fa";
 import { reportHomeless } from "../../../api/reportHomeless.api";
 
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ReportHomeless() {
   const history = useHistory();
@@ -14,8 +15,11 @@ function ReportHomeless() {
   const [media, setMedia] = useState([]);
   const [address, setAddress] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [geoLocation, setGeoLocation] = useState({ latitude: 0, longitude: 0 });
+  const [loading, setLoading] = useState(false);
 
   const handleFileSelection = (e) => {
+    if (loading) return;
     // function to handle if new files are selected
     let files = e.target.files;
 
@@ -25,12 +29,33 @@ function ReportHomeless() {
   };
 
   const submitHandler = async () => {
+    // data validation
+    if (media.length < 1) {
+      toast.error("At least one image has to be included.");
+      return;
+    }
+
     // submits the form and froward to user to the additional data form
     // submit form and receive the parent id
-    // const parentId = await reportHomeless();
+    setLoading(true);
+
+    const parentId = await toast.promise(
+      reportHomeless(
+        setLoading,
+        numberOfPeople,
+        { ...geoLocation, address },
+        media
+      ),
+      {
+        pending: "Submiting data",
+        success: "Successfully submitted",
+        error: "Oops! Something went wrong",
+      }
+    );
+
     // forward with reference to parent
     history.push("/general/report-homeless/additional-info", {
-      parentId: null,
+      parentId: parentId,
     });
   };
 
@@ -101,6 +126,7 @@ function ReportHomeless() {
           <button
             onClick={submitHandler}
             className="flex justify-center items-center text-white rounded bg-blue-500 focus:bg-blue-700 m-3 p-3 text-lg"
+            disabled={loading}
           >
             Next&nbsp;
             <FaArrowAltCircleRight className="text-md" />
