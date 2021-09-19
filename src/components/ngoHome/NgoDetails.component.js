@@ -5,6 +5,7 @@ import IconInput from "../IconInput/IconInput.component";
 import { FaUpload, FaTrash } from "react-icons/fa";
 import Resizer from "react-image-file-resizer";
 import NgoMembers from "../ngoMembers/NgoMembers.component";
+import { updateNgoBasicInfoAsync } from "../../api/ngoDetailsEdit.api";
 
 export default function NgoDetails({}) {
   const ngocontext = useContext(NgoContext);
@@ -19,14 +20,14 @@ export default function NgoDetails({}) {
   const fileInuputRef = useRef(null);
   useEffect(() => {
     setStates();
-    setMedia_urls(ngocontext.ngoDetails.media_urls);
-  }, []);
+    setMedia_urls(ngocontext.ngoDetails?.media_urls);
+  }, [ngocontext]);
   const setStates = () => {
-    setName(ngocontext.ngoDetails.name);
-    setEmail(ngocontext.ngoDetails.email);
-    setPhone(ngocontext.ngoDetails.phone);
-    setAbout(ngocontext.ngoDetails.about);
-    setWebsite(ngocontext.ngoDetails.website);
+    setName(ngocontext.ngoDetails?.name);
+    setEmail(ngocontext.ngoDetails?.email);
+    setPhone(ngocontext.ngoDetails?.phone);
+    setAbout(ngocontext.ngoDetails?.about);
+    setWebsite(ngocontext.ngoDetails?.website);
   };
 
   const showModel = () => {
@@ -65,6 +66,27 @@ export default function NgoDetails({}) {
       );
     });
 
+  const handleDetailsEditSubmit = async () => {
+    console.log(name, phone, about, website);
+    //api call
+    const newNgoData = await updateNgoBasicInfoAsync({
+      name,
+      phone,
+      about,
+      website,
+    });
+    if (!newNgoData) {
+      alert("Something went wrong");
+      return;
+    }
+    let temp = { ...ngocontext.ngoDetails };
+    temp.name = newNgoData.name;
+    temp.phone = newNgoData.phone;
+    temp.about = newNgoData.about;
+    temp.website = newNgoData.website;
+    ngocontext.setNgoDetails(temp);
+  };
+
   return (
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white">
@@ -74,6 +96,7 @@ export default function NgoDetails({}) {
         <IconInput
           placeholder={name}
           textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 font-bold"
+          // textClass="md:text-5xl text-2xl font-bold"
           onChangeText={(text) => setName(text)}
         />
         <IconInput
@@ -99,13 +122,16 @@ export default function NgoDetails({}) {
         />
 
         <div className="flex justify-end">
-          <button className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100">
+          <button
+            onClick={handleDetailsEditSubmit}
+            className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100"
+          >
             Update
           </button>
         </div>
       </div>
 
-      <NgoMembers membersList={ngocontext.ngoDetails.members} />
+      <NgoMembers membersList={ngocontext.ngoDetails?.members} />
 
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
         <div className="md:py-10 p-4 flex justify-between items-center">
@@ -125,7 +151,7 @@ export default function NgoDetails({}) {
           />
         </div>
         <div className="container grid grid-cols-3 gap-2 mx-auto">
-          {media_urls.map((i) => (
+          {media_urls?.map((i) => (
             <div className="w-full rounded" key={i.url}>
               <img
                 src={i.url}

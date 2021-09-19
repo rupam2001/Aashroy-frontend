@@ -7,11 +7,11 @@ const IconInput = ({ onChangeText, placeholder, textClass, addedClass }) => {
   const inputRef = useRef(null);
 
   const makeInputOn = () => {
-    inputRef.current.contentEditable = true;
-    inputRef.current.focus();
+    // inputRef.current.contentEditable = true;
+    // inputRef.current.focus();
   };
   const makeInputOff = () => {
-    inputRef.current.contentEditable = false;
+    // inputRef.current.contentEditable = false;
   };
   useEffect(() => {
     setValue(placeholder);
@@ -27,20 +27,37 @@ const IconInput = ({ onChangeText, placeholder, textClass, addedClass }) => {
   });
   return (
     <div className="flex justify-center max-w-max items-center">
-      <h2
-        className={
-          textClass ||
-          "text-lg mr-2 focus:outline-none px-1 py-1" + ` ${addedClass || ""}`
-        }
-        ref={inputRef}
-        onBlur={() => {
-          setShowIcon(true);
-          makeInputOff();
-        }}
-        onChange={(e) => onChangeText(e.target.value)}
-      >
-        {value}
-      </h2>
+      {showIcon && (
+        <h2
+          className={
+            textClass ||
+            "text-lg mr-2 focus:outline-none px-1 py-1" + ` ${addedClass || ""}`
+          }
+          ref={inputRef}
+          onBlur={() => {
+            setShowIcon(true);
+            makeInputOff();
+          }}
+        >
+          {value}
+        </h2>
+      )}
+      {!showIcon && (
+        <input
+          className={
+            textClass ||
+            "text-lg mr-2 focus:outline-none px-1 py-1" + ` ${addedClass || ""}`
+          }
+          ref={inputRef}
+          onBlur={() => {
+            setShowIcon(true);
+            makeInputOff();
+          }}
+          value={placeholder}
+          onChange={(e) => onChangeText(e.target.value)}
+          autoFocus={true}
+        />
+      )}
       {showIcon && (
         <FaEdit
           className="text-gray-400 text-lg cursor-pointer"

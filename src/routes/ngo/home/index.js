@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NgoDetails from "../../../components/ngoHome/NgoDetails.component";
 import NgoLayout from "../../../layouts/ngo.layout";

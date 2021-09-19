@@ -7,7 +7,7 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
- *  head: takes react component for rendering as label/head 
+ *  head: takes react component for rendering as label/head
  *
  *  example:
  *      const [password, setPassword] = React.useState("James Bond")
@@ -35,7 +35,7 @@ const PasswordField = ({ placeholder, containerClass, state, head }) => {
       <input
         placeholder={placeholder}
         type={showPassword ? "text" : "password"}
-        className="px-4 py-3 w-5/6"
+        className="px-4 py-3 w-5/6 outline-none"
         value={state[0]}
         onChange={(e) => {
           state[1](e.target.value);

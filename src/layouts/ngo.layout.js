@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./styles/ngo.css";
 import {
@@ -9,6 +9,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { MdError } from "react-icons/md";
+import { NgoContext } from "../contexts/ngo.context";
 
 export default function NgoLayout({ children }) {
   const sideMenuRef = useRef(null);
@@ -19,6 +20,8 @@ export default function NgoLayout({ children }) {
   function closeNav() {
     sideMenuRef.current.style.width = "0";
   }
+  const ngocontext = useContext(NgoContext);
+
   return (
     <div>
       <div className="md:bg-transparent md:hidden top-0 sticky bg-white shadow py-2">

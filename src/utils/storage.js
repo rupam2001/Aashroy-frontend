@@ -19,10 +19,19 @@ const handlePostFetching = (res) => {
   setAccessToken(access_token);
 };
 
+const getAccessTokenNGO = () => {
+  return Cookies.get("access_token_ngo");
+};
+const setAccessTokenNGO = (value) => {
+  Cookies.set("access_token_ngo", value, { expires: 30, path: "" });
+};
+
 export {
   getAccessToken,
   setAccessToken,
   getRefreshToken,
   setRefreshToken,
   handlePostFetching,
+  getAccessTokenNGO,
+  setAccessTokenNGO,
 };

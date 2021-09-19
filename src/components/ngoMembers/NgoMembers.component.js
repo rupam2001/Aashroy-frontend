@@ -1,6 +1,10 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { FaPlusCircle, FaTrash } from "react-icons/fa";
 import Resizer from "react-image-file-resizer";
+import {
+  addNewMembeNgoAsync,
+  removeMembeNgoAsync,
+} from "../../api/ngoDetailsEdit.api";
 
 export default function NgoMembers({ membersList }) {
   const [members, setMembers] = useState(membersList || []);
@@ -46,7 +50,27 @@ export default function NgoMembers({ membersList }) {
       );
     });
 
-  const handleNewMemberAdded = () => {};
+  const handleNewMemberAdded = async () => {
+    const { members } = await addNewMembeNgoAsync({
+      name: newName,
+      role: newRole,
+      about: newAbout,
+      profile_pic: newImage,
+    });
+    if (!members) {
+      alert("Something went wrong");
+    }
+    setMembers(members);
+    setShowForm(false);
+  };
+  const handleRemoveMember = async (_id) => {
+    const { members } = await removeMembeNgoAsync({ _id });
+    if (!members) {
+      alert("Something went wrong");
+    }
+    setMembers(members);
+    setShowForm(false);
+  };
 
   return (
     <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white mt-10">
@@ -65,7 +89,7 @@ export default function NgoMembers({ membersList }) {
 
       <div className="flex flex-col items-center ">
         {showForm && (
-          <div class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 w-full">
+          <div class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 w-full min-w-full">
             <div class="flex justify-center md:justify-end -mt-16">
               <img
                 class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500 cursor-pointer"
@@ -128,26 +152,32 @@ export default function NgoMembers({ membersList }) {
             </div>
           </div>
         )}
-        {members.map((m) => (
-          <div class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12">
-            <div class="flex justify-center md:justify-end -mt-16">
-              <img
-                class="w-20 h-20 object-cover rounded-full border-2 border-blue-500"
-                src={m.profile_pic}
-              />
-            </div>
-            <div className="md:block flex flex-col items-center">
-              <h2 class="text-gray-800 text-3xl font-semibold pb-2">
-                {m.name}
-              </h2>
-              <h5 className="text-blue-400">{m.role}</h5>
-              <p class="mt-2 text-gray-600">{m.about}</p>
-              <div className="flex justify-end mt-4 w-full">
-                <FaTrash className="cursor-pointer text-red-500" />
+        {members &&
+          members.map((m) => (
+            <div class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 min-w-full">
+              <div class="flex justify-center md:justify-end -mt-16">
+                <img
+                  class="w-20 h-20 object-cover rounded-full border-2 border-blue-500"
+                  src={m.profile_pic}
+                />
+              </div>
+              <div className="md:block flex flex-col items-center">
+                <h2 class="text-gray-800 text-3xl font-semibold pb-2">
+                  {m.name}
+                </h2>
+                <h5 className="text-blue-400">{m.role}</h5>
+                <p class="mt-2 text-gray-600">{m.about}</p>
+                <div className="flex justify-end mt-4 w-full">
+                  <FaTrash
+                    className="cursor-pointer text-red-500"
+                    onClick={() => {
+                      handleRemoveMember(m._id);
+                    }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

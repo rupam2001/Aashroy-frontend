@@ -45,5 +45,37 @@ async function ngoLoginAsync({ email, password }) {
     return { access_token: null, ngoData: null, refresh_token: null };
   }
 }
+async function ngoRegisterAsync({
+  email,
+  password,
+  name,
+  phone,
+  website,
+  about,
+  location,
+}) {
+  /**
+   *
+   */
+  try {
+    const { success, msg } = await fetch(ENDPOINT + "/auth/ngo/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+        name,
+        phone,
+        website,
+        about,
+        location,
+      }),
+    }).then((r) => r.json());
 
-export { GeneralUserLoginAsync, ngoLoginAsync };
+    return { success, msg, error: false };
+  } catch (error) {
+    return { success: false, msg: null, error: true };
+  }
+}
+
+export { GeneralUserLoginAsync, ngoLoginAsync, ngoRegisterAsync };
