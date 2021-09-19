@@ -10,6 +10,7 @@ import GeneralUser from "./routes/GeneralUser";
 import GeneralUserLogin from "./routes/GeneralUser/GeneralUserLogin";
 import ReportHomeless from "./routes/GeneralUser/ReportHomeless";
 import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
+import Donate from "./routes/GeneralUser/Donate";
 
 import NGORegistration from "./routes/ngo/registration";
 
@@ -77,6 +78,7 @@ function AuthSecureRoutes() {
           exact
           component={ReportAdditionalInfo}
         />
+        <Route path="/general/donate/:ngoId" exact component={Donate} />
       </Switch>
     </Router>
   );

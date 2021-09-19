@@ -47,8 +47,8 @@ function ReportHomeless() {
         media
       ),
       {
-        pending: "Submiting data",
-        success: "Successfully submitted",
+        pending: "Uploading data",
+        success: "Successfully uploaded",
         error: "Oops! Something went wrong",
       }
     );

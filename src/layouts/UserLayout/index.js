@@ -19,7 +19,11 @@ const NavbarLinks = [
     name: "Report Crime",
     link: "#",
   },
-  { icon: <FaPeopleCarry className="text-base" />, name: "Donate", link: "#" },
+  {
+    icon: <FaPeopleCarry className="text-base" />,
+    name: "Donate",
+    link: "/general/donate",
+  },
 ];
 
 function UserLayout({ children }) {
