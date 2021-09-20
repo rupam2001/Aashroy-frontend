@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
-const IconInput = ({ onChangeText, placeholder, textClass, addedClass }) => {
+const IconInput = ({
+  onChangeText,
+  placeholder,
+  textClass,
+  addedClass,
+  isEditable,
+}) => {
   const [showIcon, setShowIcon] = useState(true);
   const [value, setValue] = useState(placeholder);
   const inputRef = useRef(null);
@@ -58,7 +64,7 @@ const IconInput = ({ onChangeText, placeholder, textClass, addedClass }) => {
           autoFocus={true}
         />
       )}
-      {showIcon && (
+      {showIcon && isEditable && (
         <FaEdit
           className="text-gray-400 text-lg cursor-pointer"
           onClick={() => {

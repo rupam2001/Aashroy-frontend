@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./styles/ngo.css";
 import {
   FaGripLines,
@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import { MdError } from "react-icons/md";
 import { NgoContext } from "../contexts/ngo.context";
+import { removeAccessTokenNgo, removeRefreshToken } from "../utils/storage";
+import { ngoSignOutAsync } from "../api/auth.api";
 
 export default function NgoLayout({ children }) {
   const sideMenuRef = useRef(null);
@@ -21,6 +23,24 @@ export default function NgoLayout({ children }) {
     sideMenuRef.current.style.width = "0";
   }
   const ngocontext = useContext(NgoContext);
+  const history = useHistory();
+  useEffect(() => {
+    if (!ngocontext.isLoggedIn) {
+      history.push("/ngo/login");
+    }
+  }, [ngocontext.isLoggedIn]);
+
+  const handleLogout = async () => {
+    const { success } = await ngoSignOutAsync({});
+    if (success) {
+      removeAccessTokenNgo();
+      removeRefreshToken();
+      ngocontext.setIsLoggedIn(false);
+      history.push("/ngo/login");
+    } else {
+      alert("Something went wrong");
+    }
+  };
 
   return (
     <div>
@@ -46,7 +66,7 @@ export default function NgoLayout({ children }) {
           <ul class="flex flex-col py-10 ">
             <li>
               <Link to="/ngo/home">
-                <a
+                <div
                   href="#"
                   class=" outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
@@ -54,12 +74,12 @@ export default function NgoLayout({ children }) {
                     <FaWindowMaximize className="text-blue-900" />
                   </span>
                   <span class=" text-sm text-blue-900 ">Dashboard</span>
-                </a>
+                </div>
               </Link>
             </li>
             <li>
               <Link to="/ngo/home">
-                <a
+                <div
                   href="#"
                   class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
@@ -67,12 +87,12 @@ export default function NgoLayout({ children }) {
                     <FaDonate className="text-blue-900" />
                   </span>
                   <span class="text-sm  text-blue-900">Donations</span>
-                </a>
+                </div>
               </Link>
             </li>
             <li>
               <Link to="/ngo/home">
-                <a
+                <div
                   href="#"
                   class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
@@ -80,12 +100,12 @@ export default function NgoLayout({ children }) {
                     <FaWalking className="text-blue-900" />
                   </span>
                   <span class="text-sm  text-blue-900">Homeless</span>
-                </a>
+                </div>
               </Link>
             </li>
             <li>
               <Link to="/ngo/home">
-                <a
+                <div
                   href="#"
                   class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
                 >
@@ -93,19 +113,20 @@ export default function NgoLayout({ children }) {
                     <MdError className="text-blue-900" />
                   </span>
                   <span class="text-sm  text-blue-900">Crime Reports</span>
-                </a>
+                </div>
               </Link>
             </li>
             <li>
-              <a
+              <div
                 href="#"
-                class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-red-500 border-transparent"
+                class=" cursor-pointer outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-red-500 border-transparent"
+                onClick={handleLogout}
               >
                 <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-800">
                   <FaSignOutAlt className="text-red-500" />
                 </span>
                 <span class="text-sm text-red-500">Logout</span>
-              </a>
+              </div>
             </li>
           </ul>
         </div>

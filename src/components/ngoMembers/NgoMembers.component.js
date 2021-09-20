@@ -6,7 +6,7 @@ import {
   removeMembeNgoAsync,
 } from "../../api/ngoDetailsEdit.api";
 
-export default function NgoMembers({ membersList }) {
+export default function NgoMembers({ membersList, forPublic }) {
   const [members, setMembers] = useState(membersList || []);
   const [showForm, setShowForm] = useState(false);
   const fileInuputRef = useRef(null);
@@ -79,11 +79,15 @@ export default function NgoMembers({ membersList }) {
           Members
         </h1>
         <div className="flex flex-col items-center">
-          <FaPlusCircle
-            className="text-xl text-blue-500 cursor-pointer"
-            onClick={handleAddMembersClick}
-          />
-          <p className="text-sm font-medium text-blue-500">Add</p>
+          {!forPublic && (
+            <FaPlusCircle
+              className="text-xl text-blue-500 cursor-pointer"
+              onClick={handleAddMembersClick}
+            />
+          )}
+          {!forPublic && (
+            <p className="text-sm font-medium text-blue-500">Add</p>
+          )}
         </div>
       </div>
 
@@ -167,14 +171,16 @@ export default function NgoMembers({ membersList }) {
                 </h2>
                 <h5 className="text-blue-400">{m.role}</h5>
                 <p class="mt-2 text-gray-600">{m.about}</p>
-                <div className="flex justify-end mt-4 w-full">
-                  <FaTrash
-                    className="cursor-pointer text-red-500"
-                    onClick={() => {
-                      handleRemoveMember(m._id);
-                    }}
-                  />
-                </div>
+                {!forPublic && (
+                  <div className="flex justify-end mt-4 w-full">
+                    <FaTrash
+                      className="cursor-pointer text-red-500"
+                      onClick={() => {
+                        handleRemoveMember(m._id);
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           ))}

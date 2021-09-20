@@ -5,29 +5,33 @@ import IconInput from "../IconInput/IconInput.component";
 import { FaUpload, FaTrash } from "react-icons/fa";
 import Resizer from "react-image-file-resizer";
 import NgoMembers from "../ngoMembers/NgoMembers.component";
-import { updateNgoBasicInfoAsync } from "../../api/ngoDetailsEdit.api";
+import {
+  addNewPhotoAsync,
+  updateNgoBasicInfoAsync,
+} from "../../api/ngoDetailsEdit.api";
 
-export default function NgoDetails({}) {
-  const ngocontext = useContext(NgoContext);
+export default function NgoDetails({ ngoData, forPublic }) {
+  // const ngoData = useContext(NgoContext);
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [phone, setPhone] = useState(null);
   const [about, setAbout] = useState(null);
   const [media_urls, setMedia_urls] = useState([]);
   const [website, setWebsite] = useState(null);
+  const [image, setImage] = useState(null);
   const modelRef = useRef(null);
   const [currenModelData, setCurrenModelData] = useState(null);
   const fileInuputRef = useRef(null);
   useEffect(() => {
     setStates();
-    setMedia_urls(ngocontext.ngoDetails?.media_urls);
-  }, [ngocontext]);
+    setMedia_urls(ngoData.ngoDetails?.media_urls);
+  }, [ngoData]);
   const setStates = () => {
-    setName(ngocontext.ngoDetails?.name);
-    setEmail(ngocontext.ngoDetails?.email);
-    setPhone(ngocontext.ngoDetails?.phone);
-    setAbout(ngocontext.ngoDetails?.about);
-    setWebsite(ngocontext.ngoDetails?.website);
+    setName(ngoData.ngoDetails?.name);
+    setEmail(ngoData.ngoDetails?.email);
+    setPhone(ngoData.ngoDetails?.phone);
+    setAbout(ngoData.ngoDetails?.about);
+    setWebsite(ngoData.ngoDetails?.website);
   };
 
   const showModel = () => {
@@ -43,7 +47,7 @@ export default function NgoDetails({}) {
     try {
       const file = event.target.files[0];
       const image = await resizeFile(file);
-      console.log(image);
+      setImage(image);
       setCurrenModelData({ url: image, type: "image", isUploading: true });
       showModel();
     } catch (err) {
@@ -79,12 +83,25 @@ export default function NgoDetails({}) {
       alert("Something went wrong");
       return;
     }
-    let temp = { ...ngocontext.ngoDetails };
+    let temp = { ...ngoData.ngoDetails };
     temp.name = newNgoData.name;
     temp.phone = newNgoData.phone;
     temp.about = newNgoData.about;
     temp.website = newNgoData.website;
-    ngocontext.setNgoDetails(temp);
+    ngoData.setNgoDetails(temp);
+  };
+
+  const handleUpload = async () => {
+    hideModel();
+    const { newMediaList } = await addNewPhotoAsync({ imageBase64: image });
+    if (!newMediaList) {
+      alert("Something went wrong");
+      return;
+    }
+    setMedia_urls(newMediaList);
+    let temp = { ...ngoData.ngoDetails };
+    temp.media_urls = newMediaList;
+    ngoData.setNgoDetails(temp);
   };
 
   return (
@@ -98,50 +115,63 @@ export default function NgoDetails({}) {
           textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 font-bold"
           // textClass="md:text-5xl text-2xl font-bold"
           onChangeText={(text) => setName(text)}
+          isEditable={!forPublic}
         />
         <IconInput
           placeholder={email}
           // textClass="text-red-400"
           addedClass="text-red-900"
           onChangeText={(text) => setEmail(text)}
+          isEditable={!forPublic}
         />
         <IconInput
           placeholder={phone}
           addedClass="text-blue-600"
           onChangeText={(text) => setPhone(text)}
+          isEditable={!forPublic}
         />
         <IconInput
           placeholder={website}
           addedClass="text-blue-600 text-sx"
           onChangeText={(text) => setWebsite(text)}
+          isEditable={!forPublic}
         />
         <textarea
           className="min-w-full h-60 bg-transparent about focus:outline-none "
           value={about || ""}
-          onChange={(e) => setAbout(e.target.value)}
+          onChange={(e) => {
+            if (!forPublic) setAbout(e.target.value);
+          }}
         />
 
-        <div className="flex justify-end">
-          <button
-            onClick={handleDetailsEditSubmit}
-            className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100"
-          >
-            Update
-          </button>
-        </div>
+        {!forPublic && (
+          <div className="flex justify-end">
+            <button
+              onClick={handleDetailsEditSubmit}
+              className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100"
+            >
+              Update
+            </button>
+          </div>
+        )}
       </div>
 
-      <NgoMembers membersList={ngocontext.ngoDetails?.members} />
+      <NgoMembers
+        membersList={ngoData.ngoDetails?.members}
+        forPublic={forPublic}
+      />
 
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
         <div className="md:py-10 p-4 flex justify-between items-center">
           <h1 className="text-blue-500 text-lg md:text-2xl font-medium">
             Photos
           </h1>
-          <FaUpload
-            className="text-xl text-gray-500 cursor-pointer"
-            onClick={handleUploadClick}
-          />
+          {!forPublic && (
+            <FaUpload
+              className="text-xl text-gray-500 cursor-pointer"
+              onClick={handleUploadClick}
+            />
+          )}
           <input
             type="file"
             accept="image/*"
@@ -176,10 +206,14 @@ export default function NgoDetails({}) {
           <div className="flex justify-end w-full h-10 items-end">
             {currenModelData && currenModelData.isUploading && (
               <div className=" flex flex-col justify-center items-center mr-10 md:mr-20">
-                <FaUpload
-                  className="text-xl text-gray-500 cursor-pointer "
-                  onClick={() => {}}
-                />
+                {!forPublic && (
+                  <FaUpload
+                    className="text-xl text-gray-500 cursor-pointer "
+                    onClick={() => {
+                      handleUpload();
+                    }}
+                  />
+                )}
                 {/* <p>Post</p> */}
               </div>
             )}

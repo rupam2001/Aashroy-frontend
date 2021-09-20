@@ -4,6 +4,7 @@
  */
 
 import { ENDPOINT } from "../constants/global.constants";
+import { getRefreshToken } from "../utils/storage";
 
 async function GeneralUserLoginAsync({ tokenId }) {
   /**
@@ -77,5 +78,26 @@ async function ngoRegisterAsync({
     return { success: false, msg: null, error: true };
   }
 }
+async function ngoSignOutAsync({}) {
+  /**
+   *
+   */
+  try {
+    const { success } = await fetch(ENDPOINT + "/auth/ngo/signout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh_token: getRefreshToken() }),
+    }).then((r) => r.json());
 
-export { GeneralUserLoginAsync, ngoLoginAsync, ngoRegisterAsync };
+    return { success };
+  } catch (error) {
+    return { success: false };
+  }
+}
+
+export {
+  GeneralUserLoginAsync,
+  ngoLoginAsync,
+  ngoRegisterAsync,
+  ngoSignOutAsync,
+};

@@ -37,19 +37,19 @@ async function addNewPhotoAsync({ imageBase64 }) {
    */
   try {
     const bearer = "bearer " + getAccessToken() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/addnewphoto", {
+    const res = await fetch(ENDPOINT + "/ngo/details/addnewphoto", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: bearer,
       },
-      body: JSON.stringify({ imageBase64 }),
+      body: JSON.stringify({ image: imageBase64 }),
     }).then((r) => r.json());
 
     handlePostFetching(res);
     return res;
   } catch (error) {
-    return null;
+    return { newMediaList: null };
   }
 }
 async function getNGODataAsync() {
