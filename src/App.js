@@ -9,11 +9,13 @@ import { getAccessToken, getRefreshToken } from "./utils/storage";
 import GeneralUser from "./routes/GeneralUser";
 import GeneralUserLogin from "./routes/GeneralUser/GeneralUserLogin";
 import ReportHomeless from "./routes/GeneralUser/ReportHomeless";
-import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
+
+//import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
 
 import NGORegistration from "./routes/ngo/registration";
-
+import About from "./routes/AboutPage";
 import Landing from "./routes/landing";
+import Contact from "./routes/ContactPage";
 // global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
 
 function App() {
@@ -52,6 +54,8 @@ function GlobalRoutes() {
         <Route path="/" exact component={Landing} />
         <Route path="/general/login" exact component={GeneralUserLogin} />
         <Route path="/ngo/registration" component={NGORegistration} />
+        <Route path="/AboutUs" component={About} />
+        <Route path="/ContactUs" component={Contact} />
       </Switch>
     </Router>
   );
@@ -75,7 +79,7 @@ function AuthSecureRoutes() {
         <Route
           path="/general/report-homeless/additional-info"
           exact
-          component={ReportAdditionalInfo}
+          component={'xyz'}
         />
       </Switch>
     </Router>
