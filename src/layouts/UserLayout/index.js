@@ -17,7 +17,7 @@ const NavbarLinks = [
   {
     icon: <FaExclamationCircle className="text-base" />,
     name: "Report Crime",
-    link: "#",
+    link: "/report-crime",
   },
   {
     icon: <FaPeopleCarry className="text-base" />,

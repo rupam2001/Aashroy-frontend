@@ -42,9 +42,13 @@ function GeneralUser() {
 
   useEffect(() => {
     (async () => {
-      // bring userdata from backend
-      const fetchedUserDetails = await fetchUserDetails();
-      setUserData(fetchedUserDetails);
+      try {
+        // bring userdata from backend
+        const fetchedUserDetails = await fetchUserDetails();
+        setUserData(fetchedUserDetails);
+      } catch (err) {
+        toast.error("Something went wrong");
+      }
     })();
   }, []);
 
@@ -59,10 +63,12 @@ function GeneralUser() {
         id="user_profile"
         className="m-3 flex flex-col justify-center items-center"
       >
-        <GeneralUserProfileCard
-          requestUpdate={requestUpdate}
-          userData={userData}
-        />
+        {userData && (
+          <GeneralUserProfileCard
+            requestUpdate={requestUpdate}
+            userData={userData}
+          />
+        )}
       </div>
     </UserLayout>
   );
