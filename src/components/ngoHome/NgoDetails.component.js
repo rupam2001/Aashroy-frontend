@@ -23,16 +23,14 @@ export default function NgoDetails({ ngoData, forPublic }) {
   const [currenModelData, setCurrenModelData] = useState(null);
   const fileInuputRef = useRef(null);
   useEffect(() => {
-    setStates();
-    setMedia_urls(ngoData.ngoDetails?.media_urls);
+    if (!ngoData.ngoDetails) return;
+    setName(ngoData.ngoDetails.name);
+    setEmail(ngoData.ngoDetails.email);
+    setPhone(ngoData.ngoDetails.phone);
+    setAbout(ngoData.ngoDetails.about);
+    setWebsite(ngoData.ngoDetails.website);
+    setMedia_urls(ngoData.ngoDetails.media_urls);
   }, [ngoData]);
-  const setStates = () => {
-    setName(ngoData.ngoDetails?.name);
-    setEmail(ngoData.ngoDetails?.email);
-    setPhone(ngoData.ngoDetails?.phone);
-    setAbout(ngoData.ngoDetails?.about);
-    setWebsite(ngoData.ngoDetails?.website);
-  };
 
   const showModel = () => {
     modelRef.current.style.display = "flex";
