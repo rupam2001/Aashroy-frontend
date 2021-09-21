@@ -12,4 +12,19 @@ async function getNGOAsync({ id }) {
   }
 }
 
-export { getNGOAsync };
+async function getNGOSAsync({ name, skip, limit }) {
+  try {
+    const res = await fetch(
+      ENDPOINT + "/ngo/public/getList/" + name + "/" + skip + "/" + limit,
+      {
+        method: "GET",
+      }
+    ).then((r) => r.json());
+
+    return res;
+  } catch (error) {
+    return { ngo: null };
+  }
+}
+
+export { getNGOAsync, getNGOSAsync };

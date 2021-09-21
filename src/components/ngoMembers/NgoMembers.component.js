@@ -158,7 +158,10 @@ export default function NgoMembers({ membersList, forPublic }) {
         )}
         {members &&
           members.map((m) => (
-            <div class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 min-w-full">
+            <div
+              class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 min-w-full"
+              key={m._id}
+            >
               <div class="flex justify-center md:justify-end -mt-16">
                 <img
                   class="w-20 h-20 object-cover rounded-full border-2 border-blue-500"
