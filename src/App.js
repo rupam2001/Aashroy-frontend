@@ -19,7 +19,7 @@ import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
 import Donate from "./routes/GeneralUser/Donate";
 
 import ReportCrime from "./routes/CrimeReport";
-import NGORegistration from "./routes/ngo/registration";
+
 import NGOLogin from "./routes/ngo/login";
 import TestComponent from "./routes/test";
 
@@ -76,8 +76,8 @@ function GlobalRoutes() {
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
         />
-        <Route path="/AboutUs" component={About} />
-        <Route path="/ContactUs" component={Contact} />
+        <Route path="/about-us" component={About} />
+        <Route path="/contact-us" component={Contact} />
       </Switch>
       <RouteManager />
     </Router>
