@@ -6,13 +6,26 @@ import {
 import { ENDPOINT } from "../constants/global.constants";
 
 // function to submit crime report data to server
-const submitCrimeReport = (setLoading) => {
+const submitCrimeReport = (
+  setLoading,
+  type,
+  typeDescription,
+  geoLocation,
+  briefReport,
+  media
+) => {
   return fetch(`${ENDPOINT}/crime-report`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({}),
+    body: JSON.stringify({
+      type,
+      typeDescription,
+      geoLocation,
+      briefReport,
+      media,
+    }),
   })
     .then((res) => {
       if (res.ok) return res.json();
@@ -27,3 +40,5 @@ const submitCrimeReport = (setLoading) => {
       setLoading(false);
     });
 };
+
+export { submitCrimeReport };

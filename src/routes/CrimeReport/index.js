@@ -7,10 +7,13 @@ import {
   MAX_PHOTO_LIMIT_CRIME_REPORT,
 } from "../../constants/crimeReport.constants";
 import imageSizeReducer from "../../utils/imageSizeReducer";
+import { submitCrimeReport } from "../../api/crimeReport.api";
 
 import { FaHome, FaPeopleCarry } from "react-icons/fa";
 import { MdPersonAdd } from "react-icons/md";
 import { FaFileUpload } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 // links for the navbar
 const NavbarLinks = [
@@ -28,6 +31,8 @@ const NavbarLinks = [
 ];
 
 function ReportCrime() {
+  const history = useHistory();
+
   const [geoLocation, setGeoLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -49,6 +54,41 @@ function ReportCrime() {
       imageSizeReducer(files, setMedia, MAX_PHOTO_LIMIT_CRIME_REPORT);
   };
 
+  // function to submit data to server using tha api call
+  const submitHandler = async () => {
+    // validate
+    if (address.length < 1) {
+      toast.error("Address cannot be empty");
+      return;
+    } else if (report.length < 1) {
+      toast.error("Report cannot be empty");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // call api function
+      const result = await toast.promise(
+        submitCrimeReport(
+          setLoading,
+          type,
+          typeDesc,
+          { ...geoLocation, address },
+          report,
+          media
+        ),
+        {
+          pending: "Uploading data",
+          success: "Successfully uploaded",
+          error: "Oops! Something went wrong",
+        }
+      );
+    } catch (err) {
+      toast.error(err);
+    }
+    // send the user back to home page
+    history.replace("/");
+  };
   return (
     <>
       <UserNavbar NavbarLinks={NavbarLinks} />
@@ -166,6 +206,16 @@ function ReportCrime() {
           <span className="text-sm mx-3 text-gray-600">
             * Your identity will be completely anonymous
           </span>
+
+          {/* button to upload data */}
+          <button
+            onClick={submitHandler}
+            className={
+              "flex w-full justify-center items-center text-white rounded  focus:bg-blue-700 m-3 p-3 text-lg bg-blue-500"
+            }
+          >
+            Submit
+          </button>
         </div>
       </div>
     </>
