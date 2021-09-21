@@ -1,8 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import { AuthContext } from "./contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "./utils/storage";
 
@@ -14,8 +20,13 @@ import Donate from "./routes/GeneralUser/Donate";
 
 import ReportCrime from "./routes/CrimeReport";
 import NGORegistration from "./routes/ngo/registration";
+import NGOLogin from "./routes/ngo/login";
+import TestComponent from "./routes/test";
 
 import Landing from "./routes/landing";
+import NgoHome from "./routes/ngo/home";
+import { NgoContext } from "./contexts/ngo.context";
+import NgoProfile from "./routes/ngo/profile";
 // global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
 
 function App() {
@@ -48,6 +59,7 @@ function GlobalRoutes() {
   /**
    * Place all the insecure (XD) routes here
    */
+
   return (
     <Router>
       <Switch>
@@ -55,7 +67,15 @@ function GlobalRoutes() {
         <Route path="/general/login" exact component={GeneralUserLogin} />
         <Route path="/ngo/registration" component={NGORegistration} />
         <Route path="/report-crime" component={ReportCrime} />
+        <Route path="/ngo/login" component={NGOLogin} />
+        <Route path="/testing" component={TestComponent} />
+        <Route path="/ngo/home" component={NgoHome} />
+        <Route
+          path="/ngo/profile/:id"
+          render={(props) => <NgoProfile {...props} />}
+        />
       </Switch>
+      <RouteManager />
     </Router>
   );
 }
@@ -85,5 +105,23 @@ function AuthSecureRoutes() {
     </Router>
   );
 }
+
+const RouteManager = () => {
+  const history = useHistory();
+  const ngocontext = useContext(NgoContext);
+  const location = useLocation();
+  useEffect(() => {
+    if (ngocontext.isLoggedIn) {
+      if (
+        location.pathname == "/ngo/login" ||
+        location.pathname == "/ngo/registration"
+      ) {
+        history.push("/ngo/home");
+      }
+    }
+  }, [ngocontext.isLoggedIn]);
+
+  return <></>;
+};
 
 export default App;

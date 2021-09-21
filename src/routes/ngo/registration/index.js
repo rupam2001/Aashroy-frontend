@@ -1,30 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  HiOutlineLibrary,
+  HiOutlineKey,
+  HiOutlineMail,
+  HiOutlinePhone,
+  HiOutlineGlobeAlt,
+} from "react-icons/hi";
 import "./style.css";
 
-const LoginFormSection = () => (
-  <div className="container w-96 pb-20">
-    <p className="text-2xl mb-2 font-bold">Login to Aashroy</p>
-    <p className="mb-6">
-      Don't have an account?{" "}
-      <span className="text-red-300 font-bold">Create account</span>
-    </p>
-    <div className="flex flex-col">
-      <input
-        placeholder="Email address"
-        className="rounded shadow-md px-4 py-3 mb-5"
-      ></input>
-      <input
-        placeholder="Password"
-        type="password"
-        className="rounded shadow-md px-4 py-3 mb-5"
-      ></input>
+import TextField from "../../../components/TextField";
+import PasswordField from "../../../components/PasswordField";
+import MultilineField from "../../../components/MultilineField";
+import { Link } from "react-router-dom";
+import { ngoRegisterAsync } from "../../../api/auth.api";
+
+const RegistrationFormSection = () => {
+  // Contants
+  const ICON_SIZE = 16;
+
+  const [ngoName, setNgoName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [website, setWebsite] = useState("");
+  const [aboutUs, setaboutUs] = useState("");
+
+  const submitHandler = async () => {
+    // API Call here
+    const fakeLocation = {
+      latitude: 26.762094,
+      longitude: 94.2125081,
+      address: "Jorhat, 785001",
+    };
+
+    const { success, msg, error } = await ngoRegisterAsync({
+      name: ngoName,
+      email: emailAddress,
+      password,
+      phone: phoneNumber,
+      website,
+      about: aboutUs,
+      location: fakeLocation,
+    });
+    if (error) {
+      alert("Something went wrong :(");
+      return;
+    }
+    alert(msg);
+    window.location.reload();
+  };
+
+  return (
+    <div className="container w-96 pb-20">
+      <p className="text-2xl mb-2 font-bold">Register on Aashroy</p>
+      <p className="mb-6">
+        Already have an account?{" "}
+        <Link to="/ngo/login">
+          <span className="text-red-300 font-bold hover:underline">Login</span>
+        </Link>
+      </p>
+      <div className="flex flex-col">
+        <TextField
+          head={<HiOutlineLibrary size={ICON_SIZE} color="grey" />}
+          placeholder="NGO Name"
+          containerClass="mb-5"
+          state={[ngoName, setNgoName]}
+        />
+        <TextField
+          head={<HiOutlineMail size={ICON_SIZE} color="grey" />}
+          placeholder="Email Address"
+          containerClass="mb-5"
+          state={[emailAddress, setEmailAddress]}
+        />
+        <PasswordField
+          head={<HiOutlineKey size={ICON_SIZE} color="grey" />}
+          placeholder="Password"
+          containerClass="mb-5"
+          state={[password, setPassword]}
+        />
+        <TextField
+          head={<HiOutlinePhone size={ICON_SIZE} color="grey" />}
+          placeholder="Phone Number"
+          containerClass="mb-5"
+          state={[phoneNumber, setPhoneNumber]}
+        />
+        <TextField
+          head={<HiOutlineGlobeAlt size={ICON_SIZE} color="grey" />}
+          placeholder="Website"
+          containerClass="mb-5"
+          state={[website, setWebsite]}
+        />
+        <MultilineField
+          placeholder="About Us"
+          containerClass="mb-5"
+          state={[aboutUs, setaboutUs]}
+        />
+      </div>
+      <button
+        className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
+        onClick={submitHandler}
+      >
+        REGISTER
+      </button>
     </div>
-    <button className="py-3 mb-4 w-96 bg-blue-500 text-white rounded font-bold text-sm hover:bg-blue-600 transition duration-100">
-      LOGIN
-    </button>
-    <p className="text-gray-500 text-sm">Forgot password?</p>
-  </div>
-);
+  );
+};
 
 const HeroSection = () => (
   <div className="container px-20 text-gray-200">
@@ -54,19 +134,12 @@ const FootLinks = ({ links }) => (
 
 const Registration = () => {
   return (
-    <div className="flex ngo-registration-root">
-      <div className="bg-gray-100 lg:w-3/5 w-full px-20 py-16">
-        <p className="text-3xl font-bold text-blue-600">Aashroy</p>
-        <div className="w-full h-full flex items-center justify-center">
-          <LoginFormSection />
+    <div className="flex ngo-registration-root bg-blue-600">
+      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-10">
+        <p className="text-3xl font-bold text-blue-600 mb-16">Aashroy</p>
+        <div className="w-full flex justify-center">
+          <RegistrationFormSection />
         </div>
-        {/* <FootLinks
-          links={[
-            { title: "Privacy Policy", to: "http://google.com" },
-            { title: "Help", to: "http://youtube.com" },
-            { title: "Terms & Conditions", to: "http://facebook.com" },
-          ]}
-        /> */}
       </div>
       <div className="container bg-blue-600 w-2/5 lg:block hidden">
         <div className="w-full h-full flex items-center justify-center">
