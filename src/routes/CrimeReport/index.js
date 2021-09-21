@@ -37,6 +37,7 @@ function ReportCrime() {
     latitude: 0,
     longitude: 0,
   });
+  const [reverseGeocodingAddress, setReverseGeocodingAddress] = useState("");
   const [address, setAddress] = useState("");
   const [type, setType] = useState(CRIME_TYPES[0]);
   const [typeDesc, setTypeDesc] = useState("");
@@ -74,6 +75,7 @@ function ReportCrime() {
           type,
           typeDesc,
           { ...geoLocation, address },
+          reverseGeocodingAddress,
           report,
           media
         ),
