@@ -23,11 +23,13 @@ import NGORegistration from "./routes/ngo/registration";
 import NGOLogin from "./routes/ngo/login";
 import TestComponent from "./routes/test";
 
+import NGORegistration from "./routes/ngo/registration";
+import About from "./routes/AboutPage";
 import Landing from "./routes/landing";
 import NgoHome from "./routes/ngo/home";
 import { NgoContext } from "./contexts/ngo.context";
 import NgoProfile from "./routes/ngo/profile";
-// global arrayContainer:true, SliderInstance:true, DomObjects:true, document, Slider
+import Contact from "./routes/ContactPage";
 
 function App() {
   const authcontext = useContext(AuthContext);
@@ -74,6 +76,8 @@ function GlobalRoutes() {
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
         />
+        <Route path="/AboutUs" component={About} />
+        <Route path="/ContactUs" component={Contact} />
       </Switch>
       <RouteManager />
     </Router>
