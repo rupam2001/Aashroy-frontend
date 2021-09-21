@@ -30,6 +30,7 @@ import NgoHome from "./routes/ngo/home";
 import { NgoContext } from "./contexts/ngo.context";
 import NgoProfile from "./routes/ngo/profile";
 import Contact from "./routes/ContactPage";
+import NgoList from "./routes/ngo/list";
 
 function App() {
   const authcontext = useContext(AuthContext);
@@ -78,6 +79,7 @@ function GlobalRoutes() {
         />
         <Route path="/about-us" component={About} />
         <Route path="/contact-us" component={Contact} />
+        <Route path="/ngo/list" component={NgoList} />
       </Switch>
       <RouteManager />
     </Router>
