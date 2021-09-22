@@ -11,6 +11,7 @@ const submitCrimeReport = (
   type,
   typeDescription,
   geoLocation,
+  reverseGeocodingAddress,
   briefReport,
   media
 ) => {
@@ -23,6 +24,7 @@ const submitCrimeReport = (
       type,
       typeDescription,
       geoLocation,
+      reverseGeocodingAddress,
       briefReport,
       media,
     }),

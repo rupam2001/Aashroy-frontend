@@ -6,7 +6,13 @@ import {
 import { ENDPOINT } from "../constants/global.constants";
 
 // reports homeless and returns the created data _id
-function reportHomeless(setLoading, numberOfPeople, geoLocation, media) {
+function reportHomeless(
+  setLoading,
+  numberOfPeople,
+  geoLocation,
+  reverseGeocodingAddress,
+  media
+) {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
@@ -19,6 +25,7 @@ function reportHomeless(setLoading, numberOfPeople, geoLocation, media) {
     body: JSON.stringify({
       numberOfPeople,
       geoLocation,
+      reverseGeocodingAddress,
       media,
     }),
   })

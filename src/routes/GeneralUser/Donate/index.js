@@ -154,7 +154,7 @@ function Donate() {
             <input
               disabled={loading || isAnonymous}
               type="text"
-              className="border-2 border-gray-100 px-1 rounded"
+              className="border-2 border-gray-100 p-2 rounded"
               value={donorName}
               onChange={(e) => setDonorName(e.target.value)}
             />
@@ -166,7 +166,8 @@ function Donate() {
             <input
               disabled={loading}
               type="number"
-              className="border-2 border-gray-100 px-1 rounded"
+              min="0"
+              className="border-2 border-gray-100 p-2 rounded"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
             />
@@ -201,7 +202,7 @@ function Donate() {
               <input
                 disabled={loading}
                 type="text"
-                className="border-2 border-gray-100 px-1 rounded"
+                className="border-2 border-gray-100 p-2 rounded"
                 value={length}
                 onChange={(e) => setLength(e.target.value)}
               />
@@ -212,7 +213,7 @@ function Donate() {
               <input
                 disabled={loading}
                 type="text"
-                className="border-2 border-gray-100 px-1 rounded"
+                className="border-2 border-gray-100 p-2 rounded"
                 value={width}
                 onChange={(e) => setWidth(e.target.value)}
               />
@@ -223,7 +224,7 @@ function Donate() {
               <input
                 disabled={loading}
                 type="text"
-                className="border-2 border-gray-100 px-1 rounded"
+                className="border-2 border-gray-100 p-2 rounded"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
               />
@@ -238,7 +239,7 @@ function Donate() {
             <input
               disabled={loading}
               type="text"
-              className="border-2 border-gray-100 px-1 rounded"
+              className="border-2 border-gray-100 p-2 rounded"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
             />
