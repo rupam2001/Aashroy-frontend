@@ -47,4 +47,28 @@ async function getNearestNGOSAsync({ diameter, geo_location }) {
   }
 }
 
-export { getNGOAsync, getNearestNGOSAsync };
+async function searchNGOSAsync(searchQuery, skip, limit) {
+  try {
+    // const bearer =
+    //   "bearer " + getAccessTokenNGO()
+    //     ? getAccessTokenNGO()
+    //     : getAccessToken() + " " + getRefreshToken();
+
+    const res = await fetch(ENDPOINT + "/ngo/public/search/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: bearer,
+      },
+      body: JSON.stringify({ searchQuery, skip, limit }),
+    }).then((r) => r.json());
+
+    handlePostFetching(res);
+
+    return res;
+  } catch (error) {
+    return { ngos: null };
+  }
+}
+
+export { getNGOAsync, getNearestNGOSAsync, searchNGOSAsync };
