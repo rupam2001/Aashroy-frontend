@@ -17,10 +17,6 @@ const NgoCard = ({ _id, name, about, geo_location, isLoading }) => {
                 Donate
               </button>
             </Link>
-            {/* <button className=" text-blue-400 flex flex items-center justify-center">
-              <p className="text-lg"> View</p>
-              <FaAngleRight className="text-2xl" />
-            </button> */}
           </div>
         }
       </Link>

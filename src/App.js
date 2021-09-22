@@ -31,6 +31,7 @@ import { NgoContext } from "./contexts/ngo.context";
 import NgoProfile from "./routes/ngo/profile";
 import Contact from "./routes/ContactPage";
 import NgoList from "./routes/ngo/list";
+import NgoHomeLess from "./routes/ngo/homeless";
 
 function App() {
   const authcontext = useContext(AuthContext);
@@ -73,6 +74,8 @@ function GlobalRoutes() {
         <Route path="/ngo/login" component={NGOLogin} />
         <Route path="/testing" component={TestComponent} />
         <Route path="/ngo/home" component={NgoHome} />
+        <Route path="/ngo/homeless" component={NgoHomeLess} />
+
         <Route
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
@@ -124,6 +127,8 @@ const RouteManager = () => {
       ) {
         history.push("/ngo/home");
       }
+    } else if (location.pathname == "/ngo/homeless") {
+      // history.push("/ngo/login");
     }
   }, [ngocontext.isLoggedIn]);
 

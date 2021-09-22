@@ -91,7 +91,7 @@ export default function NgoLayout({ children }) {
               </Link>
             </li>
             <li>
-              <Link to="/ngo/home">
+              <Link to="/ngo/homeless">
                 <div
                   href="#"
                   class="outline-none flex flex-row items-center h-12 hover:bg-blue-100 py-8 border-l-4 hover:border-blue-500 border-transparent"
