@@ -17,7 +17,7 @@ import GeneralUserLogin from "./routes/GeneralUser/GeneralUserLogin";
 import ReportHomeless from "./routes/GeneralUser/ReportHomeless";
 import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
 import Donate from "./routes/GeneralUser/Donate";
-
+import DonationPage from "./routes/DonationPage";
 import ReportCrime from "./routes/CrimeReport";
 
 import NGOLogin from "./routes/ngo/login";
@@ -78,6 +78,7 @@ function GlobalRoutes() {
         />
         <Route path="/about-us" component={About} />
         <Route path="/contact-us" component={Contact} />
+        <Route path="/public-donations" exact component={DonationPage} />
       </Switch>
       <RouteManager />
     </Router>
