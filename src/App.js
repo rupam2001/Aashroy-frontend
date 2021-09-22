@@ -30,6 +30,7 @@ import NgoHome from "./routes/ngo/home";
 import { NgoContext } from "./contexts/ngo.context";
 import NgoProfile from "./routes/ngo/profile";
 import Contact from "./routes/ContactPage";
+import NGODonations from "./routes/ngo/donations";
 
 function App() {
   const authcontext = useContext(AuthContext);
@@ -76,6 +77,7 @@ function GlobalRoutes() {
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
         />
+        <Route path="/ngo/donations" component={NGODonations} />
         <Route path="/about-us" component={About} />
         <Route path="/contact-us" component={Contact} />
         <Route path="/public-donations" exact component={DonationPage} />

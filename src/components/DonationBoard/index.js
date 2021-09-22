@@ -3,11 +3,15 @@
 
 import React from "react";
 
-import { FaHandHoldingHeart } from "react-icons/fa";
+import { FaHandHoldingHeart, FaHeart } from "react-icons/fa";
 
 function DonationBoard({ donations, showImage }) {
   return (
     <div className="flex flex-col w-full p-2 rounded">
+      <div className="flex items-center px-4 py-2 bg-blue-200 rounded-full text-blue-700 font-semibold">
+        Donations <FaHeart className="text-pink-500 mx-1" />
+      </div>
+
       {/* details */}
       {donations.map((donation) => {
         return (
@@ -50,7 +54,7 @@ function DonationBoard({ donations, showImage }) {
 
             {/* images */}
             {showImage ? (
-              <div className="flex">
+              <div className="flex mb-2">
                 {donation.media_urls.map((item, index) => {
                   return (
                     <img
