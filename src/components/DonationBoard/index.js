@@ -12,6 +12,8 @@ function DonationBoard({ donations, showImage }) {
         Donations <FaHeart className="text-pink-500 mx-1" />
       </div>
 
+      {donations.length < 1 && <span className="p-3">No Donations yet 😭</span>}
+
       {/* details */}
       {donations.map((donation) => {
         return (
