@@ -1,0 +1,75 @@
+import { ENDPOINT } from "../constants/global.constants";
+import {
+  getAccessTokenNGO,
+  getRefreshToken,
+  handlePostFetching,
+} from "../utils/storage";
+
+async function fetchCrimesAsync({ geo_location, diameter }) {
+  try {
+    diameter = 50;
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const res = await fetch(ENDPOINT + "/crime/data/get/locationwise", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
+      body: JSON.stringify({ geo_location, diameter }),
+    }).then((r) => r.json());
+
+    handlePostFetching(res);
+
+    return res;
+  } catch (error) {
+    return { crime_list: null };
+  }
+}
+
+async function searchCrimesAsync({ address, diameter }) {
+  try {
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
+      body: JSON.stringify({ address, diameter }),
+    }).then((r) => r.json());
+
+    handlePostFetching(res);
+
+    return res;
+  } catch (error) {
+    return {
+      crime_list: [],
+      topImages: [{ url: "https://i.stack.imgur.com/y9DpT.jpg" }],
+      msg: "No results",
+    };
+  }
+}
+async function searchCrimesPeopleAsync({ person, diameter }) {
+  try {
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
+      body: JSON.stringify({ person, diameter }),
+    }).then((r) => r.json());
+
+    handlePostFetching(res);
+
+    return res;
+  } catch (error) {
+    return {
+      crime_person_list: [],
+      msg: "No results",
+    };
+  }
+}
+
+export { fetchCrimesAsync, searchCrimesAsync, searchCrimesPeopleAsync };

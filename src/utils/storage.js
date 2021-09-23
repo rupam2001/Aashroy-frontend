@@ -14,6 +14,10 @@ const setRefreshToken = (value) => {
 };
 
 const handlePostFetching = (res) => {
+  /**
+   * saves new access_token if any
+   * call it after every auth secured request and pass the respose
+   */
   const { access_token } = res;
   if (!access_token) return;
   setAccessToken(access_token);

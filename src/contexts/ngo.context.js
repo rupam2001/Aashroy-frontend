@@ -12,7 +12,7 @@ export default function NgoContextProvider({ children }) {
   const history = useHistory();
   useEffect(() => {
     if (getAccessTokenNGO() == undefined) return;
-    setIsLoggedIn(true);
+    // setIsLoggedIn(true);
     fetchNgoDataAsync();
   }, []);
 
@@ -22,6 +22,7 @@ export default function NgoContextProvider({ children }) {
       return;
     }
     setNgoDetails(ngo);
+    setIsLoggedIn(true);
   };
 
   return (

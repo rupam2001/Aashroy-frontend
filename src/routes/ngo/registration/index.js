@@ -27,11 +27,14 @@ const RegistrationFormSection = () => {
 
   const submitHandler = async () => {
     // API Call here
+    //@testing
+    const geo = [26.76683, 94.333569];
     const fakeLocation = {
-      latitude: 26.762094,
-      longitude: 94.2125081,
+      latitude: geo[0],
+      longitude: geo[1],
       address: "Jorhat, 785001",
     };
+    //@
 
     const { success, msg, error } = await ngoRegisterAsync({
       name: ngoName,

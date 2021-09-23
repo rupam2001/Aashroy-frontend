@@ -22,15 +22,6 @@ const IconInput = ({
   useEffect(() => {
     setValue(placeholder);
   }, [placeholder]);
-  useEffect(() => {
-    // const handleEnterPress = (e) => {
-    //   if (e.keyCode == 13) {
-    //     makeInputOff();
-    //   }
-    // };
-    // window.addEventListener("keyup", handleEnterPress);
-    // return () => window.removeEventListener("keyup", handleEnterPress);
-  });
   return (
     <div className="flex justify-center max-w-max items-center">
       {showIcon && (
