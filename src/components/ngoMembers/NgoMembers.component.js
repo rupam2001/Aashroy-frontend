@@ -81,13 +81,13 @@ export default function NgoMembers({ membersList, forPublic }) {
         <div className="flex flex-col items-center">
           {!forPublic && (
             <FaPlusCircle
-              className="text-xl text-blue-500 cursor-pointer"
+              className="text-2xl text-blue-500 cursor-pointer"
               onClick={handleAddMembersClick}
             />
           )}
-          {!forPublic && (
+          {/* {!forPublic && (
             <p className="text-sm font-medium text-blue-500">Add</p>
-          )}
+          )} */}
         </div>
       </div>
 
