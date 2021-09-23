@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserLayout from "../../../layouts/UserLayout";
 import TextField from "../../../components/TextField";
 import imageSizeReducer from "../../../utils/imageSizeReducer";
 import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/generalUserForm.constants";
 import { FaArrowAltCircleRight, FaFileUpload } from "react-icons/fa";
 import { reportHomeless } from "../../../api/reportHomeless.api";
+import { getCurrentGeoLocationAsync } from "../../../utils/location";
+import Map from "../../../components/Map";
+import LocationPicker from "../../../components/LocationPicker";
 
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -61,15 +64,44 @@ function ReportHomeless() {
     });
   };
 
+  useEffect(() => {
+    console.log("awaiting location");
+    (async () => {
+      // obtain geo location
+      const location = await getCurrentGeoLocationAsync();
+      console.log(location);
+      setGeoLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+    })();
+  }, []);
+
+  useEffect(() => {
+    console.log(geoLocation);
+  }, [geoLocation]);
+
+  const cordinateChangeHandler = (center) => {
+    setGeoLocation({
+      latitude: parseFloat(center[1]),
+      longitude: parseFloat(center[0]),
+    });
+  };
+
   return (
     <UserLayout>
       <div
         id="report-container"
         className="flex flex-col lg:justify-evenly lg:flex-row-reverse h-full w-full"
       >
-        <div id="map-container" className=" h-60 lg:h-screen w-full text-white">
+        <div id="map-container" className=" h-96 lg:h-screen w-full text-white">
           {/* contains map */}
-          <div className="h-full bg-red-100">Map</div>
+          <div className="h-full bg-red-100">
+            <LocationPicker
+              region={[geoLocation.longitude, geoLocation.latitude]}
+              onCordinateChange={cordinateChangeHandler}
+            />
+          </div>
         </div>
         <div id="report-form-container" className="flex flex-col lg:w-1/3 p-3">
           <h1 className="text-blue-500 rounded m-3 mt-0 p-3 text-lg font-bold">

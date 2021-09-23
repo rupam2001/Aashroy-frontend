@@ -36,6 +36,9 @@ import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
 import NgoCrimeReportView from "./routes/ngo/crime";
 
+console.warn = () => {};
+console.error = () => {};
+
 function App() {
   const authcontext = useContext(AuthContext);
   useEffect(() => {

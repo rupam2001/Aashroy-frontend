@@ -47,16 +47,16 @@ const Map = ({ region, markers, center }) => {
     if (!map.current) return; // wait for map to initialize
 
     map.current.on("move", () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
+      setLng(map.current.getCenter().lng.toFixed(7));
+      setLat(map.current.getCenter().lat.toFixed(7));
       setZoom(map.current.getZoom().toFixed(2));
     });
 
     if (center)
       map.current.on("dragend", () => {
         center[1]([
-          map.current.getCenter().lng.toFixed(4),
-          map.current.getCenter().lat.toFixed(4),
+          map.current.getCenter().lng.toFixed(7),
+          map.current.getCenter().lat.toFixed(7),
         ]);
       });
   });
