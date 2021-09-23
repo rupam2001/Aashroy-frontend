@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import "./style.css";
+import { Link } from "react-router-dom";
+import { ngoLoginAsync } from "../../../api/auth.api";
+import {
+  setAccessToken,
+  setAccessTokenNGO,
+  setRefreshToken,
+} from "../../../utils/storage";
+import { NgoContext } from "../../../contexts/ngo.context";
 
 const LoginFormSection = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const ngocontext = useContext(NgoContext);
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     // API Call here
-
-    console.log({
-      emailAddress,
+    const { access_token, refresh_token, ngoData } = await ngoLoginAsync({
+      email: emailAddress,
       password,
     });
+    if (!access_token) {
+      alert("Something went wrong");
+      return;
+    }
+    setAccessTokenNGO(access_token);
+    setRefreshToken(refresh_token);
+    ngocontext.setNgoDetails(ngoData);
+    ngocontext.setIsLoggedIn(true);
   };
 
   return (
@@ -21,7 +37,11 @@ const LoginFormSection = () => {
       <p className="text-2xl mb-2 font-bold">Login to Aashroy</p>
       <p className="mb-6">
         Don't have an account?{" "}
-        <span className="text-red-300 font-bold">Create account</span>
+        <Link to="/ngo/registration">
+          <span className="text-red-300 font-bold hover:underline">
+            Create account
+          </span>
+        </Link>
       </p>
       <div className="flex flex-col">
         <TextField
@@ -35,7 +55,10 @@ const LoginFormSection = () => {
           state={[password, setPassword]}
         />
       </div>
-      <button className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100">
+      <button
+        onClick={submitHandler}
+        className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
+      >
         LOGIN
       </button>
       <p className="text-gray-500 text-sm cursor-pointer select-none">

@@ -6,7 +6,7 @@ import React from "react";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
- *  head: takes react component for rendering as label/head 
+ *  head: takes react component for rendering as label/head
  *
  *  example:
  *      const [name, setName] = React.useState("James Bond")
@@ -31,7 +31,7 @@ const TextField = ({ placeholder, containerClass, state, head }) => {
       ) : null}
       <input
         placeholder={placeholder}
-        className="px-4 py-3 w-full"
+        className="px-4 py-3 w-full outline-none"
         value={state[0]}
         onChange={(e) => {
           state[1](e.target.value);

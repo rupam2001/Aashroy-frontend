@@ -6,15 +6,15 @@ import React from "react";
  *  state: array retured by the funtion React.useState(initialvalue)
  *  placeholder: text
  *  containerClass: mainly to enter style classes
- * 
- *  example: 
+ *
+ *  example:
  *      const [name, setName] = React.useState("James Bond")
- *      <TextField 
+ *      <TextField
  *          state={[name, setName]}
  *          placeholder="Enter name"
  *          containerClass="margin-bottom-12"
  *      />
- * 
+ *
  */
 
 const TextField = ({ placeholder, containerClass, state }) => {
@@ -22,7 +22,7 @@ const TextField = ({ placeholder, containerClass, state }) => {
     <div className={containerClass}>
       <textarea
         placeholder={placeholder}
-        className="rounded shadow-md px-4 py-3 w-full"
+        className="rounded shadow-md px-4 py-3 w-full outline-none"
         multiple={true}
         value={state[0]}
         onChange={(e) => {

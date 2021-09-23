@@ -1,20 +1,38 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import LocationPicker from "../../components/LocationPicker";
+
+const markers = [
+  {
+    address: "123",
+    latitude: 26.743573,
+    longitude: 94.2122044,
+  },
+  {
+    address: "cps e",
+    latitude: 26.733573,
+    longitude: 94.2322044,
+  },
+  {
+    address: "asdf a",
+    latitude: 26.732573,
+    longitude: 94.2022044,
+  },
+];
 
 const TesingComponent = () => {
   return (
-    <div className="w-98 h-98">
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </MapContainer>
+    <div className="h-screen w-screen bg-purple-600">
+      {/* <Map region={[94.2142044, 26.753573]} markers={markers} /> */}
+      <LocationPicker
+        region={[94.2142044, 26.753573]}
+        onCordinateChange={() => {
+          console.log("yay");
+        }}
+        onRGCResponse={(name) => {
+          console.log(name);
+          alert(name);
+        }}
+      />
     </div>
   );
 };

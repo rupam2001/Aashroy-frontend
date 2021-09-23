@@ -11,6 +11,8 @@ import "./style.css";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
+import { Link } from "react-router-dom";
+import { ngoRegisterAsync } from "../../../api/auth.api";
 
 const RegistrationFormSection = () => {
   // Contants
@@ -23,17 +25,32 @@ const RegistrationFormSection = () => {
   const [website, setWebsite] = useState("");
   const [aboutUs, setaboutUs] = useState("");
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     // API Call here
+    //@testing
+    const geo = [26.76683, 94.333569];
+    const fakeLocation = {
+      latitude: geo[0],
+      longitude: geo[1],
+      address: "Jorhat, 785001",
+    };
+    //@
 
-    console.log({
-      ngoName,
-      emailAddress,
+    const { success, msg, error } = await ngoRegisterAsync({
+      name: ngoName,
+      email: emailAddress,
       password,
-      phoneNumber,
+      phone: phoneNumber,
       website,
-      aboutUs,
+      about: aboutUs,
+      location: fakeLocation,
     });
+    if (error) {
+      alert("Something went wrong :(");
+      return;
+    }
+    alert(msg);
+    window.location.reload();
   };
 
   return (
@@ -41,7 +58,9 @@ const RegistrationFormSection = () => {
       <p className="text-2xl mb-2 font-bold">Register on Aashroy</p>
       <p className="mb-6">
         Already have an account?{" "}
-        <span className="text-red-300 font-bold">Login</span>
+        <Link to="/ngo/login">
+          <span className="text-red-300 font-bold hover:underline">Login</span>
+        </Link>
       </p>
       <div className="flex flex-col">
         <TextField
@@ -84,7 +103,7 @@ const RegistrationFormSection = () => {
         className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
         onClick={submitHandler}
       >
-        LOGIN
+        REGISTER
       </button>
     </div>
   );
