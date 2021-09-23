@@ -11,6 +11,7 @@ import {
   fetchCrimesAsync,
   searchCrimesAsync,
 } from "../../../api/crimeData.api";
+import CrimeCards from "../../../components/CrimeCards";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -143,6 +144,15 @@ export default function NgoCrimeReportView() {
             handleViewPhotoClick={handleViewPhoto}
           />
         )}
+        {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN &&
+          crimeList.map((crime) => (
+            <CrimeCards
+              body={crime.brief_report}
+              title={crime.type}
+              crimeType={crime.type_description}
+              place={crime.reverse_geocoding_address}
+            />
+          ))}
         {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
           crimeList.length && (
             <div className="mt-4">
@@ -165,7 +175,12 @@ export default function NgoCrimeReportView() {
         {}
       </div>
       <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
-        <Map markers={markers} region={[markers[0]]} />
+        {markers.length != 0 && (
+          <Map
+            markers={markers}
+            region={[markers[0].longitude, markers[0].latitude]}
+          />
+        )}
       </div>
 
       <SearchFilterModel
