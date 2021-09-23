@@ -23,7 +23,7 @@ const NavbarLinks = [
   {
     icon: <FaPeopleCarry className="text-base" />,
     name: "Donate",
-    link: "/general/donate",
+    link: "/ngo/list",
   },
 ];
 

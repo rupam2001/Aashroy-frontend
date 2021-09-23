@@ -1,13 +1,16 @@
 // page to report crimes
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserNavbar from "../../components/UserNavbar";
+import Footer from "../../components/Footer";
 import {
   CRIME_TYPES,
   MAX_PHOTO_LIMIT_CRIME_REPORT,
 } from "../../constants/crimeReport.constants";
 import imageSizeReducer from "../../utils/imageSizeReducer";
 import { submitCrimeReport } from "../../api/crimeReport.api";
+import LocationPicker from "../../components/LocationPicker";
+import { getCurrentGeoLocationAsync } from "../../utils/location";
 
 import { FaHome, FaPeopleCarry } from "react-icons/fa";
 import { MdPersonAdd } from "react-icons/md";
@@ -34,8 +37,8 @@ function ReportCrime() {
   const history = useHistory();
 
   const [geoLocation, setGeoLocation] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: 26.7459721,
+    longitude: 94.2463553,
   });
   const [reverseGeocodingAddress, setReverseGeocodingAddress] = useState("");
   const [address, setAddress] = useState("");
@@ -91,21 +94,52 @@ function ReportCrime() {
     // send the user back to home page
     history.replace("/");
   };
+
+  useEffect(() => {
+    (async () => {
+      // obtain geo location
+      const location = await getCurrentGeoLocationAsync();
+      console.log(location);
+      setGeoLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+    })();
+  }, []);
+
+  const cordinateChangeHandler = (center) => {
+    setGeoLocation({
+      latitude: parseFloat(center[1]),
+      longitude: parseFloat(center[0]),
+    });
+  };
+
+  const onRGCResponseHandler = (placeName) => {
+    setReverseGeocodingAddress(placeName);
+  };
+
   return (
     <>
       <UserNavbar NavbarLinks={NavbarLinks} />
 
       {/* main form */}
-      <div className="min-w-screen flex flex-col p-3 md:flex-row-reverse justify-center">
+      <div className="min-w-screen flex flex-col md:flex-row-reverse justify-center">
         {/* map */}
-        <div id="crime-report-map-container" className="md:w-2/3 p-3">
-          <div>Map</div>
+        <div
+          id="crime-report-map-container"
+          className="md:w-2/3 md:h-screen h-96"
+        >
+          <LocationPicker
+            region={[geoLocation.longitude, geoLocation.latitude]}
+            onCordinateChange={cordinateChangeHandler}
+            onRGCResponse={onRGCResponseHandler}
+          />
         </div>
 
         {/* form */}
         <div
           id="crime-report-form-container"
-          className="shadow-md md:w-1/3 p-3"
+          className="shadow-md md:w-1/3 p-3 m-3"
         >
           {/* crime address */}
           <div className="flex flex-col pb-2">
@@ -213,13 +247,15 @@ function ReportCrime() {
           <button
             onClick={submitHandler}
             className={
-              "flex w-full justify-center items-center text-white rounded  focus:bg-blue-700 m-3 p-3 text-lg bg-blue-500"
+              "flex w-full justify-center items-center text-white rounded  focus:bg-blue-700 p-3 text-lg bg-blue-500"
             }
           >
             Submit
           </button>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

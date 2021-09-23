@@ -91,6 +91,10 @@ function ReportHomeless() {
     });
   };
 
+  const onRGCResponseHandler = (placeName) => {
+    setReverseGeocodingAddress(placeName);
+  };
+
   return (
     <UserLayout>
       <div
@@ -103,6 +107,7 @@ function ReportHomeless() {
             <LocationPicker
               region={[geoLocation.longitude, geoLocation.latitude]}
               onCordinateChange={cordinateChangeHandler}
+              onRGCResponse={onRGCResponseHandler}
             />
           </div>
         </div>
