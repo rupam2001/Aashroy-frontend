@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/auth.context";
 import { getAccessToken, getRefreshToken } from "../../utils/storage";
 import UserNavbar from "../../components/UserNavbar";
+import Footer from "../../components/Footer";
 
 import { FaHome, FaExclamationCircle, FaPeopleCarry } from "react-icons/fa";
 import { MdPersonAdd } from "react-icons/md";
@@ -49,6 +50,7 @@ function UserLayout({ children }) {
     <div className="flex flex-col w-full min-h-screen">
       <UserNavbar NavbarLinks={NavbarLinks} />
       {children}
+      <Footer />
     </div>
   );
 }

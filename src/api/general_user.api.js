@@ -29,6 +29,25 @@ const fetchUserDetails = () => {
     .finally(() => {});
 };
 
+// route to fetch user details to display on public profile
+const fetchPublicUserDetails = (id) => {
+  return fetch(`${ENDPOINT}/general-user/profile-details/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else throw res;
+    })
+    .then((data) => {
+      return data["0"];
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {});
+};
+
 // update user data
 const updateUserData = (newName) => {
   const accessToken = getAccessToken();
@@ -56,4 +75,36 @@ const updateUserData = (newName) => {
     .finally(() => {});
 };
 
-export { fetchUserDetails, updateUserData };
+// route to fetch donation details of user
+const fetchDonationDetails = (skip, limit) => {
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+
+  return fetch(
+    `${ENDPOINT}/general-user/donation/my-donations/${skip}/${limit}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken} ${refreshToken}`,
+      },
+    }
+  )
+    .then((res) => {
+      if (res.ok) return res.json();
+      else throw res;
+    })
+    .then((data) => {
+      handlePostFetching(data);
+      return data;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {});
+};
+
+export {
+  fetchUserDetails,
+  updateUserData,
+  fetchDonationDetails,
+  fetchPublicUserDetails,
+};

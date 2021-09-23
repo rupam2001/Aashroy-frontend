@@ -20,12 +20,16 @@ const Map = ({ region, markers, center }) => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
+      center: [region[0], region[1]],
       zoom: zoom,
     });
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
     console.log(markers);
   });
+
+  useEffect(() => {
+    map.current.flyTo({ center: [region[0], region[1]], essential: true });
+  }, [region]);
 
   useEffect(() => {
     if (markers)
@@ -47,19 +51,19 @@ const Map = ({ region, markers, center }) => {
     if (!map.current) return; // wait for map to initialize
 
     map.current.on("move", () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
+      setLng(map.current.getCenter().lng.toFixed(7));
+      setLat(map.current.getCenter().lat.toFixed(7));
       setZoom(map.current.getZoom().toFixed(2));
     });
 
     if (center)
       map.current.on("dragend", () => {
         center[1]([
-          map.current.getCenter().lng.toFixed(4),
-          map.current.getCenter().lat.toFixed(4),
+          map.current.getCenter().lng.toFixed(7),
+          map.current.getCenter().lat.toFixed(7),
         ]);
       });
-  });
+  }, []);
 
   return <div ref={mapContainer} className="map-container" />;
 };

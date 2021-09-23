@@ -17,8 +17,9 @@ import GeneralUserLogin from "./routes/GeneralUser/GeneralUserLogin";
 import ReportHomeless from "./routes/GeneralUser/ReportHomeless";
 import ReportAdditionalInfo from "./routes/GeneralUser/ReportAdditionalInfo";
 import Donate from "./routes/GeneralUser/Donate";
-
+import DonationPage from "./routes/DonationPage";
 import ReportCrime from "./routes/CrimeReport";
+import PublicProfile from "./routes/GeneralUser/PublicProfile";
 
 import NGOLogin from "./routes/ngo/login";
 import TestComponent from "./routes/test";
@@ -30,6 +31,7 @@ import NgoHome from "./routes/ngo/home";
 import { NgoContext } from "./contexts/ngo.context";
 import NgoProfile from "./routes/ngo/profile";
 import Contact from "./routes/ContactPage";
+import NGODonations from "./routes/ngo/donations";
 import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
 import NgoCrimeReportView from "./routes/ngo/crime";
@@ -73,6 +75,7 @@ function GlobalRoutes() {
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/general/login" exact component={GeneralUserLogin} />
+        <Route path="/general/profile/:id" component={PublicProfile} />
         <Route path="/ngo/registration" component={NGORegistration} />
         <Route path="/report-crime" component={ReportCrime} />
         <Route path="/ngo/login" component={NGOLogin} />
@@ -85,8 +88,10 @@ function GlobalRoutes() {
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
         />
+        <Route path="/ngo/donations" component={NGODonations} />
         <Route path="/about-us" component={About} />
         <Route path="/contact-us" component={Contact} />
+        <Route path="/public-donations" exact component={DonationPage} />
         <Route path="/ngo/list" component={NgoList} />
       </Switch>
       <RouteManager />
