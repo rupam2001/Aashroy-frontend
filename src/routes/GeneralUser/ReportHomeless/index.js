@@ -6,7 +6,6 @@ import { HOMELESS_REPORT_PHOTO_LIMIT } from "../../../constants/generalUserForm.
 import { FaArrowAltCircleRight, FaFileUpload } from "react-icons/fa";
 import { reportHomeless } from "../../../api/reportHomeless.api";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
-import Map from "../../../components/Map";
 import LocationPicker from "../../../components/LocationPicker";
 
 import { useHistory } from "react-router-dom";
@@ -68,7 +67,6 @@ function ReportHomeless() {
   };
 
   useEffect(() => {
-    console.log("awaiting location");
     (async () => {
       // obtain geo location
       const location = await getCurrentGeoLocationAsync();
@@ -79,10 +77,6 @@ function ReportHomeless() {
       });
     })();
   }, []);
-
-  useEffect(() => {
-    console.log(geoLocation);
-  }, [geoLocation]);
 
   const cordinateChangeHandler = (center) => {
     setGeoLocation({

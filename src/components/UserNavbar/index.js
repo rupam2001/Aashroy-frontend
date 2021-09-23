@@ -27,14 +27,14 @@ function UserNavbar({ NavbarLinks }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="flex flex-wrap items-center justify-between px-2 py-3 bg-blue-500 ">
+      <nav className="flex flex-wrap items-center justify-between px-4 py-3 bg-blue-500 ">
         <div className="w-full container flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:block lg:justify-start">
             <a
-              className="text-md font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+              className="text-md font-bold leading-relaxed inline-block py-2 whitespace-nowrap uppercase text-white"
               href="/"
             >
-              ASHROY
+              AASHROY
             </a>
             <button
               className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
