@@ -32,19 +32,19 @@ function UserLayout({ children }) {
   const history = useHistory();
   const authcontext = useContext(AuthContext);
 
-  useEffect(() => {
-    // checks if user has already logged in
-    // if not sent him to login page with the location as state
-    // that he currently intended to go
-    if (
-      getAccessToken() == null &&
-      getRefreshToken() == null &&
-      location.pathname != "/general/login"
-    ) {
-      history.replace("/general/login", { forwardTo: location.pathname });
-      history.go(0);
-    }
-  }, [authcontext.isLoggedIn]);
+  // useEffect(() => {
+  //   // checks if user has already logged in
+  //   // if not sent him to login page with the location as state
+  //   // that he currently intended to go
+  //   if (
+  //     getAccessToken() == null &&
+  //     getRefreshToken() == null &&
+  //     location.pathname != "/general/login"
+  //   ) {
+  //     history.replace("/general/login", { forwardTo: location.pathname });
+  //     history.go(0);
+  //   }
+  // }, [authcontext.isLoggedIn]);
 
   return (
     <div className="flex flex-col w-full min-h-screen">
