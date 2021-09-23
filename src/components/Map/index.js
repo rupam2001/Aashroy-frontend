@@ -24,7 +24,9 @@ const Map = ({ region, markers }) => {
     });
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
     console.log(markers);
+  });
 
+  useEffect(() => {
     markers.map((marker) => {
       const el = document.createElement("div");
       el.setAttribute("title", "Reported Area");
@@ -37,7 +39,7 @@ const Map = ({ region, markers }) => {
         )
         .addTo(map.current);
     });
-  });
+  }, [markers]);
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize

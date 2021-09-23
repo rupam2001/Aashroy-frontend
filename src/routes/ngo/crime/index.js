@@ -12,9 +12,13 @@ import "./style.css";
 import SearchResultGallery from "../../../components/SeachResultGallery";
 import SearchResultMain from "../../../components/SearchResultMain";
 import Map from "../../../components/Map";
+import {
+  fetchCrimesAsync,
+  searchCrimesAsync,
+} from "../../../api/crimeData.api";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export default function NgoHomeLess() {
+export default function NgoCrimeReportView() {
   const SEARCH_RESULT_MODES = {
     MAIN: "main",
     GALLERY: "gallery",
@@ -24,14 +28,14 @@ export default function NgoHomeLess() {
   const [filter, setFilter] = useState("place");
   const [searchResultTitle, setSearchResultTitle] = useState("People arround ");
   const [diameter, setDiameter] = useState(10);
-  const [homelessList, setHomelessList] = useState([]);
+  const [crimeList, setCrimeList] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [currentSearchResultMode, setCurrentSearchResultMode] = useState(
     SEARCH_RESULT_MODES.MAIN
   );
   const [_topImages, setTopImages] = useState([""]);
   const modelRef = useRef(null);
-  const [homelessMap, setHomelessMap] = useState({});
+  const [crimeMap, setCrimeMap] = useState({});
   const showModel = () => {
     modelRef.current.style.display = "flex";
   };
@@ -53,21 +57,21 @@ export default function NgoHomeLess() {
 
   const loadInitialHomelessDataAsync = async () => {
     const geo_location = await getBaseLocationAsync();
-    const { homeless_list, topImages, homelessMap } = await fetchHomelessAsync({
+    const { crime_list, topImages, crimeMap } = await fetchCrimesAsync({
       geo_location,
       diameter,
     });
-    // alert(JSON.stringify(homeless_list));
-    if (homeless_list) {
+    // alert(JSON.stringify(crime_list));
+    if (crime_list) {
       setTopImages(topImages);
-      setHomelessList(homeless_list);
+      setCrimeList(crime_list);
     }
-    // console.log(homeless_list);
-    setHomelessMap(homelessMap);
+    // console.log(crime_list);
+    setCrimeMap(crimeMap);
   };
   useEffect(() => {
     loadInitialHomelessDataAsync();
-    setSearchResultTitle("People near " + ngocontext.ngoDetails?.name);
+    setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
   }, [ngocontext.ngoDetails]);
 
   const handleImageClick = (homeless) => {};
@@ -80,34 +84,33 @@ export default function NgoHomeLess() {
   };
 
   const placeWiseSearchAsync = async () => {
-    const { homeless_list, msg, topImages, homelessMap } =
-      await searchHomelessAsync({
-        address: searchQuery,
-        diameter,
-      });
-    if (!homeless_list && !topImages) {
+    const { crime_list, msg, topImages, crimeMap } = await searchCrimesAsync({
+      address: searchQuery,
+      diameter,
+    });
+    if (!crime_list && !topImages) {
       setTopImages(topImages);
       setSearchResultTitle("no results");
-      setHomelessList([]);
+      setCrimeList([]);
       return;
     }
     setTopImages(topImages);
     setSearchResultTitle(msg);
-    setHomelessList(homeless_list);
-    setHomelessMap(homelessMap);
+    setCrimeList(crime_list);
+    setCrimeMap(crimeMap);
   };
 
-  const getMarkers = (homeless_list) => {
+  const getMarkers = (crime_list) => {
     let _markers = [];
-    homeless_list.forEach((h) => {
+    crime_list.forEach((h) => {
       _markers.push(h.geo_location);
     });
     console.log(_markers);
     return _markers;
   };
   useEffect(() => {
-    setMarkers(getMarkers(homelessList));
-  }, [homelessList]);
+    setMarkers(getMarkers(crimeList));
+  }, [crimeList]);
   const handleViewPhoto = () => {
     setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
   };
@@ -134,12 +137,12 @@ export default function NgoHomeLess() {
           <SearchResultMain
             topImages={_topImages}
             heading={searchResultTitle}
-            info={{ totalPeople: homelessList.length }}
+            info={{ totalPeople: crimeList.length }}
             handleViewPhotoClick={handleViewPhoto}
           />
         )}
         {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
-          homelessList.length && (
+          crimeList.length && (
             <div className="mt-4">
               <button
                 onClick={() => {
@@ -150,10 +153,10 @@ export default function NgoHomeLess() {
                 &#8592; Back
               </button>
               <SearchResultGallery
-                homelessList={homelessList}
+                crimeList={crimeList}
                 handleImageClick={handleImageClick}
                 containerClass="mt-5"
-                homelessMap={homelessMap}
+                homelessMap={crimeMap}
               />
             </div>
           )}

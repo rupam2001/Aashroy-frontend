@@ -32,6 +32,7 @@ import NgoProfile from "./routes/ngo/profile";
 import Contact from "./routes/ContactPage";
 import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
+import NgoCrimeReportView from "./routes/ngo/crime";
 
 console.warn = () => {};
 console.error = () => {};
@@ -78,6 +79,7 @@ function GlobalRoutes() {
         <Route path="/testing" component={TestComponent} />
         <Route path="/ngo/home" component={NgoHome} />
         <Route path="/ngo/homeless" component={NgoHomeLess} />
+        <Route path="/ngo/crime" component={NgoCrimeReportView} />
 
         <Route
           path="/ngo/profile/:id"
