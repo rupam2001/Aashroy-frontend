@@ -167,7 +167,12 @@ export default function NgoHomeLess() {
         {}
       </div>
       <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
-        <Map markers={markers} region={[markers[0]]} />
+        {markers.length != 0 && (
+          <Map
+            markers={markers}
+            region={[markers[0].longitude, markers[0].latitude]}
+          />
+        )}
       </div>
 
       <SearchFilterModel
