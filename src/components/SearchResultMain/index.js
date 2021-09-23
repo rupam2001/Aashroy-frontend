@@ -5,6 +5,7 @@ const SearchResultMain = ({
   heading,
   info: { totalPeople },
   handleViewPhotoClick,
+  handleVisualizeClick,
 }) => {
   const imgRef = useRef(null);
 
@@ -31,6 +32,16 @@ const SearchResultMain = ({
           >
             View Photos
           </button>
+        </div>
+        <div>
+          {handleVisualizeClick && (
+            <button
+              onClick={handleVisualizeClick}
+              className="border-2 p-2 rounded-3xl border-blue-500 text-blue-600 hover:text-white hover:bg-blue-600 text-sm"
+            >
+              Visualize
+            </button>
+          )}
         </div>
       </div>
       <hr />

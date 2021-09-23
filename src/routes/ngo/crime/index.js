@@ -12,6 +12,8 @@ import {
   searchCrimesAsync,
 } from "../../../api/crimeData.api";
 import CrimeCards from "../../../components/CrimeCards";
+import TableWrapper from "../../../components/TableWrapper";
+import { crimeColumn } from "../../../constants/table.constants";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -19,6 +21,7 @@ export default function NgoCrimeReportView() {
     MAIN: "main",
     GALLERY: "gallery",
   };
+  const [showDataVis, setDataVis] = useState(false);
   const ngocontext = useContext(NgoContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("place");
@@ -117,9 +120,12 @@ export default function NgoCrimeReportView() {
   const handleViewPhoto = () => {
     setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
   };
+  const handleVisualizeClick = () => {
+    setDataVis(true);
+  };
   return (
     <div className="flex md:flex-row flex-col-reverse h-screen">
-      <div className="md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
+      <div className=" shadow md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
         <div className="flex w-full items-center h-auto sticky top-0">
           <SearchBar
             onChange={(text) => {
@@ -142,6 +148,7 @@ export default function NgoCrimeReportView() {
             heading={searchResultTitle}
             info={{ totalPeople: crimeList.length }}
             handleViewPhotoClick={handleViewPhoto}
+            handleVisualizeClick={handleVisualizeClick}
           />
         )}
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN &&
@@ -174,13 +181,14 @@ export default function NgoCrimeReportView() {
           )}
         {}
       </div>
-      <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
-        {markers.length != 0 && (
+      <div className="flex-1 md:min-h-screen  shadow">
+        {!showDataVis && markers.length != 0 && (
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
           />
         )}
+        {showDataVis && <TableWrapper data={crimeList} columns={crimeColumn} />}
       </div>
 
       <SearchFilterModel
@@ -252,7 +260,7 @@ const SearchFilterModel = ({
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
               min="10"
-              max="100"
+              max="500"
               step="5"
               value={diameter}
               onChange={(e) => {
