@@ -1,25 +1,25 @@
 import React from "react";
-import { FaDonate, FaAngleRight, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaDonate } from "react-icons/fa";
+import { Link, useHistory } from "react-router-dom";
 
-const NgoCard = ({ _id, name, about, geo_location, isLoading }) => {
+const NgoCard = ({ _id, name, about, geo_location }) => {
   return (
     <div className={"p-5 my-4 bg-white shadow rounded md:w-2/5 w-full"}>
       <Link to={"/ngo/profile/" + _id}>
         <h3 className="text-lg font-bold">{name}</h3>
-        <p className="text-blue-400">{geo_location.address}</p>
-        <p className="text-gray-500 italic">{about.substr(0, 80)} ...</p>
-        {
-          <div className="flex justify-end mt-4">
-            <Link to={"/general/donate/" + _id}>
-              <button className="mr-6 text-green-400 flex flex-col items-center">
-                <FaDonate className="text-xl" />
-                Donate
-              </button>
-            </Link>
-          </div>
-        }
       </Link>
+      <p className="text-blue-400">{geo_location.address}</p>
+      <p className="text-gray-500 italic">{about.substr(0, 80)} ...</p>
+      {
+        <div className="flex justify-end mt-4">
+          <Link to={"/general/donate/" + _id}>
+            <button className="mr-6 text-green-400 flex flex-col items-center">
+              <FaDonate className="text-xl" />
+              Donate
+            </button>
+          </Link>
+        </div>
+      }
     </div>
   );
 };

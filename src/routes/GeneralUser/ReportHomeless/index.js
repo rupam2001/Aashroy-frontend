@@ -93,9 +93,12 @@ function ReportHomeless() {
     <UserLayout>
       <div
         id="report-container"
-        className="flex flex-col lg:justify-evenly lg:flex-row-reverse h-full w-full"
+        className="flex flex-col lg:flex-row-reverse h-full w-full"
       >
-        <div id="map-container" className=" h-96 lg:h-screen w-full text-white">
+        <div
+          id="map-container"
+          className=" h-96 lg:h-screen w-full lg:w-2/3 text-white"
+        >
           {/* contains map */}
           <div className="h-full bg-red-100">
             <LocationPicker
@@ -105,8 +108,11 @@ function ReportHomeless() {
             />
           </div>
         </div>
-        <div id="report-form-container" className="flex flex-col lg:w-1/3 p-3">
-          <h1 className="text-blue-500 rounded m-3 mt-0 p-3 text-lg font-bold">
+        <div
+          id="report-form-container"
+          className="flex flex-col lg:w-1/3 p-3 md:px-10"
+        >
+          <h1 className="text-blue-500 rounded my-3 mt-0 py-3 text-2xl font-bold">
             Report Homeless
           </h1>
 

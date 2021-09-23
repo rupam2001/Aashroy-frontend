@@ -12,9 +12,10 @@ const reverseGeocode = async (coordinates) => {
     url.search = new URLSearchParams(params).toString();
     const response = await fetch(url);
     const reponseJSON = await response.json();
-    return reponseJSON.features[0].place_name
+    return reponseJSON.features[0].place_name;
   } catch (error) {
     console.log(error);
+    return "";
   }
 };
 

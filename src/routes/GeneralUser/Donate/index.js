@@ -126,14 +126,14 @@ function Donate() {
     <UserLayout>
       <div className="flex flex-col justify-center item-center p-3 md:flex-row-reverse md:justify-around w-full">
         <div id="ngo-details-container" className=" flex flex-col md:w-1/2">
+          <div className="">Map</div>
+
           <NGOdetailsSmallCard
             name={ngoDetails.name}
             phone={ngoDetails.phone}
             email={ngoDetails.email}
             website={ngoDetails.website}
           />
-
-          <div className="hidden md:block">Map</div>
         </div>
         <div
           id="donation-form"

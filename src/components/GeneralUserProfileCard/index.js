@@ -8,7 +8,7 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
   const [canEdit, setCanEdit] = useState(false);
 
   return (
-    <div className="relative p-3 w-full shadow-md flex flex-col md:w-1/2 md:flex-row-reverse md:justify-center items-center">
+    <div className="relative p-3 w-full shadow-md flex flex-col md:w-1/2 md:flex-row-reverse md:justify-between items-center">
       {/* edit button */}
       {!canEdit && (
         <button
@@ -22,7 +22,7 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
       {/* // */}
       <div
         id="user_profile_picture"
-        className="border-2 border-gray-300 h-32 w-32 rounded"
+        className="border-2 border-gray-300 h-32 w-32 md:mr-14 rounded"
       >
         <img
           src={userData.profile_pic}
@@ -31,16 +31,18 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
         />
       </div>
       <div id="user_profile_details" className="p-3">
-        <h2 className="text-blue-400 font-semibold">Profile Details</h2>
+        <h2 className="text-blue-400 font-semibold text-2xl pb-3">
+          Profile Details
+        </h2>
 
         {/* email */}
-        <div className="py-1">
+        <div className="">
           <span className="text-sm text-gray-400">Email :&nbsp;</span>
           <span className="">{userData.email}</span>
         </div>
 
         {/* name */}
-        <div className="py-1">
+        <div className="">
           <span className="text-sm text-gray-400">Name :&nbsp;</span>
           {canEdit ? (
             <input
@@ -54,7 +56,7 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
         </div>
 
         {/* points */}
-        <div className="py-1">
+        <div className="">
           <span className="text-sm text-gray-400">
             Contribution points :&nbsp;
           </span>

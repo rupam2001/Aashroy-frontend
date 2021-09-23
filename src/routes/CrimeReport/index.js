@@ -29,7 +29,7 @@ const NavbarLinks = [
   {
     icon: <FaPeopleCarry className="text-base" />,
     name: "Donate",
-    link: "/general/donate",
+    link: "/ngo/list",
   },
 ];
 
@@ -142,8 +142,8 @@ function ReportCrime() {
           className="shadow-md md:w-1/3 p-3 m-3"
         >
           {/* crime address */}
-          <div className="flex flex-col pb-2">
-            <label className="text-gray-400 text-sm">Address :</label>
+          <div className="flex flex-col pb-2 my-1">
+            <label className="text-gray-400 text-sm mb-1">Address :</label>
             <input
               placeholder="Address"
               value={address}
@@ -153,8 +153,8 @@ function ReportCrime() {
           </div>
 
           {/* crime type */}
-          <div className="flex pb-3 pt-2 item-center">
-            <label for="select-gender" className="text-gray-400 text-sm">
+          <div className="flex pb-3 pt-2 item-center my-1">
+            <label for="select-gender" className="text-gray-400 text-sm mb-1">
               Crime type :&nbsp;
             </label>
             <select
@@ -172,9 +172,10 @@ function ReportCrime() {
               ))}
             </select>
           </div>
+
           {/* crime type description */}
-          <div className="flex flex-col pb-2">
-            <label className="text-gray-400 text-sm">
+          <div className="flex flex-col pb-2 my-1">
+            <label className="text-gray-400 text-sm mb-1">
               A brief description on the type of crime :
             </label>
             <input
@@ -187,8 +188,8 @@ function ReportCrime() {
           </div>
 
           {/* brief report on the crime */}
-          <div className="flex flex-col pb-2">
-            <label className="text-gray-400 text-sm">
+          <div className="flex flex-col pb-2 my-1">
+            <label className="text-gray-400 text-sm mb-1">
               A brief description on the crime :
             </label>
             <textarea
@@ -234,12 +235,12 @@ function ReportCrime() {
               />
             </>
           )}
-          <span className="text-sm mx-3 text-gray-600">
+          <span className="text-sm mx-3 text-gray-500">
             * A maximum of {MAX_PHOTO_LIMIT_CRIME_REPORT} images can be uploaded
             at once
           </span>
           <br />
-          <span className="text-sm mx-3 text-gray-600">
+          <span className="text-sm mx-3 text-gray-500">
             * Your identity will be completely anonymous
           </span>
 
@@ -247,7 +248,7 @@ function ReportCrime() {
           <button
             onClick={submitHandler}
             className={
-              "flex w-full justify-center items-center text-white rounded  focus:bg-blue-700 p-3 text-lg bg-blue-500"
+              "flex w-full justify-center my-2 items-center text-white rounded  focus:bg-blue-700 p-3 text-lg bg-blue-500"
             }
           >
             Submit
