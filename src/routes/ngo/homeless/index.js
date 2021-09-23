@@ -19,6 +19,7 @@ export default function NgoHomeLess() {
     MAIN: "main",
     GALLERY: "gallery",
   };
+  const [days, setDays] = useState(1);
   const ngocontext = useContext(NgoContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("place");
@@ -56,6 +57,7 @@ export default function NgoHomeLess() {
     const { homeless_list, topImages, homelessMap } = await fetchHomelessAsync({
       geo_location,
       diameter,
+      days,
     });
     // alert(JSON.stringify(homeless_list));
     if (homeless_list) {
@@ -72,6 +74,10 @@ export default function NgoHomeLess() {
 
   const handleImageClick = (homeless) => {};
   const handleSearchAsync = async () => {
+    if (searchQuery == "") {
+      loadInitialHomelessDataAsync();
+      return;
+    }
     if (filter == "place") {
       placeWiseSearchAsync();
     }
@@ -84,6 +90,7 @@ export default function NgoHomeLess() {
       await searchHomelessAsync({
         address: searchQuery,
         diameter,
+        days,
       });
     if (!homeless_list && !topImages) {
       setTopImages(topImages);
@@ -170,6 +177,8 @@ export default function NgoHomeLess() {
         hideModel={hideModel}
         modelRef={modelRef}
         onSelectFilter={(f) => setFilter(f)}
+        days={days}
+        setDays={setDays}
       />
     </div>
   );
@@ -182,6 +191,8 @@ const SearchFilterModel = ({
   hideModel,
   modelRef,
   onSelectFilter,
+  days,
+  setDays,
 }) => {
   return (
     <div
@@ -235,6 +246,21 @@ const SearchFilterModel = ({
                 setDiameter(e.target.value);
               }}
               title={diameter}
+            />
+          </div>
+          <div className="bg-white w-full px-2 py-8">
+            <h2 className="font-bold">Last {days} Days </h2>
+            <input
+              class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
+              type="range"
+              min="1"
+              max="100"
+              step="1"
+              value={days}
+              onChange={(e) => {
+                setDays(e.target.value);
+              }}
+              title={days}
             />
           </div>
         </div>

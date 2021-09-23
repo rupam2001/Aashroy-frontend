@@ -37,7 +37,7 @@ const Map = ({ region, markers, center }) => {
           .setLngLat([marker.longitude, marker.latitude])
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
-              .setHTML(`<h3>Hello</h3><p>${marker.address}</p>`)
+              .setHTML(`<h3></h3><p>${marker.address}</p>`)
           )
           .addTo(map.current);
       });

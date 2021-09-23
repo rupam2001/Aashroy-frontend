@@ -30,7 +30,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
     setAbout(ngoData.ngoDetails.about);
     setWebsite(ngoData.ngoDetails.website);
     setMedia_urls(ngoData.ngoDetails.media_urls);
-  }, [ngoData]);
+  }, [ngoData.ngoDetails]);
 
   const showModel = () => {
     modelRef.current.style.display = "flex";

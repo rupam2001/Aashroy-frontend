@@ -5,7 +5,7 @@ import {
   handlePostFetching,
 } from "../utils/storage";
 
-async function fetchHomelessAsync({ geo_location, diameter }) {
+async function fetchHomelessAsync({ geo_location, diameter, days }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
     const res = await fetch(ENDPOINT + "/homeless/data/get/locationwise", {
@@ -14,7 +14,7 @@ async function fetchHomelessAsync({ geo_location, diameter }) {
         "Content-Type": "application/json",
         Authorization: bearer,
       },
-      body: JSON.stringify({ geo_location, diameter }),
+      body: JSON.stringify({ geo_location, diameter, days }),
     }).then((r) => r.json());
 
     handlePostFetching(res);
@@ -25,7 +25,7 @@ async function fetchHomelessAsync({ geo_location, diameter }) {
   }
 }
 
-async function searchHomelessAsync({ address, diameter }) {
+async function searchHomelessAsync({ address, diameter, days }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
     const res = await fetch(ENDPOINT + "/homeless/data/get/addresswise", {
@@ -34,7 +34,7 @@ async function searchHomelessAsync({ address, diameter }) {
         "Content-Type": "application/json",
         Authorization: bearer,
       },
-      body: JSON.stringify({ address, diameter }),
+      body: JSON.stringify({ address, diameter, days }),
     }).then((r) => r.json());
 
     handlePostFetching(res);
