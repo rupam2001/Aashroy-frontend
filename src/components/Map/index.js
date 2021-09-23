@@ -5,11 +5,12 @@ import "./style.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoicmctNDA0IiwiYSI6ImNrczk5eG8yZzF1dmgydnBoZWgwNjZzZ2QifQ.hrxTaZwJoKGMxstCagV5zw";
 
-const Map = ({ region, markers }) => {
+const Map = ({ region, markers, center }) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(94.2122044);
   const [lat, setLat] = useState(26.743573);
+  // const [center, setCenter] = useState([94.2122044, 26.743573]);
   const [zoom, setZoom] = useState(13);
 
   useEffect(() => {
@@ -27,18 +28,19 @@ const Map = ({ region, markers }) => {
   });
 
   useEffect(() => {
-    markers.map((marker) => {
-      const el = document.createElement("div");
-      el.setAttribute("title", "Reported Area");
-      el.className = "marker-custom";
-      new mapboxgl.Marker(el)
-        .setLngLat([marker.longitude, marker.latitude])
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML(`<h3>Hello</h3><p>${marker.address}</p>`)
-        )
-        .addTo(map.current);
-    });
+    if (markers)
+      markers.map((marker) => {
+        const el = document.createElement("div");
+        el.setAttribute("title", "Reported Area");
+        el.className = "marker-custom";
+        new mapboxgl.Marker(el)
+          .setLngLat([marker.longitude, marker.latitude])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+              .setHTML(`<h3>Hello</h3><p>${marker.address}</p>`)
+          )
+          .addTo(map.current);
+      });
   }, [markers]);
 
   useEffect(() => {
@@ -49,6 +51,14 @@ const Map = ({ region, markers }) => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
+
+    if (center)
+      map.current.on("dragend", () => {
+        center[1]([
+          map.current.getCenter().lng.toFixed(4),
+          map.current.getCenter().lat.toFixed(4),
+        ]);
+      });
   });
 
   return <div ref={mapContainer} className="map-container" />;

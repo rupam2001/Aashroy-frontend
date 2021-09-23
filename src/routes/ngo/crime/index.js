@@ -3,11 +3,6 @@ import SearchBar from "../../../components/SearchBar";
 import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
-import {
-  fetchHomelessAsync,
-  searchHomelessAsync,
-  searchHomelessPeopleAsync,
-} from "../../../api/homeless.api";
 import "./style.css";
 import SearchResultGallery from "../../../components/SeachResultGallery";
 import SearchResultMain from "../../../components/SearchResultMain";
