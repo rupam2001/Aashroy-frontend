@@ -33,6 +33,9 @@ import Contact from "./routes/ContactPage";
 import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
 
+console.warn = () => {};
+console.error = () => {};
+
 function App() {
   const authcontext = useContext(AuthContext);
   useEffect(() => {
