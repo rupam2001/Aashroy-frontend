@@ -20,12 +20,16 @@ const Map = ({ region, markers, center }) => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
+      center: [region[0], region[1]],
       zoom: zoom,
     });
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
     console.log(markers);
   });
+
+  useEffect(() => {
+    map.current.flyTo({ center: [region[0], region[1]], essential: true });
+  }, [region]);
 
   useEffect(() => {
     if (markers)
@@ -59,7 +63,7 @@ const Map = ({ region, markers, center }) => {
           map.current.getCenter().lat.toFixed(7),
         ]);
       });
-  });
+  }, []);
 
   return <div ref={mapContainer} className="map-container" />;
 };

@@ -18,7 +18,10 @@ function ReportHomeless() {
   const [media, setMedia] = useState([]);
   const [address, setAddress] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState(1);
-  const [geoLocation, setGeoLocation] = useState({ latitude: 0, longitude: 0 });
+  const [geoLocation, setGeoLocation] = useState({
+    latitude: 26.7459721,
+    longitude: 94.2463553,
+  });
   const [reverseGeocodingAddress, setReverseGeocodingAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
