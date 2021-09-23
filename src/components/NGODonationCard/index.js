@@ -20,14 +20,15 @@ function NGODonationCard({ donation }) {
       <div className="flex items-center my-2">
         {/* profile pic */}
         <div className="h-10 w-10 flex justify-center items-center bg-gray-500 rounded-full">
-          {donation.donor.profile_pic &&
-            donation.donor.profile_pic.length > 0 && (
+          {donation.donor.profile_pic && donation.donor.profile_pic.length > 0 && (
+            <a href={`/general/profile/${donation.donor._id}`}>
               <img
                 src={donation.donor.profile_pic}
                 alt="profile"
                 className="rounded-full object-contain"
               />
-            )}
+            </a>
+          )}
         </div>
         {/* name of the donor */}
         <div className="mx-2 font-semibold text-md">{donation.donor_name}</div>
