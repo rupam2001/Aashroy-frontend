@@ -161,6 +161,7 @@ export default function NgoCrimeReportView() {
                 <CrimeCards
                   body={crime.brief_report}
                   title={crime.type}
+                  date={crime.date}
                   crimeType={crime.type_description}
                   place={crime.reverse_geocoding_address}
                 />
