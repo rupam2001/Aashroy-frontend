@@ -9,6 +9,8 @@ import {
   addNewPhotoAsync,
   updateNgoBasicInfoAsync,
 } from "../../api/ngoDetailsEdit.api";
+import { toast } from "react-toastify";
+import Map from "../Map";
 
 export default function NgoDetails({ ngoData, forPublic }) {
   // const ngoData = useContext(NgoContext);
@@ -69,16 +71,21 @@ export default function NgoDetails({ ngoData, forPublic }) {
     });
 
   const handleDetailsEditSubmit = async () => {
-    console.log(name, phone, about, website);
     //api call
-    const newNgoData = await updateNgoBasicInfoAsync({
-      name,
-      phone,
-      about,
-      website,
-    });
+    const newNgoData = await toast.promise(
+      updateNgoBasicInfoAsync({
+        name,
+        phone,
+        about,
+        website,
+      }),
+      {
+        pending: "Updating..",
+        success: "Updated Successfully",
+        error: "Something went wrong",
+      }
+    );
     if (!newNgoData) {
-      alert("Something went wrong");
       return;
     }
     let temp = { ...ngoData.ngoDetails };
@@ -91,11 +98,19 @@ export default function NgoDetails({ ngoData, forPublic }) {
 
   const handleUpload = async () => {
     hideModel();
-    const { newMediaList } = await addNewPhotoAsync({ imageBase64: image });
+
+    const { newMediaList } = await toast.promise(
+      addNewPhotoAsync({ imageBase64: image }),
+      {
+        pending: "Uploading....",
+        success: "Uploaded",
+        error: "Something went wrong",
+      }
+    );
     if (!newMediaList) {
-      alert("Something went wrong");
       return;
     }
+
     setMedia_urls(newMediaList);
     let temp = { ...ngoData.ngoDetails };
     temp.media_urls = newMediaList;
@@ -106,22 +121,32 @@ export default function NgoDetails({ ngoData, forPublic }) {
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white">
         <div className="container border-b-2 border-gray-100 h-28 mb-4">
-          Map goes here
+          {ngoData.ngoDetails?.geo_location && (
+            <Map
+              markers={[]}
+              region={[
+                ngoData.ngoDetails.geo_location.longitude,
+                ngoData.ngoDetails.geo_location.latitude,
+              ]}
+            />
+          )}
         </div>
         <IconInput
           placeholder={name}
           textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 font-bold"
           // textClass="md:text-5xl text-2xl font-bold"
           onChangeText={(text) => setName(text)}
-          isEditable={!forPublic}
+          isEditable={false}
         />
-        <IconInput
-          placeholder={email}
-          // textClass="text-red-400"
-          addedClass="text-red-900"
-          onChangeText={(text) => setEmail(text)}
-          isEditable={!forPublic}
-        />
+        {ngoData.ngoDetails && (
+          <IconInput
+            placeholder={email}
+            // textClass="text-red-400"
+            addedClass="text-red-900"
+            onChangeText={(text) => setEmail(text)}
+            isEditable={false}
+          />
+        )}
         <IconInput
           placeholder={phone}
           addedClass="text-blue-600"

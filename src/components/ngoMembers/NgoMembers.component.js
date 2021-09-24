@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { FaPlusCircle, FaTrash } from "react-icons/fa";
 import Resizer from "react-image-file-resizer";
+import { toast } from "react-toastify";
 import {
   addNewMembeNgoAsync,
   removeMembeNgoAsync,
@@ -51,22 +52,33 @@ export default function NgoMembers({ membersList, forPublic }) {
     });
 
   const handleNewMemberAdded = async () => {
-    const { members } = await addNewMembeNgoAsync({
-      name: newName,
-      role: newRole,
-      about: newAbout,
-      profile_pic: newImage,
-    });
+    const { members } = await toast.promise(
+      addNewMembeNgoAsync({
+        name: newName,
+        role: newRole,
+        about: newAbout,
+        profile_pic: newImage,
+      }),
+      {
+        pending: "Adding..",
+        success: "Successfully added",
+        error: "Something went wrong",
+      }
+    );
     if (!members) {
-      alert("Something went wrong");
+      return;
     }
     setMembers(members);
     setShowForm(false);
   };
   const handleRemoveMember = async (_id) => {
-    const { members } = await removeMembeNgoAsync({ _id });
+    const { members } = await toast.promise(removeMembeNgoAsync({ _id }), {
+      pending: "Removing..",
+      success: "Removed",
+      error: "Something went wrong",
+    });
     if (!members) {
-      alert("Something went wrong");
+      return;
     }
     setMembers(members);
     setShowForm(false);
@@ -81,13 +93,13 @@ export default function NgoMembers({ membersList, forPublic }) {
         <div className="flex flex-col items-center">
           {!forPublic && (
             <FaPlusCircle
-              className="text-xl text-blue-500 cursor-pointer"
+              className="text-2xl text-blue-500 cursor-pointer"
               onClick={handleAddMembersClick}
             />
           )}
-          {!forPublic && (
+          {/* {!forPublic && (
             <p className="text-sm font-medium text-blue-500">Add</p>
-          )}
+          )} */}
         </div>
       </div>
 

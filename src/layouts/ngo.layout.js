@@ -51,7 +51,7 @@ export default function NgoLayout({ children }) {
       </div>
       <div class="min-h-screen flex flex-row">
         <div
-          class="flex flex-col bg-white min-h-screen overflow-hidden z-100 md:z-0 fixed md:sticky sidenav md:w-72 w-0 shadow-md"
+          class="flex flex-col bg-white min-h-screen overflow-hidden z-10000 md:z-0 fixed md:sticky sidenav md:w-72 w-0 shadow-md"
           ref={sideMenuRef}
         >
           <div class="flex  items-center justify-evenly h-38 shadow  py-5">

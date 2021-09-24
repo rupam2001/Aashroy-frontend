@@ -12,6 +12,9 @@ import {
   searchCrimesAsync,
 } from "../../../api/crimeData.api";
 import CrimeCards from "../../../components/CrimeCards";
+import TableWrapper from "../../../components/TableWrapper";
+import { crimeColumn } from "../../../constants/table.constants";
+import Table from "../../../components/Table";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -19,6 +22,7 @@ export default function NgoCrimeReportView() {
     MAIN: "main",
     GALLERY: "gallery",
   };
+  const [showDataVis, setDataVis] = useState(false);
   const ngocontext = useContext(NgoContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("place");
@@ -76,6 +80,7 @@ export default function NgoCrimeReportView() {
   const handleSearchAsync = async () => {
     if (searchQuery == "") {
       loadInitialHomelessDataAsync();
+
       return;
     }
     if (filter == "place") {
@@ -117,9 +122,12 @@ export default function NgoCrimeReportView() {
   const handleViewPhoto = () => {
     setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
   };
+  const handleVisualizeClick = () => {
+    setDataVis(true);
+  };
   return (
     <div className="flex md:flex-row flex-col-reverse h-screen">
-      <div className="md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
+      <div className=" shadow md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
         <div className="flex w-full items-center h-auto sticky top-0">
           <SearchBar
             onChange={(text) => {
@@ -137,22 +145,31 @@ export default function NgoCrimeReportView() {
           />
         </div>
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && (
-          <SearchResultMain
-            topImages={_topImages}
-            heading={searchResultTitle}
-            info={{ totalPeople: crimeList.length }}
-            handleViewPhotoClick={handleViewPhoto}
-          />
-        )}
-        {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN &&
-          crimeList.map((crime) => (
-            <CrimeCards
-              body={crime.brief_report}
-              title={crime.type}
-              crimeType={crime.type_description}
-              place={crime.reverse_geocoding_address}
+          <div>
+            <SearchResultMain
+              topImages={_topImages}
+              heading={searchResultTitle}
+              info={{ totalPeople: crimeList.length }}
+              handleViewPhotoClick={handleViewPhoto}
+              handleVisualizeClick={handleVisualizeClick}
+              handleMapShowClick={() => {
+                setDataVis(false);
+              }}
             />
-          ))}
+            <div>
+              {crimeList.map((crime) => (
+                <CrimeCards
+                  body={crime.brief_report}
+                  title={crime.type}
+                  crimeType={crime.type_description}
+                  place={crime.reverse_geocoding_address}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {/* {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && */}
+
         {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
           crimeList.length && (
             <div className="mt-4">
@@ -174,13 +191,27 @@ export default function NgoCrimeReportView() {
           )}
         {}
       </div>
-      <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
-        {markers.length != 0 && (
+      <div
+        className={
+          !showDataVis
+            ? "flex-1 md:min-h-screen shadow overflow-hidden"
+            : "flex-1 md:min-h-screen shadow overflow-scroll"
+        }
+      >
+        {!showDataVis && markers.length != 0 && (
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
           />
         )}
+        <div className=" md:h-screen md:w-full w-max">
+          {showDataVis && (
+            <TableWrapper
+              data={[...crimeList, ...crimeList]}
+              columns={crimeColumn}
+            />
+          )}
+        </div>
       </div>
 
       <SearchFilterModel
@@ -252,7 +283,7 @@ const SearchFilterModel = ({
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
               min="10"
-              max="100"
+              max="500"
               step="5"
               value={diameter}
               onChange={(e) => {

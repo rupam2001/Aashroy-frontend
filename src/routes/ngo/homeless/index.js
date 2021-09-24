@@ -244,7 +244,7 @@ const SearchFilterModel = ({
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
               min="10"
-              max="100"
+              max="500"
               step="5"
               value={diameter}
               onChange={(e) => {

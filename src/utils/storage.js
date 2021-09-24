@@ -23,6 +23,16 @@ const handlePostFetching = (res) => {
   setAccessToken(access_token);
 };
 
+const handlePostFetchingNgo = (res) => {
+  /**
+   * saves new access_token if any
+   * call it after every auth secured request and pass the respose
+   */
+  const { access_token } = res;
+  if (!access_token) return;
+  setAccessTokenNGO(access_token);
+};
+
 const getAccessTokenNGO = () => {
   return Cookies.get("access_token_ngo");
 };
@@ -47,4 +57,5 @@ export {
   setAccessTokenNGO,
   removeAccessTokenNgo,
   removeRefreshToken,
+  handlePostFetchingNgo,
 };
