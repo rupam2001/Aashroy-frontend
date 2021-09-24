@@ -107,6 +107,8 @@ export default function NgoDetails({ ngoData, forPublic }) {
         error: "Something went wrong",
       }
     );
+    setCurrenModelData(null);
+    setImage(null);
     if (!newMediaList) {
       return;
     }
