@@ -132,6 +132,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
                 {
                   longitude: ngoData.ngoDetails.geo_location.longitude,
                   latitude: ngoData.ngoDetails.geo_location.latitude,
+                  address: ngoData.ngoDetails.geo_location.address,
                 },
               ]}
             />
