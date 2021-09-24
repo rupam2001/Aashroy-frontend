@@ -19,10 +19,12 @@ import React from "react";
  *
  */
 
-const TextField = ({ placeholder, containerClass, state, head }) => {
+const TextField = ({ placeholder, containerClass, state, head, noShadow }) => {
   return (
     <div
-      className={`rounded shadow-md w-full bg-white flex justify-between ${containerClass}`}
+      className={`rounded ${
+        !noShadow ? "shadow - md" : ""
+      } w-full bg-white flex justify-between ${containerClass}`}
     >
       {head ? (
         <div className="flex justify-center flex-col pl-4 pr-3 select-none">

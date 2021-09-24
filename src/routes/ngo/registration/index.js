@@ -11,6 +11,7 @@ import "./style.css";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
+import LocationInputField from "../../../components/LocationInputField";
 import { Link } from "react-router-dom";
 import { ngoRegisterAsync } from "../../../api/auth.api";
 import { toast } from "react-toastify";
@@ -94,6 +95,7 @@ const RegistrationFormSection = () => {
           containerClass="mb-5"
           state={[website, setWebsite]}
         />
+        <LocationInputField containerClass="mb-5" />
         <MultilineField
           placeholder="About Us"
           containerClass="mb-5"
