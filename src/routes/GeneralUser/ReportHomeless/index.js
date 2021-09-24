@@ -116,6 +116,11 @@ function ReportHomeless() {
             Report Homeless
           </h1>
 
+          {/* message */}
+          <div className="mb-4 italic text-gray-500">
+            Help us to detect and map the homeless persons through this form.
+          </div>
+
           {/* address field */}
           <label className="text-gray-400 text-sm">Address : </label>
           <TextField

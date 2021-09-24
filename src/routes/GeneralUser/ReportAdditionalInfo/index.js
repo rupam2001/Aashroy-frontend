@@ -84,6 +84,12 @@ function ReportAdditionalInfo() {
     <UserLayout>
       <div className="flex justify-center w-full">
         <div className="flex flex-col w-full p-3 items-center">
+          {/* message */}
+          <div className="mb-4 italic text-gray-500">
+            Please enter some additional information about the homeless persons
+            you marked in the previous form.
+          </div>
+
           {/* list of homeless people */}
           {data.length > 0 &&
             data.map((person, index) => {

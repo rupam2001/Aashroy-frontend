@@ -141,6 +141,17 @@ function ReportCrime() {
           id="crime-report-form-container"
           className="shadow-md md:w-1/3 p-3 m-3"
         >
+          <h1 className="text-blue-500 rounded my-3 mt-0 py-3 text-2xl font-bold">
+            Report Crime
+            <span className="text-sm mx-1 font-normal">Anonymously</span>
+          </h1>
+
+          {/* message */}
+          <div className="mb-6 italic text-gray-500">
+            Dear User, You can report any criminal activity against the homeless
+            in this form without revealing your identity.
+          </div>
+
           {/* crime address */}
           <div className="flex flex-col pb-2 my-1">
             <label className="text-gray-400 text-sm mb-1">Address :</label>

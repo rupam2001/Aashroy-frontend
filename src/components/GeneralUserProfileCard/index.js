@@ -56,11 +56,17 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
         </div>
 
         {/* points */}
-        <div className="">
+        <div className="group relative">
           <span className="text-sm text-gray-400">
             Contribution points :&nbsp;
           </span>
-          <span>{userData.contribution_points}</span>
+          <span className="text-red-400 font-bold">
+            {userData.contribution_points}
+          </span>
+          <span className="text-xs absolute top-0 w-40 left-0 bg-blue-50 rounded-md p-2 opacity-0 group-hover:opacity-100">
+            Reporting homeless gives you 5 points, giving additional information
+            and donation completion gives you 10 and 20 points respectively.
+          </span>
         </div>
 
         {/* submit and cancel buttons */}

@@ -139,6 +139,18 @@ function Donate() {
           id="donation-form"
           className="my-3 flex flex-col rounded shadow-md p-3 md:w-1/2"
         >
+          <h1 className="text-blue-500 rounded my-3 mt-0 py-3 text-2xl font-bold">
+            Donate to Homeless
+          </h1>
+
+          {/* message */}
+          <div className="mb-4 italic text-gray-500">
+            Dear User, Lend a hand towards these homeless as much as you can..
+            As you know "The world is dangerous place, not because of those who
+            do evil, but those who look on and do nothing". You can donate
+            anything through any one of your trusted NGOs.
+          </div>
+
           {/* name of donor */}
           <div className="flex flex-col pb-2">
             <div className="flex justify-between mb-1">

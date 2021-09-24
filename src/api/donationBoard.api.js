@@ -19,4 +19,21 @@ const getDonationData = (skip, limit) => {
     .catch((err) => console.log(err));
 };
 
-export { getDonationData };
+const getTopContributors = () => {
+  return fetch(`${ENDPOINT}/donation-board/top-contributors`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      else throw res;
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => console.log(err));
+};
+
+export { getDonationData, getTopContributors };

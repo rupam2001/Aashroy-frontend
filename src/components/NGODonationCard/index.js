@@ -14,7 +14,7 @@ function NGODonationCard({ donation }) {
   return (
     <div
       id="donation-card-container"
-      className=" w-full p-3 my-2 shadow-md lg:w-2/3 lg:p-5"
+      className=" w-full p-3 my-2 shadow lg:w-2/3 lg:p-5"
     >
       {/* header */}
       <div className="flex items-center my-2">

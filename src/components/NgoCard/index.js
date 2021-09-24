@@ -12,12 +12,15 @@ const NgoCard = ({ _id, name, about, geo_location }) => {
       <p className="text-gray-500 italic">{about.substr(0, 80)} ...</p>
       {
         <div className="flex justify-end mt-4">
-          <Link to={"/general/donate/" + _id}>
-            <button className="mr-6 text-green-400 flex flex-col items-center">
-              <FaDonate className="text-xl" />
-              Donate
-            </button>
-          </Link>
+          {/* <Link to={"/general/donate/" + _id}> */}
+          <a
+            href={"/general/donate/" + _id}
+            className="mr-6 text-green-400 flex flex-col items-center"
+          >
+            <FaDonate className="text-xl" />
+            Donate
+          </a>
+          {/* </Link> */}
         </div>
       }
     </div>
