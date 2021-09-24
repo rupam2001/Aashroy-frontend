@@ -7,6 +7,9 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
   const [userName, setUserName] = useState("");
   const [canEdit, setCanEdit] = useState(false);
 
+  // ui state
+  const [displayTooltip, setDisplayTooltip] = useState(false);
+
   return (
     <div className="relative p-3 w-full shadow-md flex flex-col md:w-1/2 md:flex-row-reverse md:justify-between items-center">
       {/* edit button */}
@@ -30,7 +33,7 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
           className="w-full h-full"
         />
       </div>
-      <div id="user_profile_details" className="p-3">
+      <div id="user_profile_details" className="p-3 relative">
         <h2 className="text-blue-400 font-semibold text-2xl pb-3">
           Profile Details
         </h2>
@@ -56,18 +59,30 @@ function GeneralUserProfileCard({ requestUpdate, userData }) {
         </div>
 
         {/* points */}
-        <div className="group relative">
-          <span className="text-sm text-gray-400">
+        <div>
+          <span
+            className="text-sm text-gray-400"
+            onMouseOver={() => {
+              setDisplayTooltip(true);
+            }}
+            onMouseLeave={() => {
+              setDisplayTooltip(false);
+            }}
+          >
             Contribution points :&nbsp;
           </span>
           <span className="text-red-400 font-bold">
             {userData.contribution_points}
           </span>
-          <span className="text-xs absolute top-0 w-40 left-0 bg-blue-50 rounded-md p-2 opacity-0 group-hover:opacity-100">
-            Reporting homeless gives you 5 points, giving additional information
-            and donation completion gives you 10 and 20 points respectively.
-          </span>
         </div>
+        <span
+          className={`text-xs absolute top-0 w-40 left-0 bg-blue-50 rounded-md p-2 ${
+            displayTooltip ? "opacity-100" : "opacity-0"
+          } `}
+        >
+          Reporting homeless gives you 5 points, giving additional information
+          and donation completion gives you 10 and 20 points respectively.
+        </span>
 
         {/* submit and cancel buttons */}
         {canEdit && (
