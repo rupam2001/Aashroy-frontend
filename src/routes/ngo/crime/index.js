@@ -202,9 +202,10 @@ export default function NgoCrimeReportView() {
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
+            regionColor="red"
           />
         )}
-        <div className=" md:h-screen md:w-full w-max">
+        <div className=" md:h-screen md:w-full ">
           {showDataVis && (
             <TableWrapper data={crimeList} columns={crimeColumn} />
           )}

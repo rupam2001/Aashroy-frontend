@@ -120,13 +120,19 @@ export default function NgoDetails({ ngoData, forPublic }) {
   return (
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
       <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white">
-        <div className="container border-b-2 border-gray-100 h-28 mb-4">
+        <div className="container border-b-2 border-gray-100 h-40 mb-4">
           {ngoData.ngoDetails?.geo_location && (
             <Map
               markers={[]}
               region={[
                 ngoData.ngoDetails.geo_location.longitude,
                 ngoData.ngoDetails.geo_location.latitude,
+              ]}
+              pins={[
+                {
+                  longitude: ngoData.ngoDetails.geo_location.longitude,
+                  latitude: ngoData.ngoDetails.geo_location.latitude,
+                },
               ]}
             />
           )}

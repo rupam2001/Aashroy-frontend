@@ -14,10 +14,10 @@ import {
 export default function Charts({ data }) {
   const [preParedDataByDate, setPreparedDataByDate] = useState([]);
 
-  const LineChartSection = ({ key_x, _data, lines = [] }) => (
+  const LineChartSection = ({ key_x, _data, lines = [], w, h }) => (
     <LineChart
-      width={800}
-      height={400}
+      width={w}
+      height={h}
       data={_data}
       margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
     >
@@ -37,10 +37,10 @@ export default function Charts({ data }) {
     </LineChart>
   );
 
-  const AreaChartComp = ({ key_x, _data, areas = [] }) => (
+  const AreaChartComp = ({ key_x, _data, areas = [], w, h }) => (
     <AreaChart
-      width={790}
-      height={400}
+      width={w}
+      height={h}
       data={_data}
       margin={{
         top: 10,
@@ -70,18 +70,40 @@ export default function Charts({ data }) {
 
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
-      <div className="my-8">
+      <div className="my-8 md:block hidden">
         <LineChartSection
           key_x="date"
           lines={[{ colour: "blue", key_y: "Number of crime reports" }]}
           _data={preParedDataByDate}
+          w={800}
+          h={400}
         />
       </div>
-      <div className="mt-8">
+      <div className="my-8 md:hidden block">
+        <LineChartSection
+          key_x="date"
+          lines={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={400}
+          h={400}
+        />
+      </div>
+      <div className="mt-8 md:block hidden">
         <AreaChartComp
           key_x="date"
           areas={[{ colour: "blue", key_y: "Number of crime reports" }]}
           _data={preParedDataByDate}
+          w={790}
+          h={400}
+        />
+      </div>
+      <div className="mt-8 md:hidden block">
+        <AreaChartComp
+          key_x="date"
+          areas={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={400}
+          h={400}
         />
       </div>
     </div>
