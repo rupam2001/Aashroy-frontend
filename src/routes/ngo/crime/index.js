@@ -14,6 +14,7 @@ import {
 import CrimeCards from "../../../components/CrimeCards";
 import TableWrapper from "../../../components/TableWrapper";
 import { crimeColumn } from "../../../constants/table.constants";
+import Table from "../../../components/Table";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -79,6 +80,7 @@ export default function NgoCrimeReportView() {
   const handleSearchAsync = async () => {
     if (searchQuery == "") {
       loadInitialHomelessDataAsync();
+
       return;
     }
     if (filter == "place") {
@@ -143,23 +145,31 @@ export default function NgoCrimeReportView() {
           />
         </div>
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && (
-          <SearchResultMain
-            topImages={_topImages}
-            heading={searchResultTitle}
-            info={{ totalPeople: crimeList.length }}
-            handleViewPhotoClick={handleViewPhoto}
-            handleVisualizeClick={handleVisualizeClick}
-          />
-        )}
-        {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN &&
-          crimeList.map((crime) => (
-            <CrimeCards
-              body={crime.brief_report}
-              title={crime.type}
-              crimeType={crime.type_description}
-              place={crime.reverse_geocoding_address}
+          <div>
+            <SearchResultMain
+              topImages={_topImages}
+              heading={searchResultTitle}
+              info={{ totalPeople: crimeList.length }}
+              handleViewPhotoClick={handleViewPhoto}
+              handleVisualizeClick={handleVisualizeClick}
+              handleMapShowClick={() => {
+                setDataVis(false);
+              }}
             />
-          ))}
+            <div>
+              {crimeList.map((crime) => (
+                <CrimeCards
+                  body={crime.brief_report}
+                  title={crime.type}
+                  crimeType={crime.type_description}
+                  place={crime.reverse_geocoding_address}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {/* {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && */}
+
         {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
           crimeList.length && (
             <div className="mt-4">
@@ -181,14 +191,27 @@ export default function NgoCrimeReportView() {
           )}
         {}
       </div>
-      <div className="flex-1 md:min-h-screen  shadow">
+      <div
+        className={
+          !showDataVis
+            ? "flex-1 md:min-h-screen shadow overflow-hidden"
+            : "flex-1 md:min-h-screen shadow overflow-scroll"
+        }
+      >
         {!showDataVis && markers.length != 0 && (
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
           />
         )}
-        {showDataVis && <TableWrapper data={crimeList} columns={crimeColumn} />}
+        <div className=" md:h-screen md:w-full w-max">
+          {showDataVis && (
+            <TableWrapper
+              data={[...crimeList, ...crimeList]}
+              columns={crimeColumn}
+            />
+          )}
+        </div>
       </div>
 
       <SearchFilterModel

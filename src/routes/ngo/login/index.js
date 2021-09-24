@@ -4,12 +4,9 @@ import PasswordField from "../../../components/PasswordField";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { ngoLoginAsync } from "../../../api/auth.api";
-import {
-  setAccessToken,
-  setAccessTokenNGO,
-  setRefreshToken,
-} from "../../../utils/storage";
+import { setAccessTokenNGO, setRefreshToken } from "../../../utils/storage";
 import { NgoContext } from "../../../contexts/ngo.context";
+import { toast } from "react-toastify";
 
 const LoginFormSection = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -23,7 +20,7 @@ const LoginFormSection = () => {
       password,
     });
     if (!access_token) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
       return;
     }
     setAccessTokenNGO(access_token);
