@@ -1,5 +1,6 @@
 import React from "react";
 import LocationPicker from "../../components/LocationPicker";
+import Map from "../../components/Map";
 
 const markers = [
   {
@@ -23,15 +24,11 @@ const TesingComponent = () => {
   return (
     <div className="h-screen w-screen bg-purple-600">
       {/* <Map region={[94.2142044, 26.753573]} markers={markers} /> */}
-      <LocationPicker
+      <Map
         region={[94.2142044, 26.753573]}
-        onCordinateChange={() => {
-          console.log("yay");
-        }}
-        onRGCResponse={(name) => {
-          console.log(name);
-          alert(name);
-        }}
+        markers={markers}
+        regionColor="#ff000075"
+        pins={[{ address: "123", latitude: 26.613573, longitude: 94.2122044 }]}
       />
     </div>
   );

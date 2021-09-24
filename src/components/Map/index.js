@@ -5,7 +5,7 @@ import "./style.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoicmctNDA0IiwiYSI6ImNrczk5eG8yZzF1dmgydnBoZWgwNjZzZ2QifQ.hrxTaZwJoKGMxstCagV5zw";
 
-const Map = ({ region, markers, center }) => {
+const Map = ({ region, markers, center, pins, regionColor }) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(94.2122044);
@@ -37,6 +37,8 @@ const Map = ({ region, markers, center }) => {
         const el = document.createElement("div");
         el.setAttribute("title", "Reported Area");
         el.className = "marker-custom";
+        if (regionColor) el.style.backgroundColor = regionColor;
+        else el.style.backgroundColor = "#0059ff75";
         new mapboxgl.Marker(el)
           .setLngLat([marker.longitude, marker.latitude])
           .setPopup(
@@ -46,6 +48,19 @@ const Map = ({ region, markers, center }) => {
           .addTo(map.current);
       });
   }, [markers]);
+
+  useEffect(() => {
+    if (pins)
+      pins.map((pin) => {
+        new mapboxgl.Marker()
+          .setLngLat([pin.longitude, pin.latitude])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+              .setHTML(`<h3></h3><p>${pin.address}</p>`)
+          )
+          .addTo(map.current);
+      });
+  }, [pins]);
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
