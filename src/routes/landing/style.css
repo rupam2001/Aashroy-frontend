@@ -5,10 +5,10 @@
 .hero-section-image {
   background-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.336),
-      rgba(0, 0, 0, 0.767)
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
     ),
-    url("https://source.unsplash.com/rbz1hVh7_LM/1920x1080");
+    url("https://source.unsplash.com/AweUC9wTnbs/1920x1080");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import DefaultLayout from "../../layouts/default.layout";
+import DonationBoard from "../../components/DonationBoard";
+import { getDonationData } from "../../api/donationBoard.api";
+
 import * as FontAwsome from "react-icons/fa";
 import "./style.css";
 
@@ -59,7 +63,8 @@ const HeroSection = () => {
         style={{ transform: `translateY(${offsetY * 0.4}px)` }}
       ></div>
       <div className="text-7xl text-white font-bold text-center hero-title mb-5">
-        Some Heading About Something Will Go Here
+        Help the Homeless
+        <br /> Get Them their AASHROY
       </div>
       <p className="text-white">
         Exercitation aliqua est ut veniam eu nulla sint aliqua exercitation
@@ -104,6 +109,21 @@ const SponsorSection = () => {
   );
 };
 
+const DonationBoardSection = () => {
+  const [recentDonations, setRecentDonations] = useState([]);
+
+  useEffect(() => {
+    // fetch data and pass it to donation board to display
+    (async () => {
+      const rdata = await getDonationData(0, 20);
+      console.log(rdata.donations);
+      setRecentDonations(rdata.donations);
+    })();
+  }, []);
+
+  return <DonationBoard donations={recentDonations} showImage={false} />;
+};
+
 const Landing = () => {
   return (
     <DefaultLayout>
@@ -113,7 +133,7 @@ const Landing = () => {
           <div className="flex">
             <div className="md:w-1/2">
               <Link to="/general/report-homeless">
-                <div className="mb-12">
+                <div className="mb-12 cursor-pointer">
                   <p className="mb-2 font-bold cursor-default text-3xl">
                     Report homeless
                   </p>
@@ -122,32 +142,30 @@ const Landing = () => {
                     deserunt consequat.
                   </p>
                   <p className=" text-blue-600">
+                    <u>GO</u> {">>>"}
+                  </p>
+                </div>
+              </Link>
+              <Link to="/report-crime" className="cursor-pointer">
+                <div className="mb-20">
+                  <p className="mb-2 font-bold cursor-default text-3xl">
+                    Crime Report
+                  </p>
+                  <p className="mb-2 cursor-default">
+                    Cupidatat sit exercitation et velit velit enim magna
+                    deserunt consequat.
+                  </p>
+                  <p className="text-blue-600">
                     <a href="#">
-                      <u>GO</u> {">>>"}
+                      <u>Make report for crime</u> {">>>"}
                     </a>
                   </p>
                 </div>
               </Link>
-              <div className="mb-20">
-                <p className="mb-2 font-bold cursor-default text-3xl">
-                  Crime Report
-                </p>
-                <p className="mb-2 cursor-default">
-                  Cupidatat sit exercitation et velit velit enim magna deserunt
-                  consequat.
-                </p>
-                <p className="text-blue-600">
-                  <a href="#">
-                    <u>Make report for crime</u> {">>>"}
-                  </a>
-                </p>
-              </div>
 
               {[
-                "Adipisicing sunt occaecat sit qui ea esse aliqua sunt id officia culpa cupidatat eu voluptate. \
-          Veniam occaecat mollit fugiat ipsum aliqua non laborum voluptate non id. Enim sint ut ex non adipisicing amet elit laboris quis aliqua veniam culpa.",
-                "Incididunt consectetur nisi aute consequat velit sunt laborum laboris eu ullamco velit irure. Amet dolor fugiat ullamco aliquip laboris.",
-                "Velit eu sit excepteur fugiat commodo Lorem commodo excepteur labore ea dolore sint fugiat. Reprehenderit cillum labore aliquip enim commodo sint nisi et reprehenderit.",
+                "Hey ! Are you a socialist ? Whatever you are! You as a human, can too join our hands and be a part of our social motive - Aashroy for homeless people.",
+                "NGO s , government representives , journalists, socialists and common people too can join our hands",
               ].map((item, index) => (
                 <p className="mb-4 leading-8" key={`home_list_1_${index}`}>
                   {item}
@@ -168,18 +186,14 @@ const Landing = () => {
               </div>
             </div>
             <div className="md:w-1/2 md:block hidden">
-              <div className="pl-20">
-                <img
-                  height={800}
-                  width={640}
-                  src="https://source.unsplash.com/36PPJckrJY8/640X800"
-                  alt="Helping hands"
-                />
+              <div className="px-16">
+                <DonationBoardSection />
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <GalleryWall />
       <SponsorSection />
     </DefaultLayout>

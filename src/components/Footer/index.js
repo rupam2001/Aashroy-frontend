@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FaFacebook,
   FaTwitter,
@@ -14,9 +14,10 @@ import {
   SOCIAL_MEDIA,
 } from "../../constants/footer.constats";
 
-const Footer = () => {
+const Footer = ({theme}) => {
+
   return (
-    <div className="flex flex-col w-full pt-xl pb-10 bg-white items-center border-gray-200 border-t-2">
+    <div className={`flex flex-col w-full pt-xl pb-10 ${theme=="dark"?"bg-black" : "bg-white"} items-center border-gray-200 border-t-2`}>
       {/* top section */}
       <div className="mt-10 flex flex-row justify-evenly flex-wrap lg:gap-20 gap:10 text-left w-full px-20">
         {/* main section */}
