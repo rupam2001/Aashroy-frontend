@@ -13,6 +13,7 @@ import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
 import { Link } from "react-router-dom";
 import { ngoRegisterAsync } from "../../../api/auth.api";
+import { toast } from "react-toastify";
 
 const RegistrationFormSection = () => {
   // Contants
@@ -46,10 +47,10 @@ const RegistrationFormSection = () => {
       location: fakeLocation,
     });
     if (error) {
-      alert("Something went wrong :(");
+      toast.error("Something went wrong :(");
       return;
     }
-    alert(msg);
+    toast.success(msg);
     window.location.reload();
   };
 

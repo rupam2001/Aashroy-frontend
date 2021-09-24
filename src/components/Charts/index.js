@@ -7,70 +7,155 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Area,
+  AreaChart,
   ResponsiveContainer,
 } from "recharts";
-import moment from "moment";
-
 export default function Charts({ data }) {
-  const [preParedData, setPreparedData] = useState([]);
+  const [preParedDataByDate, setPreparedDataByDate] = useState([]);
 
-  const LineChartSection = ({ key_x, key_y, _data }) => (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        width={400}
-        height={400}
-        data={_data}
-        margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={key_x} />
-        <YAxis />
-        <Tooltip />
-        <Legend />
+  const LineChartSection = ({ key_x, _data, lines = [], w, h }) => (
+    <LineChart
+      width={w}
+      height={h}
+      data={_data}
+      margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey={key_x} />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      {lines.map(({ colour, key_y }) => (
         <Line
           type="monotone"
           dataKey={key_y}
-          stroke="#8884d8"
+          stroke={colour}
           activeDot={{ r: 8 }}
         />
-      </LineChart>
-    </ResponsiveContainer>
+      ))}
+    </LineChart>
   );
+
+  const AreaChartComp = ({ key_x, _data, areas = [], w, h }) => (
+    <AreaChart
+      width={w}
+      height={h}
+      data={_data}
+      margin={{
+        top: 10,
+        right: 30,
+        left: 0,
+        bottom: 0,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey={key_x} />
+      <YAxis />
+      <Tooltip />
+      {areas.map(({ colour, key_y }) => (
+        <Area
+          type="monotone"
+          dataKey={key_y}
+          stroke={colour}
+          activeDot={{ r: 8 }}
+        />
+      ))}
+    </AreaChart>
+  );
+
   useEffect(() => {
-    setPreparedData(data);
+    setPreparedDataByDate(countCrimeFreqByDate(data));
   }, [data]);
+
   return (
-    <div className="bg-red-100 w-full h-full">
-      <LineChartSection key_x="type" key_y="date" _data={preParedData} />
+    <div className=" w-full min-h-screen flex flex-col justify-center items-center">
+      <div className="my-8 md:block hidden shadow py-4 pr-4">
+        <LineChartSection
+          key_x="date"
+          lines={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={800}
+          h={400}
+        />
+      </div>
+      <div className="my-8 md:hidden block">
+        <LineChartSection
+          key_x="date"
+          lines={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={400}
+          h={400}
+        />
+      </div>
+      <div className="mt-8 md:block hidden shadow py-4 pr-4 rounded">
+        <AreaChartComp
+          key_x="date"
+          areas={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={790}
+          h={400}
+        />
+      </div>
+      <div className="mt-8 md:hidden block">
+        <AreaChartComp
+          key_x="date"
+          areas={[{ colour: "blue", key_y: "Number of crime reports" }]}
+          _data={preParedDataByDate}
+          w={400}
+          h={400}
+        />
+      </div>
     </div>
   );
 }
 
-const groupByDate = (array, key) => {
-  // Return the reduced array
-  return array.reduce((result, currentItem) => {
-    // If an array already present for key, push it to the array. Otherwise create an array and push the object.
-    (result[currentItem[key]] = result[currentItem[key]] || []).push(
-      currentItem
-    );
-    // return the current iteration `result` value, this will be the next iteration's `result` value and accumulate
-    return result;
-  }, {}); // Empty object is the initial value for result object
+const countCrimeFreqByDate = (array) => {
+  const date_map = {};
+
+  for (let i = 0; i < array.length; i++) {
+    let d = array[i].date;
+    //convert it to date string
+    d = new Date(d).toString();
+    d = d.split(" ");
+    d = d[0] + " " + d[1] + " " + d[2]; //eg: Tue Jan 10
+    if (date_map.hasOwnProperty(d)) {
+      date_map[d]++;
+    } else {
+      date_map[d] = 1;
+    }
+  }
+  let result = [];
+  for (const key in date_map) {
+    const obj = {
+      date: key,
+      "Number of crime reports": date_map[key],
+    };
+    result.push(obj);
+  }
+  return result;
 };
 
-const groupByDate2 = (array = [], days = 10) => {};
+const groupByType = (array, type) => {
+  const type_map = {};
 
-const fake = [
-  {
-    type: "A",
-    date: 123,
-  },
-  {
-    type: "B",
-    date: 124,
-  },
-  {
-    type: "C",
-    date: 126,
-  },
-];
+  for (let i = 0; i < array.length; i++) {
+    let t = array[i].type;
+    //convert it to date string
+
+    if (type_map.hasOwnProperty(t)) {
+      type_map[t]++;
+      continue;
+    }
+    type_map[t] = 1;
+  }
+  let result = [];
+  for (const key in type_map) {
+    const obj = {
+      type: key,
+      freq: type_map[key],
+    };
+    result.push(obj);
+  }
+  return result;
+};

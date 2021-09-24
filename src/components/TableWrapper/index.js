@@ -13,7 +13,7 @@ export default function TableWrapper({ data, columns }) {
   const [showTable, setShowTable] = useState(true);
   return (
     <div className="p-4 w-full">
-      <div className="flex justify-evenly py-2 my-1 sticky top-0 bg-white shadow items-center text-sm border-b-2 border-gray-100">
+      <div className="flex justify-evenly py-2 z-50 my-1 sticky top-0 bg-white shadow items-center text-sm border-b-2 border-gray-100">
         <div
           className="flex flex-col items-center text-blue-500 cursor-pointer"
           onClick={() => {
