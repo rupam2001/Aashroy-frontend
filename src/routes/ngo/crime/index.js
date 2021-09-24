@@ -34,7 +34,7 @@ export default function NgoCrimeReportView() {
     SEARCH_RESULT_MODES.MAIN
   );
   const [_topImages, setTopImages] = useState([""]);
-  const [days, setDays] = useState(1);
+  const [days, setDays] = useState(7);
   const modelRef = useRef(null);
   const [crimeMap, setCrimeMap] = useState({});
   const showModel = () => {
@@ -206,10 +206,7 @@ export default function NgoCrimeReportView() {
         )}
         <div className=" md:h-screen md:w-full w-max">
           {showDataVis && (
-            <TableWrapper
-              data={[...crimeList, ...crimeList]}
-              columns={crimeColumn}
-            />
+            <TableWrapper data={crimeList} columns={crimeColumn} />
           )}
         </div>
       </div>
