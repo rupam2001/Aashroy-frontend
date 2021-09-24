@@ -17,7 +17,7 @@ async function updateNgoBasicInfoAsync({ name, email, phone, about, website }) {
    */
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/details/updatebasic", {
+    const res = await fetch(ENDPOINT + "/api/ngo/details/updatebasic", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: bearer },
       body: JSON.stringify({ name, email, phone, about, website }),
@@ -37,7 +37,7 @@ async function addNewPhotoAsync({ imageBase64 }) {
    */
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/details/addnewphoto", {
+    const res = await fetch(ENDPOINT + "/api/ngo/details/addnewphoto", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ async function addNewPhotoAsync({ imageBase64 }) {
 async function getNGODataAsync() {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/details/getdata", {
+    const res = await fetch(ENDPOINT + "/api/ngo/details/getdata", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ async function getNGODataAsync() {
 async function addNewMembeNgoAsync({ name, role, profile_pic, about }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/details/addmember", {
+    const res = await fetch(ENDPOINT + "/api/ngo/details/addmember", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ async function addNewMembeNgoAsync({ name, role, profile_pic, about }) {
 async function removeMembeNgoAsync({ _id }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/ngo/details/deletemember", {
+    const res = await fetch(ENDPOINT + "/api/ngo/details/deletemember", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

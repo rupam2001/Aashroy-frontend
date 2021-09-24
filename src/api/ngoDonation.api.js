@@ -12,7 +12,7 @@ const fetchDonations = (skip, limit) => {
   const accessToken = getAccessTokenNGO();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/ngo/donation/our-donation/${skip}/${limit}`, {
+  return fetch(`${ENDPOINT}/api/ngo/donation/our-donation/${skip}/${limit}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const acceptDonation = (setLoading, donationId) => {
   const accessToken = getAccessTokenNGO();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/ngo/donation/accept-donation`, {
+  return fetch(`${ENDPOINT}/api/ngo/donation/accept-donation`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const markDonationReceived = (setLoading, donationId) => {
   const accessToken = getAccessTokenNGO();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/ngo/donation/received-donation`, {
+  return fetch(`${ENDPOINT}/api/ngo/donation/received-donation`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

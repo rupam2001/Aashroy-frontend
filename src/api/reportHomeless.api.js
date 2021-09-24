@@ -16,7 +16,7 @@ function reportHomeless(
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/report-homeless`, {
+  return fetch(`${ENDPOINT}/api/general-user/report-homeless`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function reportHomelessAddInfo(setLoading, data, parentId) {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/report-homeless/additional-info`, {
+  return fetch(`${ENDPOINT}/api/general-user/report-homeless/additional-info`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

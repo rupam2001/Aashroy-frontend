@@ -9,7 +9,7 @@ async function fetchCrimesAsync({ geo_location, diameter, days }) {
   try {
     diameter = 50;
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/locationwise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/locationwise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ async function fetchCrimesAsync({ geo_location, diameter, days }) {
 async function searchCrimesAsync({ address, diameter, days }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/addresswise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ async function searchCrimesAsync({ address, diameter, days }) {
 async function searchCrimesPeopleAsync({ person, diameter }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/addresswise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
