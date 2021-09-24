@@ -1,0 +1,26 @@
+.hero-section{
+    height: 55rem;
+}
+
+.hero-section-image {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    url("https://source.unsplash.com/AweUC9wTnbs/1920x1080");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.hero-title {
+  width: 60rem;
+  line-height: 6rem;
+}

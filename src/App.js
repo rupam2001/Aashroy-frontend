@@ -91,7 +91,7 @@ function GlobalRoutes() {
         <Route path="/ngo/donations" component={NGODonations} />
         <Route path="/about-us" component={About} />
         <Route path="/contact-us" component={Contact} />
-        <Route path="/public-donations" exact component={DonationPage} />
+        <Route path="/public-contribution" exact component={DonationPage} />
         <Route path="/ngo/list" component={NgoList} />
       </Switch>
       <RouteManager />
