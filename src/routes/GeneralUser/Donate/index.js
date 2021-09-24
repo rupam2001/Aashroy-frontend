@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import { useParams, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaFileUpload, FaGhost } from "react-icons/fa";
+import Map from "../../../components/Map";
 
 function Donate() {
   const { ngoId } = useParams();
@@ -115,6 +116,7 @@ function Donate() {
       try {
         const data = await fetchNGOdetails(ngoId);
         setNgoDetails(data["0"]);
+        console.log(data[0]);
       } catch (err) {
         toast.error(err);
         history.replace("/general");
@@ -126,7 +128,17 @@ function Donate() {
     <UserLayout>
       <div className="flex flex-col justify-center item-center p-3 md:flex-row-reverse md:justify-around w-full">
         <div id="ngo-details-container" className=" flex flex-col md:w-1/2">
-          <div className="">Map</div>
+          <div className="h-96 p-3">
+            {ngoDetails && ngoDetails.geo_location && (
+              <Map
+                region={[
+                  ngoDetails.geo_location.longitude,
+                  ngoDetails.geo_location.latitude,
+                ]}
+                pins={[ngoDetails.geo_location]}
+              />
+            )}
+          </div>
 
           <NGOdetailsSmallCard
             name={ngoDetails.name}
