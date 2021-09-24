@@ -3,6 +3,7 @@ import {
   getAccessTokenNGO,
   getRefreshToken,
   handlePostFetching,
+  handlePostFetchingNgo,
 } from "../utils/storage";
 
 async function fetchHomelessAsync({ geo_location, diameter, days }) {
@@ -17,7 +18,7 @@ async function fetchHomelessAsync({ geo_location, diameter, days }) {
       body: JSON.stringify({ geo_location, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -37,7 +38,7 @@ async function searchHomelessAsync({ address, diameter, days }) {
       body: JSON.stringify({ address, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -60,7 +61,7 @@ async function searchHomelessPeopleAsync({ person, diameter }) {
       body: JSON.stringify({ person, diameter }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -71,4 +72,29 @@ async function searchHomelessPeopleAsync({ person, diameter }) {
   }
 }
 
-export { fetchHomelessAsync, searchHomelessAsync, searchHomelessPeopleAsync };
+async function getHomelessPersonAsync({ _id }) {
+  try {
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const res = await fetch(ENDPOINT + "/homeless/data/get/person", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
+      body: JSON.stringify({ _id }),
+    }).then((r) => r.json());
+
+    handlePostFetchingNgo(res);
+
+    return res;
+  } catch (error) {
+    return {};
+  }
+}
+
+export {
+  fetchHomelessAsync,
+  searchHomelessAsync,
+  searchHomelessPeopleAsync,
+  getHomelessPersonAsync,
+};

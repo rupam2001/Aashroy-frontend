@@ -145,7 +145,7 @@ export default function NgoCrimeReportView() {
           />
         </div>
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && (
-          <div>
+          <div className="w-full">
             <SearchResultMain
               topImages={_topImages}
               heading={searchResultTitle}

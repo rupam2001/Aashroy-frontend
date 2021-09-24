@@ -1,4 +1,4 @@
-const ENDPOINT = "https://aashroy.herokuapp.com";
-// const ENDPOINT = "http://192.168.29.238:5000";
+// const ENDPOINT = "https://aashroy.herokuapp.com";
+const ENDPOINT = "http://localhost:5000";
 
 export { ENDPOINT };

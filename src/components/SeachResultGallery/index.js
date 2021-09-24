@@ -20,7 +20,12 @@ const SearchResultGallery = ({
               <div className="container mx-auto mt-10">
                 {value.map((each_homeless) => {
                   return (
-                    <div className="container grid grid-cols-3 gap-1 mx-auto w-full">
+                    <div
+                      className="container grid grid-cols-3 gap-1 mx-auto w-full"
+                      onClick={() => {
+                        handleImageClick(each_homeless);
+                      }}
+                    >
                       {each_homeless.media_url &&
                         each_homeless.media_url.map((media) => (
                           <div className="w-full rounded my-2" key={media.url}>
@@ -28,9 +33,6 @@ const SearchResultGallery = ({
                               src={media.url}
                               alt="image"
                               className="cursor-pointer"
-                              onClick={() => {
-                                handleImageClick(each_homeless);
-                              }}
                             />
                           </div>
                         ))}
