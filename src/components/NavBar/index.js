@@ -19,7 +19,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="py-1">
+    <nav className="py-1 z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex space-x-4">
