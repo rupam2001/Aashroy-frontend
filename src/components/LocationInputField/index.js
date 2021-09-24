@@ -4,34 +4,32 @@ import { getCurrentGeoLocationAsync } from "../../utils/location";
 import { HiOutlineLocationMarker, HiOutlineMap } from "react-icons/hi";
 import TextField from "../TextField";
 
-const LocationInputField = ({ containerClass }) => {
+const LocationInputField = ({
+  containerClass,
+  onCordinateChange,
+  onRGCResponse,
+}) => {
   const [address, setAddress] = useState("");
-  const [geoLocation, setGeoLocation] = useState({
-    latitude: 26.7459721,
-    longitude: 94.2463553,
-  });
+  const [geoLocation, setGeoLocation] = useState([94.2463553, 26.7459721]);
 
-  useEffect(() => {
-    console.log("DEBUGGGG");
-    console.log(geoLocation);
-  }, [address]);
+    useEffect(() => {
+      onRGCResponse(address);
+    }, [address]);
+
+    useEffect(() => {
+      onCordinateChange(geoLocation);
+    }, [geoLocation]);
 
   useEffect(() => {
     (async () => {
       // obtain geo location
       const location = await getCurrentGeoLocationAsync();
-      setGeoLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      });
+      setGeoLocation([location.coords.longitude, location.coords.latitude]);
     })();
   }, []);
 
   const cordinateChangeHandler = (center) => {
-    setGeoLocation({
-      latitude: parseFloat(center[1]),
-      longitude: parseFloat(center[0]),
-    });
+    setGeoLocation([parseFloat(center[0]), parseFloat(center[1])]);
   };
 
   const updateAddress = (text) => setAddress(text);
@@ -46,7 +44,7 @@ const LocationInputField = ({ containerClass }) => {
       </div>
       <div className="h-60">
         <LocationPicker
-          region={[geoLocation.longitude, geoLocation.latitude]}
+          region={geoLocation}
           onCordinateChange={cordinateChangeHandler}
           onRGCResponse={updateAddress}
         />

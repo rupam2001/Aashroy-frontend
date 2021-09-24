@@ -26,15 +26,20 @@ const RegistrationFormSection = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [website, setWebsite] = useState("");
   const [aboutUs, setaboutUs] = useState("");
+  const [address, setAddress] = useState("");
+  const [geoLocation, setGeoLocation] = useState([94.2463553, 26.7459721]);
+
+  const onCordinateChange = (center) => setGeoLocation(center);
+
+  const onAddressChange = (text) => setAddress(text);
 
   const submitHandler = async () => {
     // API Call here
     //@testing
-    const geo = [26.76683, 94.333569];
-    const fakeLocation = {
-      latitude: geo[0],
-      longitude: geo[1],
-      address: "Jorhat, 785001",
+    const _location = {
+      latitude: geoLocation[1],
+      longitude: geoLocation[0],
+      address,
     };
     //@
 
@@ -45,7 +50,7 @@ const RegistrationFormSection = () => {
       phone: phoneNumber,
       website,
       about: aboutUs,
-      location: fakeLocation,
+      location: _location,
     });
     if (error) {
       toast.error("Something went wrong :(");
@@ -95,7 +100,11 @@ const RegistrationFormSection = () => {
           containerClass="mb-5"
           state={[website, setWebsite]}
         />
-        <LocationInputField containerClass="mb-5" />
+        <LocationInputField
+          containerClass="mb-5"
+          onCordinateChange={onCordinateChange}
+          onRGCResponse={onAddressChange}
+        />
         <MultilineField
           placeholder="About Us"
           containerClass="mb-5"
