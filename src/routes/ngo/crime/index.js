@@ -202,7 +202,7 @@ export default function NgoCrimeReportView() {
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
-            regionColor="red"
+            regionColor="#ff6969"
           />
         )}
         <div className=" md:h-screen md:w-full ">

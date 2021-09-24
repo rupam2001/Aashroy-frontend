@@ -70,7 +70,7 @@ export default function Charts({ data }) {
 
   return (
     <div className=" w-full min-h-screen flex flex-col justify-center items-center">
-      <div className="my-8 md:block hidden">
+      <div className="my-8 md:block hidden shadow py-4 pr-4">
         <LineChartSection
           key_x="date"
           lines={[{ colour: "blue", key_y: "Number of crime reports" }]}
@@ -88,7 +88,7 @@ export default function Charts({ data }) {
           h={400}
         />
       </div>
-      <div className="mt-8 md:block hidden">
+      <div className="mt-8 md:block hidden shadow py-4 pr-4 rounded">
         <AreaChartComp
           key_x="date"
           areas={[{ colour: "blue", key_y: "Number of crime reports" }]}
