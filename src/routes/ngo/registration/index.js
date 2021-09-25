@@ -112,7 +112,7 @@ const RegistrationFormSection = () => {
         />
       </div>
       <button
-        className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
+        className="py-3 mb-4 w-full bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
         onClick={submitHandler}
       >
         REGISTER
@@ -150,7 +150,7 @@ const FootLinks = ({ links }) => (
 const Registration = () => {
   return (
     <div className="flex ngo-registration-root bg-blue-600">
-      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-10">
+      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
         <p className="text-3xl font-bold text-blue-600 mb-16">Aashroy</p>
         <div className="w-full flex justify-center">
           <RegistrationFormSection />
