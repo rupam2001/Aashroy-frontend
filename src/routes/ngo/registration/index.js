@@ -12,6 +12,7 @@ import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
 import LocationInputField from "../../../components/LocationInputField";
+import StrengthChecker from "../../../components/StrengthChecker";
 import { Link } from "react-router-dom";
 import { ngoRegisterAsync } from "../../../api/auth.api";
 import { toast } from "react-toastify";
@@ -85,9 +86,14 @@ const RegistrationFormSection = () => {
         <PasswordField
           head={<HiOutlineKey size={ICON_SIZE} color="grey" />}
           placeholder="Password"
-          containerClass="mb-5"
+          containerClass={password.length > 6 ? "" : "mb-5"}
           state={[password, setPassword]}
         />
+        {password.length > 6 ? (
+          <StrengthChecker password={password} containerClass="mb-5" />
+        ) : password.length !== 0 ? (
+          <span className="mb-5 text-sm text-red-600">Password should be 6 or more character</span>
+        ) : null}
         <TextField
           head={<HiOutlinePhone size={ICON_SIZE} color="grey" />}
           placeholder="Phone Number"

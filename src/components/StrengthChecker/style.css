@@ -1,0 +1,45 @@
+.strength-checker-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.strength-checker-container .strength-label {
+  /* position: absolute; */
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.strength-meter {
+  position: relative;
+  height: 0.5rem;
+  width: 100%;
+  border: 2px solid var(--strengthColor);
+  border-radius: 0 0 0.3rem 0.3rem;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.strength-meter::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: calc(1% * var(--strength, 0));
+  background-color: var(--strengthColor);
+  transition: width 1s;
+}
+

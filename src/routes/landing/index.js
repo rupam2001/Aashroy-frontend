@@ -34,11 +34,16 @@ const GalleryWall = () => {
   );
 };
 
-const CTAButton = ({ title }) => {
+const CTAButton = ({ title, bgColor, color, containerClass, to }) => {
   return (
-    <div className="md:w-auto w-full py-3 px-10 mx-4 border-2 border-white text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100 cursor-pointer text-center md:mb-0 mb-5">
-      {title}
-    </div>
+    <a href={to}>
+      <div
+        className={`md:w-auto w-full py-3 px-10 mx-2 border-2 border-white rounded font-bold text-sm transition duration-100 cursor-pointer text-center md:mb-0 mb-5 ${containerClass}`}
+        style={{ backgroundColor: bgColor, color }}
+      >
+        {title}
+      </div>
+    </a>
   );
 };
 
@@ -66,13 +71,33 @@ const HeroSection = () => {
           <br /> Get Them their AASHROY
         </div>
         <p className="text-white text-center">
-          Exercitation aliqua est ut veniam eu nulla sint aliqua exercitation
-          irure culpa quis aliquip enim
+          An initiative towards humanity under JORHAT ENGINEERING COLLGE
         </p>
-        <div className="flex mt-10 md:flex-row flex-col justify-center items-center">
-          <CTAButton title="Submit" />
-          <CTAButton title="Submit" />
-          <CTAButton title="Submit" />
+        <div className="flex mt-10 flex-col justify-center items-center">
+          <div className="flex md:mb-5 justify-center items-center">
+            <CTAButton
+              to="/general/report-homeless"
+              title="Report Homeless"
+              bgColor="#fbbf24"
+              containerClass="rounded-3xl"
+            />
+            <CTAButton
+              to="/report-crime"
+              title="Report Crime"
+              bgColor="black"
+              color="#fff"
+              containerClass="rounded-3xl"
+            />
+          </div>
+          <div className="  w-96">
+            <CTAButton
+              to="/ngo/list"
+              title="₹ Donate Now"
+              color="#000"
+              bgColor="#fff"
+              containerClass="rounded-3xl"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -144,7 +169,12 @@ const DonationBoardSection = () => {
     })();
   }, []);
 
-  return <DonationBoard donations={recentDonations} showImage={false} />;
+  return (
+    <div>
+      <DonationBoard donations={recentDonations} showImage={false} />
+      <div>View More →</div>
+    </div>
+  );
 };
 
 const Landing = () => {
@@ -160,9 +190,9 @@ const Landing = () => {
                   <p className="mb-2 font-bold cursor-default text-3xl">
                     Report homeless
                   </p>
-                  <p className="mb-2 cursor-default">
-                    Cupidatat sit exercitation et velit velit enim magna
-                    deserunt consequat.
+                  <p className="mb-2 cursor-default  text-justify">
+                    Detect the person you saw roaming around in search of
+                    Aashroy and ask the authorities to help them.
                   </p>
                   <p className=" text-blue-600">
                     <u>GO</u> {">>>"}
@@ -174,9 +204,9 @@ const Landing = () => {
                   <p className="mb-2 font-bold cursor-default text-3xl">
                     Crime Report
                   </p>
-                  <p className="mb-2 cursor-default">
-                    Cupidatat sit exercitation et velit velit enim magna
-                    deserunt consequat.
+                  <p className="mb-2 cursor-default  text-justify">
+                    Be the voice of the homeless and report any anonymous
+                    activity against these helpless.
                   </p>
                   <p className="text-blue-600">
                     <a href="#">
@@ -187,10 +217,13 @@ const Landing = () => {
               </Link>
 
               {[
-                "Hey ! Are you a socialist ? Whatever you are! You as a human, can too join our hands and be a part of our social motive - Aashroy for homeless people.",
-                "NGO s , government representives , journalists, socialists and common people too can join our hands",
+                "Hey! Are you a socialist? Whatever you are! You as a human, can too join our hands and be a part of our social motive - Aashroy for homeless people.",
+                "NGOs, government representives, journalists, socialists and common people too can join our hands.",
               ].map((item, index) => (
-                <p className="mb-4 leading-8" key={`home_list_1_${index}`}>
+                <p
+                  className="mb-4 leading-8 text-justify"
+                  key={`home_list_1_${index}`}
+                >
                   {item}
                 </p>
               ))}
