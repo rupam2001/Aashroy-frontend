@@ -1,5 +1,5 @@
-.hero-section{
-    height: 55rem;
+.hero-section {
+  height: 55rem;
 }
 
 .hero-section-image {
@@ -21,6 +21,11 @@
 }
 
 .hero-title {
-  width: 60rem;
   line-height: 6rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .hero-title {
+    line-height: inherit;
+  }
 }

@@ -15,22 +15,20 @@ const GalleryWall = () => {
       style={{ backgroundColor: "#fff" }}
     >
       {[
-        "https://picsum.photos/seed/picsum/300/300",
-        "https://picsum.photos/seed/rtwrt/300/300",
-        "https://picsum.photos/seed/adfz/300/300",
-        "https://picsum.photos/seed/adsfasdf/300/300",
-        "https://picsum.photos/seed/fdgha/300/300",
-        "https://picsum.photos/seed/rtey/300/300",
-        "https://picsum.photos/seed/dg/300/300",
-        "https://picsum.photos/seed/ty/300/300",
-        "https://picsum.photos/seed/ryud/300/300",
-        "https://picsum.photos/seed/jmrtu/300/300",
-        "https://picsum.photos/seed/wert/300/300",
-        "https://picsum.photos/seed/rwt/300/300",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Teal_Black_White_Photo_Homelessness_Poster_oz1bhe.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Brown_Carton_Homelessness_Poster_o5miud.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Red_and_Black_Hands_Homeless_Poster_sd7ebh.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Blue_Beige_Photo_Homelessness_Poster_kxxxxy.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Orange_Photo_Homelessness_Poster_nafgu9.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Pink_and_Black_Photo_Homelessness_Awareness_Poster_epun86.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Brown_Yellow_Photo_Modern_Homelessness_Poster_a5joov.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Blue_and_Grayscale_Photo_Homelessness_Poster_podw7a.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Green_and_White_Square_Photo_Frame_Homelessness_Poster_tf2ku5.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Cyan_Hand_Homelessness_Poster_ypvmul.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Orange_Blue_Photo_Homelessness_Poster_a2ag7w.png",
+        "https://res.cloudinary.com/dmmrlohoi/image/upload/c_scale,w_500/v1632550822/aashroy/Black_White_with_Photo_Homelessness_Fact_Awareness_Poster_ixge1b.png",
       ].map((url) => {
-        return (
-          <img className="my-5" src={url} style={{ height: 300, width: 300 }} />
-        );
+        return <img className="my-5" src={url} style={{ width: 300 }} />;
       })}
     </div>
   );
@@ -38,7 +36,7 @@ const GalleryWall = () => {
 
 const CTAButton = ({ title }) => {
   return (
-    <div className="py-3 px-10 mx-4 border-2 border-white text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100 cursor-pointer">
+    <div className="md:w-auto w-full py-3 px-10 mx-4 border-2 border-white text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100 cursor-pointer text-center md:mb-0 mb-5">
       {title}
     </div>
   );
@@ -62,48 +60,73 @@ const HeroSection = () => {
         className="hero-section-image"
         style={{ transform: `translateY(${offsetY * 0.4}px)` }}
       ></div>
-      <div className="text-7xl text-white font-bold text-center hero-title mb-5">
-        Help the Homeless
-        <br /> Get Them their AASHROY
-      </div>
-      <p className="text-white">
-        Exercitation aliqua est ut veniam eu nulla sint aliqua exercitation
-        irure culpa quis aliquip enim
-      </p>
-      <div className="flex mt-8">
-        <CTAButton title="Submit" />
-        <CTAButton title="Submit" />
-        <CTAButton title="Submit" />
+      <div className="md:px-0 px-10 md:pb-0 pb-16">
+        <div className="text-3xl md:text-7xl text-white font-bold text-center hero-title mb-5">
+          Help the Homeless
+          <br /> Get Them their AASHROY
+        </div>
+        <p className="text-white text-center">
+          Exercitation aliqua est ut veniam eu nulla sint aliqua exercitation
+          irure culpa quis aliquip enim
+        </p>
+        <div className="flex mt-10 md:flex-row flex-col justify-center items-center">
+          <CTAButton title="Submit" />
+          <CTAButton title="Submit" />
+          <CTAButton title="Submit" />
+        </div>
       </div>
     </div>
   );
 };
 
 const SponsorSection = () => {
+  const ICON_SIZE = 70;
+  const ICON_COLOR = "#ccc";
+
   return (
     <div className="my-16">
-      <div className="text-center mb-8">OUR SPONSORS</div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex mb-10">
-          <FontAwsome.FaAws size={80} color="gray" className="mx-10" />
-          <FontAwsome.FaDigitalOcean size={80} color="gray" className="mx-10" />
-          <FontAwsome.FaFacebookSquare
-            size={80}
-            color="gray"
-            className="mx-10"
-          />
-          <FontAwsome.FaGoogle size={80} color="gray" className="mx-10" />
-        </div>
-        <div className="flex">
-          <FontAwsome.FaUbuntu size={80} color="gray" className="mx-10" />
-          <FontAwsome.FaSkype size={80} color="gray" className="mx-10" />
-          <FontAwsome.FaPlaystation size={80} color="gray" className="mx-10" />
-          <FontAwsome.FaPhoenixSquadron
-            size={80}
-            color="gray"
-            className="mx-10"
-          />
-        </div>
+      <div className="text-center mb-10">OUR SPONSORS</div>
+      <div className="flex mb-10 flex-wrap justify-center items-center">
+        <FontAwsome.FaAws
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaDigitalOcean
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaFacebookSquare
+          size={80}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaGoogle
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaUbuntu
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaSkype
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaPlaystation
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
+        <FontAwsome.FaPhoenixSquadron
+          size={ICON_SIZE}
+          color={ICON_COLOR}
+          className="mx-10 md:my-0 my-5"
+        />
       </div>
     </div>
   );
