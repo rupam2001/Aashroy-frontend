@@ -43,13 +43,19 @@ To build the frontend run
 - Data visualisation
 - Responsive
 
+## Configuring MapBox
+
 ## Configuring Constants
 
-To quickly edit the site, you can change the constants.
+Set up the constants before starting running the project. Constans can also be changed to quickly edit the site :
 
-`API_KEY`
-
-`ANOTHER_API_KEY`
+- [auth.constants.js](src/constants/auth.constants.js) : contains the Google Oauth client ID and the redirect url for Oauth
+- [crimeReport.constants.js](src/constants/crimeReport.constants.js) : set the crime types for crime report form and set the maximum photo a user can upload at a time.
+- [donation.constants.js](src/constants/donation.constants.js) : set the types of donations available at donation form and set the maximum photo a user can upload at a time.
+- [footer.constants.js](src/constants/footer.constats.js) : set the social media, service and contact details to be showed at the footer.
+- [generalUserForm.constants.js](src/constants/generalUserForm.constants.js) : set the age groups, gender categories and the photo limit to how many a user can upload at once at the homeless report form
+- [global.constants.js](src/constants/global.constants.js) : set the root endpoint of the api of the backend server.
+- [table.constants.js](src/constants/table.constants.js) : configure the data coulmns for the table used in data visualisation at NGO's end points.
 
 ## Contributors
 
