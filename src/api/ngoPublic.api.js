@@ -40,7 +40,7 @@ async function getNearestNGOSAsync({ diameter, geo_location }) {
       body: JSON.stringify({ diameter, geo_location }),
     }).then((r) => r.json());
 
-    handlePostFetchingNgo(res);
+    // handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -64,7 +64,7 @@ async function searchNGOSAsync(searchQuery, skip, limit) {
       body: JSON.stringify({ searchQuery, skip, limit }),
     }).then((r) => r.json());
 
-    handlePostFetchingNgo(res);
+    // handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {

@@ -3,6 +3,7 @@ import {
   getAccessTokenNGO,
   getRefreshToken,
   handlePostFetching,
+  handlePostFetchingNgo,
 } from "../utils/storage";
 
 async function fetchCrimesAsync({ geo_location, diameter, days }) {
@@ -18,7 +19,7 @@ async function fetchCrimesAsync({ geo_location, diameter, days }) {
       body: JSON.stringify({ geo_location, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -38,7 +39,7 @@ async function searchCrimesAsync({ address, diameter, days }) {
       body: JSON.stringify({ address, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -61,7 +62,7 @@ async function searchCrimesPeopleAsync({ person, diameter }) {
       body: JSON.stringify({ person, diameter }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
