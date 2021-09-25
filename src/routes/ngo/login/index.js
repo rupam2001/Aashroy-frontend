@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ngoLoginAsync } from "../../../api/auth.api";
-import { setAccessTokenNGO, setRefreshToken } from "../../../utils/storage";
+import {
+  setAccessTokenNGO,
+  setRefreshToken,
+  setRefreshTokenNgo,
+} from "../../../utils/storage";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { toast } from "react-toastify";
 
@@ -12,6 +16,11 @@ const LoginFormSection = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const ngocontext = useContext(NgoContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitHandler = async () => {
     // API Call here
@@ -24,9 +33,11 @@ const LoginFormSection = () => {
       return;
     }
     setAccessTokenNGO(access_token);
-    setRefreshToken(refresh_token);
+    setRefreshTokenNgo(refresh_token);
     ngocontext.setNgoDetails(ngoData);
     ngocontext.setIsLoggedIn(true);
+    history.push("/ngo/home");
+    history.go(0);
   };
 
   return (
@@ -68,13 +79,13 @@ const LoginFormSection = () => {
 const HeroSection = () => (
   <div className="container px-20 text-gray-200">
     <h1 className="mb-6 text-4xl font-semibold leading-snug">
-      Some heading will go here, its really hot today
+      Thank you for landing in our portal.
     </h1>
     <p className="text-sm leading-relaxed">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex elit,
-      tincidunt venenatis mauris in, pretium bibendum tellus. Nullam vitae
-      maximus sem, in convallis nisi. Maecenas laoreet augue libero, nec dictum
-      dolor euismod nec. Fusce mollis et erat a ullamcorper.
+      It is a very overwhelming moment for us to work with such a high-peer
+      organizations like you. We assure, that we together will bring a change to
+      these homeless people and provide their rights as a human being in this
+      world. We request you to please login or register for this virtuous leap .
     </p>
   </div>
 );
@@ -95,7 +106,9 @@ const Registration = () => {
   return (
     <div className="flex ngo-login-root bg-blue-600">
       <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
-        <p className="text-3xl font-bold text-blue-600">Aashroy</p>
+        <Link className="text-3xl font-bold text-blue-600" to="/">
+          Aashroy
+        </Link>
         <div className="w-full h-full flex items-center justify-center">
           <LoginFormSection />
         </div>

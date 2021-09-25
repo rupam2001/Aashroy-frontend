@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
 import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
+import { BsFilter } from "react-icons/bs";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
 import {
@@ -67,6 +68,7 @@ export default function NgoHomeLess() {
     // alert(JSON.stringify(homeless_list));
     if (homeless_list) {
       setTopImages(topImages);
+      console.log(topImages);
       setHomelessList(homeless_list);
       setSearchResultTitle("Near " + ngocontext.ngoDetails?.name);
     }
@@ -137,9 +139,10 @@ export default function NgoHomeLess() {
 
   return (
     <div className="flex md:flex-row flex-col-reverse h-screen">
-      <div className="md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
+      <div className="md:flex-initial md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
         <div className="flex w-full items-center h-auto sticky top-0">
           <SearchBar
+            placeholder="Search by Location"
             onChange={(text) => {
               setSearchQuery(text);
             }}
@@ -149,65 +152,71 @@ export default function NgoHomeLess() {
             containerClass="flex-1 rounded"
             value={searchQuery}
           />
-          <MdFilterList
-            className="text-4xl  md:mx-2 text-blue-500 cursor-pointer"
-            onClick={showModel}
-          />
+          <div className="md:ml-2 p-2 bg-white shadow rounded cursor-pointer text-blue-500 hover:bg-blue-500 hover:text-white transition duration-100">
+            <BsFilter className="text-4xl " onClick={showModel} />
+          </div>
         </div>
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && (
           <SearchResultMain
+            diameter={diameter}
+            days={days}
             topImages={_topImages}
             heading={searchResultTitle}
             info={{ totalPeople: homelessList.length }}
             handleViewPhotoClick={handleViewPhoto}
           />
         )}
-        {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
-          homelessList.length && (
-            <div className="mt-4">
-              <button
-                onClick={() => {
-                  setCurrentSearchResultMode(SEARCH_RESULT_MODES.MAIN);
-                }}
-                className=" text-blue-600 "
-              >
-                &#8592; Back
-              </button>
+        {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY && (
+          <div className="mt-4">
+            <button
+              onClick={() => {
+                setCurrentSearchResultMode(SEARCH_RESULT_MODES.MAIN);
+              }}
+              className=" text-blue-600 "
+            >
+              &#8592; Back
+            </button>
 
+            {homelessList.length > 0 ? (
               <SearchResultGallery
                 homelessList={homelessList}
                 handleImageClick={handleImageClick}
                 containerClass="mt-5"
                 homelessMap={homelessMap}
               />
-            </div>
-          )}
+            ) : null}
+          </div>
+        )}
         {currentSearchResultMode == SEARCH_RESULT_MODES.PERSONS && (
-          <div>
-            <button
-              onClick={() => {
-                setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
-              }}
-              className=" text-blue-600 "
-            >
-              &#8592; Back
-            </button>
-            <h2 className="text-gray-500 font-bold py-4">
-              Peoples in this report:{" "}
-            </h2>
-            <hr />
-            {homelessPersons &&
-              homelessPersons.map((hp) => <HomelessPerson {...hp} />)}
+          <div className="w-full mt-5">
+            <div className="px-2">
+              <button
+                onClick={() => {
+                  setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
+                }}
+                className=" text-blue-600 "
+              >
+                &#8592; Back
+              </button>
+              <h2 className="text-gray-500 font-bold pt-4 pb-2">
+                Peoples in this report:{" "}
+              </h2>
+              <hr />
+              {homelessPersons &&
+                homelessPersons.map((hp) => <HomelessPerson {...hp} />)}
+            </div>
           </div>
         )}
       </div>
       <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
-        {markers.length != 0 && (
+        {markers.length > 0 ? (
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
             customPopup={customPopup}
           />
+        ) : (
+          <Map region={[94.2463553, 26.7459721]} />
         )}
       </div>
 
@@ -238,7 +247,7 @@ const SearchFilterModel = ({
   return (
     <div
       id="myModal"
-      className="fixed hidden z-10000 left-0 top-0 w-full h-full bg-black bg-opacity-50  flex justify-center items-center py-10 bg-transparent"
+      className="fixed hidden z-10000 left-0 top-0 w-full h-full bg-black bg-opacity-50  justify-center items-center py-10 bg-transparent"
       ref={modelRef}
     >
       <div className=" h-full md:w-1/2 w-full px-4 rounded-md flex flex-col items-center justify-center ">
@@ -273,8 +282,8 @@ const SearchFilterModel = ({
           </ol>
           <div className="bg-white w-full px-2 py-8">
             <h2 className="font-bold">
-              Diameter of area{" "}
-              <span className="text-red-500">({diameter}km)</span>
+              Diameter of area :{" "}
+              <span className="text-red-500">{diameter} km</span>
             </h2>
             <input
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
@@ -310,4 +319,5 @@ const SearchFilterModel = ({
   );
 };
 
-const customPopup = (marker) => `<div><h2> ${marker.address}</h2></div>`;
+const customPopup = (marker) =>
+  `<div><img src="${marker.media_url[0].url}" width=300/><h2 class="text-center mt-4 font-bold"> ${marker.address}</h2></div>`;

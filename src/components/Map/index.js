@@ -13,6 +13,8 @@ const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
   // const [center, setCenter] = useState([94.2122044, 26.743573]);
   const [zoom, setZoom] = useState(13);
 
+  const [currentMarkers, setCurrentMarkers] = useState([]);
+
   useEffect(() => {
     if (map.current) return; // initialize map only once
     setLng(region[0]);
@@ -24,14 +26,19 @@ const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
       zoom: zoom,
     });
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
-    console.log(markers);
   });
 
   useEffect(() => {
     map.current.flyTo({ center: [region[0], region[1]], essential: true });
   }, [region]);
 
+  const clearMarkers = () => {
+    currentMarkers.forEach((marker) => marker.remove());
+  };
+
   useEffect(() => {
+    clearMarkers();
+    let tempMarkers = [];
     if (markers)
       markers.map((marker) => {
         const el = document.createElement("div");
@@ -39,7 +46,7 @@ const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
         el.className = "marker-custom";
         if (regionColor) el.style.backgroundColor = regionColor;
         else el.style.backgroundColor = "#0059ff75";
-        new mapboxgl.Marker(el)
+        let newMarker = new mapboxgl.Marker(el)
           .setLngLat([marker.longitude, marker.latitude])
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
@@ -48,7 +55,9 @@ const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
               )
           )
           .addTo(map.current);
+        tempMarkers.push(newMarker);
       });
+    setCurrentMarkers(tempMarkers);
   }, [markers]);
 
   useEffect(() => {
@@ -66,7 +75,6 @@ const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
-
     map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(7));
       setLat(map.current.getCenter().lat.toFixed(7));

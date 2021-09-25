@@ -1,14 +1,13 @@
 import { ENDPOINT } from "../constants/global.constants";
 import {
   getAccessTokenNGO,
-  getRefreshToken,
-  handlePostFetching,
+  getRefreshTokenNgo,
   handlePostFetchingNgo,
 } from "../utils/storage";
 
 async function fetchHomelessAsync({ geo_location, diameter, days }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/homeless/data/get/locationwise", {
       method: "POST",
       headers: {
@@ -28,7 +27,7 @@ async function fetchHomelessAsync({ geo_location, diameter, days }) {
 
 async function searchHomelessAsync({ address, diameter, days }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/homeless/data/get/addresswise", {
       method: "POST",
       headers: {
@@ -51,7 +50,7 @@ async function searchHomelessAsync({ address, diameter, days }) {
 }
 async function searchHomelessPeopleAsync({ person, diameter }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/homeless/data/get/addresswise", {
       method: "POST",
       headers: {
@@ -74,7 +73,7 @@ async function searchHomelessPeopleAsync({ person, diameter }) {
 
 async function getHomelessPersonAsync({ _id }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/homeless/data/get/person", {
       method: "POST",
       headers: {

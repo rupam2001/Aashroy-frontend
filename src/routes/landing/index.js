@@ -36,14 +36,14 @@ const GalleryWall = () => {
 
 const CTAButton = ({ title, bgColor, color, containerClass, to }) => {
   return (
-    <a href={to}>
+    <Link to={to}>
       <div
-        className={`md:w-auto w-full py-3 px-10 mx-2 border-2 border-white rounded font-bold text-sm transition duration-100 cursor-pointer text-center md:mb-0 mb-5 ${containerClass}`}
+        className={`md:w-auto w-full py-3 px-10 mx-2 border-2 border-white rounded font-bold transition duration-100 cursor-pointer text-center md:mb-0 mb-5 ${containerClass}`}
         style={{ backgroundColor: bgColor, color }}
       >
         {title}
       </div>
-    </a>
+    </Link>
   );
 };
 
@@ -74,7 +74,7 @@ const HeroSection = () => {
           An initiative towards humanity under JORHAT ENGINEERING COLLEGE
         </p>
         <div className="flex mt-10 flex-col justify-center items-center">
-          <div className="flex md:mb-5 justify-center items-center">
+          <div className="flex md:mb-5 justify-center items-center flex-col md:flex-row">
             <CTAButton
               to="/general/report-homeless"
               title="Report Homeless"
@@ -89,7 +89,7 @@ const HeroSection = () => {
               containerClass="rounded-3xl"
             />
           </div>
-          <div className="  w-96">
+          <div className="md:w-96">
             <CTAButton
               to="/ngo/list"
               title="₹ Donate Now"
@@ -172,7 +172,9 @@ const DonationBoardSection = () => {
   return (
     <div>
       <DonationBoard donations={recentDonations} showImage={false} />
-      <div>View More →</div>
+      <Link className="px-4 text-blue-600" to="/public-contribution">
+        View More →
+      </Link>
     </div>
   );
 };
@@ -194,9 +196,7 @@ const Landing = () => {
                     Detect the person you saw roaming around in search of
                     Aashroy and ask the authorities to help them.
                   </p>
-                  <p className=" text-blue-600">
-                    <u>GO</u> {">>>"}
-                  </p>
+                  <p className=" text-blue-600">Report Now →</p>
                 </div>
               </Link>
               <Link to="/report-crime" className="cursor-pointer">
@@ -209,9 +209,7 @@ const Landing = () => {
                     activity against these helpless.
                   </p>
                   <p className="text-blue-600">
-                    <a href="#">
-                      <u>Make report for crime</u> {">>>"}
-                    </a>
+                    <a href="#">Make report for crime →</a>
                   </p>
                 </div>
               </Link>
@@ -229,15 +227,12 @@ const Landing = () => {
               ))}
               <div className="mb-12 mt-12">
                 <p className="mb-2 font-bold">NGO</p>
-                <p className="mb-2">By YAy</p>
+                <p className="mb-2">
+                  Get data on homeless population, crimes and more. Work for
+                  upliftment of the homeless.
+                </p>
                 <p className=" text-blue-600">
-                  <a
-                    target="_blank"
-                    href="https://news.google.com/covid19/map?hl=en-IN&gl=IN&ceid=IN%3Aen&mid=%2Fm%2F03rk0"
-                    rel="noopener noreferrer"
-                  >
-                    <u>Login</u> {">>>"}
-                  </a>
+                  <Link to="/ngo/registration">Register Now →</Link>
                 </p>
               </div>
             </div>

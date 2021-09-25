@@ -85,8 +85,8 @@ export default function NgoMembers({ membersList, forPublic }) {
   };
 
   return (
-    <div className="md:w-5/6 md:h-auto w-screen border rounded-2xl bg-white mt-10">
-      <div className="flex justify-between items-center mb-10 md:px-20 py-5 bg-blue-800">
+    <div className="md:w-5/6 md:h-auto w-full  border rounded-2xl bg-white mt-10">
+      <div className="flex justify-between items-center mb-10 md:px-20 px-10 py-5 bg-blue-800">
         <h1 className="text-white text-xl md:text-3xl font-medium">Members</h1>
         <div className="flex flex-col items-center">
           {!forPublic && (

@@ -8,7 +8,7 @@ const SearchResultGallery = ({
 }) => {
   return (
     <div className={containerClass}>
-      <div className="">
+      <div className="px-2">
         {Object.entries(homelessMap).map((obj) => {
           const key = obj[0];
           const value = obj[1];
@@ -17,7 +17,7 @@ const SearchResultGallery = ({
               <div>
                 <h2 className="text-gray-600 font-bold">{key} :</h2>
               </div>
-              <div className="container mx-auto mt-10">
+              <div className="container mx-auto mt-2">
                 {value.map((each_homeless) => {
                   return (
                     <div

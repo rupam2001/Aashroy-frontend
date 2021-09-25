@@ -6,6 +6,7 @@ export default function SearchBar({
   onChange,
   onSearchClick,
   containerClass,
+  placeholder,
 }) {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -22,7 +23,7 @@ export default function SearchBar({
     >
       <input
         className="w-full outline-none text-lg "
-        placeholder="Search"
+        placeholder={placeholder ? placeholder : "Search"}
         value={value}
         onChange={(e) => {
           onChange(e.target.value);
