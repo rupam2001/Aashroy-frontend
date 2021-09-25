@@ -46,7 +46,7 @@ export default function NgoList() {
       setNgoList([]);
       return;
     }
-    if (skip != 0) {
+    if (false && skip != 0) {
       //means user has already searched
       // append
       setNgoList([...ngoList, ...ngos]);
@@ -89,7 +89,7 @@ export default function NgoList() {
       {msg.length > 0 ? <p className="text-gray-400 mt-5">{msg}</p> : null}
       {ngoList.length === 0 ? (
         <div className="flex justify-center items-center flex-col pb-20 pt-10">
-          <div className="text-gray-500" >Begin your search</div>
+          <div className="text-gray-500">Begin your search</div>
           <img src="https://domains.google.com/m/assets/frontend/registrarapp/main/client/common/search/resources/images//search_2x.png" />
         </div>
       ) : (
