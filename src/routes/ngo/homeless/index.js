@@ -310,4 +310,5 @@ const SearchFilterModel = ({
   );
 };
 
-const customPopup = (marker) => `<div><h2> ${marker.address}</h2></div>`;
+const customPopup = (marker) =>
+  `<div><img src="https://picsum.photos/1000" width=300/><h2> ${marker.address}</h2></div>`;

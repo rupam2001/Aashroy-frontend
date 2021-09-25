@@ -74,7 +74,7 @@ const HeroSection = () => {
           An initiative towards humanity under JORHAT ENGINEERING COLLEGE
         </p>
         <div className="flex mt-10 flex-col justify-center items-center">
-          <div className="flex md:mb-5 justify-center items-center">
+          <div className="flex md:mb-5 justify-center items-center flex-col md:flex-row">
             <CTAButton
               to="/general/report-homeless"
               title="Report Homeless"
@@ -89,7 +89,7 @@ const HeroSection = () => {
               containerClass="rounded-3xl"
             />
           </div>
-          <div className="  w-96">
+          <div className="md:w-96">
             <CTAButton
               to="/ngo/list"
               title="₹ Donate Now"
