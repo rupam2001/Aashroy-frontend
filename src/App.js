@@ -35,6 +35,7 @@ import NGODonations from "./routes/ngo/donations";
 import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
 import NgoCrimeReportView from "./routes/ngo/crime";
+import TermsNConditions from "./routes/TermsAndConditions";
 
 import NotFound from "./routes/404";
 
@@ -75,6 +76,7 @@ function GlobalRoutes() {
     <Router>
       <Switch>
         <Route path="/" exact component={Landing} />
+        <Route path="/terms-and-conditions" component={TermsNConditions }/>
         <Route path="/general/login" exact component={GeneralUserLogin} />
         <Route path="/general/profile/:id" component={PublicProfile} />
         <Route path="/ngo/registration" component={NGORegistration} />
