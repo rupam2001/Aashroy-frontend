@@ -21,7 +21,7 @@ const submitDonationFormData = (
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/donation`, {
+  return fetch(`${ENDPOINT}/api/general-user/donation`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const fetchNGOdetails = (ngoId) => {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/donation/ngo-details/${ngoId}`, {
+  return fetch(`${ENDPOINT}/api/general-user/donation/ngo-details/${ngoId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

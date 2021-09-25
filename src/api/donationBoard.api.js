@@ -3,7 +3,7 @@
 import { ENDPOINT } from "../constants/global.constants";
 
 const getDonationData = (skip, limit) => {
-  return fetch(`${ENDPOINT}/donation-board/${skip}/${limit}`, {
+  return fetch(`${ENDPOINT}/api/donation-board/${skip}/${limit}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const getDonationData = (skip, limit) => {
 };
 
 const getTopContributors = () => {
-  return fetch(`${ENDPOINT}/donation-board/top-contributors`, {
+  return fetch(`${ENDPOINT}/api/donation-board/top-contributors`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import "./style.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoicmctNDA0IiwiYSI6ImNrczk5eG8yZzF1dmgydnBoZWgwNjZzZ2QifQ.hrxTaZwJoKGMxstCagV5zw";
 
-const Map = ({ region, markers, center, pins, regionColor }) => {
+const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(94.2122044);
@@ -43,7 +43,9 @@ const Map = ({ region, markers, center, pins, regionColor }) => {
           .setLngLat([marker.longitude, marker.latitude])
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
-              .setHTML(`<h3></h3><p>${marker.address}</p>`)
+              .setHTML(
+                customPopup ? customPopup(marker) : `<p>${marker.address}</p>`
+              )
           )
           .addTo(map.current);
       });

@@ -5,6 +5,7 @@ import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
 import {
   fetchHomelessAsync,
+  getHomelessPersonAsync,
   searchHomelessAsync,
   searchHomelessPeopleAsync,
 } from "../../../api/homeless.api";
@@ -12,19 +13,23 @@ import "./style.css";
 import SearchResultGallery from "../../../components/SeachResultGallery";
 import SearchResultMain from "../../../components/SearchResultMain";
 import Map from "../../../components/Map";
+import HomelessPerson from "../../../components/HomelessPerson";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoHomeLess() {
   const SEARCH_RESULT_MODES = {
     MAIN: "main",
     GALLERY: "gallery",
+    PERSONS: "persons",
   };
+
+  const [homelessPersons, setHomelessPersons] = useState([]);
   const [days, setDays] = useState(1);
   const ngocontext = useContext(NgoContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("place");
   const [searchResultTitle, setSearchResultTitle] = useState("People arround ");
-  const [diameter, setDiameter] = useState(10);
+  const [diameter, setDiameter] = useState(20);
   const [homelessList, setHomelessList] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [currentSearchResultMode, setCurrentSearchResultMode] = useState(
@@ -63,6 +68,7 @@ export default function NgoHomeLess() {
     if (homeless_list) {
       setTopImages(topImages);
       setHomelessList(homeless_list);
+      setSearchResultTitle("Near " + ngocontext.ngoDetails?.name);
     }
     // console.log(homeless_list);
     setHomelessMap(homelessMap);
@@ -72,7 +78,17 @@ export default function NgoHomeLess() {
     setSearchResultTitle("People near " + ngocontext.ngoDetails?.name);
   }, [ngocontext.ngoDetails]);
 
-  const handleImageClick = (homeless) => {};
+  const handleImageClick = async (homeless) => {
+    const { _id } = homeless;
+    const { homeless_person, notfound } = await getHomelessPersonAsync({ _id });
+
+    if (notfound) {
+      return;
+    }
+    console.log(homeless_person);
+    setHomelessPersons(homeless_person);
+    setCurrentSearchResultMode(SEARCH_RESULT_MODES.PERSONS);
+  };
   const handleSearchAsync = async () => {
     if (searchQuery == "") {
       loadInitialHomelessDataAsync();
@@ -107,7 +123,7 @@ export default function NgoHomeLess() {
   const getMarkers = (homeless_list) => {
     let _markers = [];
     homeless_list.forEach((h) => {
-      _markers.push(h.geo_location);
+      _markers.push({ ...h.geo_location, media_url: h.media_url });
     });
     console.log(_markers);
     return _markers;
@@ -118,6 +134,7 @@ export default function NgoHomeLess() {
   const handleViewPhoto = () => {
     setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
   };
+
   return (
     <div className="flex md:flex-row flex-col-reverse h-screen">
       <div className="md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
@@ -156,6 +173,7 @@ export default function NgoHomeLess() {
               >
                 &#8592; Back
               </button>
+
               <SearchResultGallery
                 homelessList={homelessList}
                 handleImageClick={handleImageClick}
@@ -164,13 +182,31 @@ export default function NgoHomeLess() {
               />
             </div>
           )}
-        {}
+        {currentSearchResultMode == SEARCH_RESULT_MODES.PERSONS && (
+          <div>
+            <button
+              onClick={() => {
+                setCurrentSearchResultMode(SEARCH_RESULT_MODES.GALLERY);
+              }}
+              className=" text-blue-600 "
+            >
+              &#8592; Back
+            </button>
+            <h2 className="text-gray-500 font-bold py-4">
+              Peoples in this report:{" "}
+            </h2>
+            <hr />
+            {homelessPersons &&
+              homelessPersons.map((hp) => <HomelessPerson {...hp} />)}
+          </div>
+        )}
       </div>
       <div className="flex-1 bg-blue-300 md:min-h-screen  shadow">
         {markers.length != 0 && (
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
+            customPopup={customPopup}
           />
         )}
       </div>
@@ -243,7 +279,7 @@ const SearchFilterModel = ({
             <input
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
-              min="10"
+              min="1"
               max="500"
               step="5"
               value={diameter}
@@ -273,3 +309,5 @@ const SearchFilterModel = ({
     </div>
   );
 };
+
+const customPopup = (marker) => `<div><h2> ${marker.address}</h2></div>`;

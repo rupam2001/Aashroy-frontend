@@ -15,7 +15,7 @@ const submitCrimeReport = (
   briefReport,
   media
 ) => {
-  return fetch(`${ENDPOINT}/crime-report`, {
+  return fetch(`${ENDPOINT}/api/crime-report`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

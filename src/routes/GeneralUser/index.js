@@ -11,8 +11,11 @@ import GeneralUserDonationCard from "../../components/GeneralUserDonationCard";
 
 import { FaHistory } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 function GeneralUser() {
+  const history = useHistory();
+
   const [userData, setUserData] = useState({
     name: "",
     profile_pic: "",
@@ -45,6 +48,15 @@ function GeneralUser() {
     } catch (err) {
       toast.error(err);
     }
+  };
+
+  // function to log user out
+  const logoutHandler = () => {
+    if (!window.confirm("Are you sure to Logout ?")) return;
+    // remove the access token
+    Cookies.remove("access_token");
+    history.push("/general/login");
+    history.go(0);
   };
 
   useEffect(() => {
@@ -88,6 +100,28 @@ function GeneralUser() {
         {donations.map((donation, index) => {
           return <GeneralUserDonationCard key={index} donation={donation} />;
         })}
+
+        {donations.length < 1 && (
+          <div className="flex flex-col items-center">
+            <span className="text-gray-400">
+              You haven't made any donations yet
+            </span>
+            <img
+              src={
+                "https://image.freepik.com/free-vector/flat-clothing-donation-illustration_23-2148815985.jpg"
+              }
+              alt="donation"
+            />
+          </div>
+        )}
+
+        {/* logout */}
+        <button
+          className="my-3 px-3 py-1 border-2 border-red-600 rounded-md text-red-600 hover:bg-red-600 hover:text-white"
+          onClick={logoutHandler}
+        >
+          Logout
+        </button>
       </div>
     </UserLayout>
   );

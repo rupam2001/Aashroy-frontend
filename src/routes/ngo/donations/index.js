@@ -16,6 +16,7 @@ function NGODonations() {
   // function to handle accept button press
   const acceptHandler = async (donationId, index) => {
     if (loading) return;
+    if (!window.confirm("Are you sure to accept this donation?")) return;
 
     setLoading(true);
 
@@ -40,6 +41,7 @@ function NGODonations() {
   // function to handle receive button press
   const receiveHandler = async (donationId, index) => {
     if (loading) return;
+    if (!window.confirm("Are you sure to mark this donation received?")) return;
 
     setLoading(true);
 
@@ -73,6 +75,19 @@ function NGODonations() {
   return (
     <NgoLayout>
       <div className="w-full h-full flex flex-col p-3 items-center">
+        {donations.length < 1 && (
+          <div className="flex flex-col items-center">
+            <img
+              className="w-1/2"
+              src={
+                "https://img.freepik.com/free-vector/volunteers-packing-donation-boxes_74855-5299.jpg?size=626&ext=jpg"
+              }
+              alt="vectorgraphic"
+            />
+            <span className="text-gray-500">No Donations yet</span>
+          </div>
+        )}
+
         {donations.map((donation, index) => {
           return (
             <div key={index} className="w-full mb-2 flex flex-col items-center">

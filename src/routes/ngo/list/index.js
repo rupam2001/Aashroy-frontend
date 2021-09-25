@@ -8,7 +8,7 @@ import SearchBar from "../../../components/SearchBar";
 import { NgoCard, NgoLoadingCard } from "../../../components/NgoCard";
 export default function NgoList() {
   const [ngoList, setNgoList] = useState([1, 2, 3, 4, 5, 6]);
-  const [msg, setMsg] = useState("NGOs near you");
+  const [msg, setMsg] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [oldSearchQuery, setOldSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -71,21 +71,35 @@ export default function NgoList() {
   };
 
   return (
-    <div className=" w-full min-h-full flex flex-col items-center bg-gray-50 px-2 pt-6 ">
-      <SearchBar
-        onChange={(text) => {
-          setSearchQuery(text);
-          setSkip(0);
-        }}
-        value={searchQuery}
-        containerClass={isLoading ? "" : "sticky top-2"}
-        onSearchClick={handleSearchAsync}
-      />
-      <p className="text-gray-400 mt-4">{msg}</p>
-      {ngoList.map((n) => {
-        if (isLoading) return <NgoLoadingCard />;
-        return <NgoCard {...n} />;
-      })}
+    <div className=" w-full min-h-full flex flex-col items-center">
+      <div className="w-full pt-14 pb-10 bg-blue-600 justify-center items-center flex flex-col">
+        <div className="text-4xl font-bold text-white mb-4">NGO Search</div>
+        <div className="w-full min-h-full flex flex-col items-center px-2 pt-6">
+          <SearchBar
+            onChange={(text) => {
+              setSearchQuery(text);
+              setSkip(0);
+            }}
+            value={searchQuery}
+            containerClass={isLoading ? "" : "sticky top-2"}
+            onSearchClick={handleSearchAsync}
+          />
+        </div>
+      </div>
+      {msg.length > 0 ? <p className="text-gray-400 mt-5">{msg}</p> : null}
+      {ngoList.length === 0 ? (
+        <div className="flex justify-center items-center flex-col pb-20 pt-10">
+          <div className="text-gray-500" >Begin your search</div>
+          <img src="https://domains.google.com/m/assets/frontend/registrarapp/main/client/common/search/resources/images//search_2x.png" />
+        </div>
+      ) : (
+        <>
+          {ngoList.map((n) => {
+            if (isLoading) return <NgoLoadingCard />;
+            return <NgoCard {...n} />;
+          })}
+        </>
+      )}
     </div>
   );
 }

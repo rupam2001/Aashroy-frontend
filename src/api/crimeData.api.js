@@ -3,13 +3,14 @@ import {
   getAccessTokenNGO,
   getRefreshToken,
   handlePostFetching,
+  handlePostFetchingNgo,
 } from "../utils/storage";
 
 async function fetchCrimesAsync({ geo_location, diameter, days }) {
   try {
     diameter = 50;
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/locationwise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/locationwise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +19,7 @@ async function fetchCrimesAsync({ geo_location, diameter, days }) {
       body: JSON.stringify({ geo_location, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -29,7 +30,7 @@ async function fetchCrimesAsync({ geo_location, diameter, days }) {
 async function searchCrimesAsync({ address, diameter, days }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/addresswise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ async function searchCrimesAsync({ address, diameter, days }) {
       body: JSON.stringify({ address, diameter, days }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -52,7 +53,7 @@ async function searchCrimesAsync({ address, diameter, days }) {
 async function searchCrimesPeopleAsync({ person, diameter }) {
   try {
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
-    const res = await fetch(ENDPOINT + "/crime/data/get/addresswise", {
+    const res = await fetch(ENDPOINT + "/api/crime/data/get/addresswise", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +62,7 @@ async function searchCrimesPeopleAsync({ person, diameter }) {
       body: JSON.stringify({ person, diameter }),
     }).then((r) => r.json());
 
-    handlePostFetching(res);
+    handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {

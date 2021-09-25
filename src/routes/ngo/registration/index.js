@@ -11,6 +11,8 @@ import "./style.css";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import MultilineField from "../../../components/MultilineField";
+import LocationInputField from "../../../components/LocationInputField";
+import StrengthChecker from "../../../components/StrengthChecker";
 import { Link } from "react-router-dom";
 import { ngoRegisterAsync } from "../../../api/auth.api";
 import { toast } from "react-toastify";
@@ -25,15 +27,20 @@ const RegistrationFormSection = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [website, setWebsite] = useState("");
   const [aboutUs, setaboutUs] = useState("");
+  const [address, setAddress] = useState("");
+  const [geoLocation, setGeoLocation] = useState([94.2463553, 26.7459721]);
+
+  const onCordinateChange = (center) => setGeoLocation(center);
+
+  const onAddressChange = (text) => setAddress(text);
 
   const submitHandler = async () => {
     // API Call here
     //@testing
-    const geo = [26.76683, 94.333569];
-    const fakeLocation = {
-      latitude: geo[0],
-      longitude: geo[1],
-      address: "Jorhat, 785001",
+    const _location = {
+      latitude: geoLocation[1],
+      longitude: geoLocation[0],
+      address,
     };
     //@
 
@@ -44,7 +51,7 @@ const RegistrationFormSection = () => {
       phone: phoneNumber,
       website,
       about: aboutUs,
-      location: fakeLocation,
+      location: _location,
     });
     if (error) {
       toast.error("Something went wrong :(");
@@ -79,9 +86,14 @@ const RegistrationFormSection = () => {
         <PasswordField
           head={<HiOutlineKey size={ICON_SIZE} color="grey" />}
           placeholder="Password"
-          containerClass="mb-5"
+          containerClass={password.length > 6 ? "" : "mb-5"}
           state={[password, setPassword]}
         />
+        {password.length > 6 ? (
+          <StrengthChecker password={password} containerClass="mb-5" />
+        ) : password.length !== 0 ? (
+          <span className="mb-5 text-sm text-red-600">Password should be 6 or more character</span>
+        ) : null}
         <TextField
           head={<HiOutlinePhone size={ICON_SIZE} color="grey" />}
           placeholder="Phone Number"
@@ -94,6 +106,11 @@ const RegistrationFormSection = () => {
           containerClass="mb-5"
           state={[website, setWebsite]}
         />
+        <LocationInputField
+          containerClass="mb-5"
+          onCordinateChange={onCordinateChange}
+          onRGCResponse={onAddressChange}
+        />
         <MultilineField
           placeholder="About Us"
           containerClass="mb-5"
@@ -101,7 +118,7 @@ const RegistrationFormSection = () => {
         />
       </div>
       <button
-        className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
+        className="py-3 mb-4 w-full bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
         onClick={submitHandler}
       >
         REGISTER
@@ -139,7 +156,7 @@ const FootLinks = ({ links }) => (
 const Registration = () => {
   return (
     <div className="flex ngo-registration-root bg-blue-600">
-      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-10">
+      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
         <p className="text-3xl font-bold text-blue-600 mb-16">Aashroy</p>
         <div className="w-full flex justify-center">
           <RegistrationFormSection />

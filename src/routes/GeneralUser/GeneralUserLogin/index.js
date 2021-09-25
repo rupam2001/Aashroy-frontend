@@ -29,6 +29,13 @@ function GeneralUserLogin({}) {
 
   return (
     <div className="justify-center items-center flex flex-col min-h-screen min-w-max">
+      <img
+        className="w-2/3 md:w-auto"
+        src={
+          "https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?size=338&ext=jpg"
+        }
+        alt="login"
+      />
       <GoogleSignIn
         children={
           <button className="flex flex-row items-center text-blue-700 border-black border-2 p-3 rounded hover:border-gray-500">

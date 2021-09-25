@@ -30,7 +30,7 @@ const LoginFormSection = () => {
   };
 
   return (
-    <div className="container w-96 pb-20">
+    <div className="pb-20 md:px-0">
       <p className="text-2xl mb-2 font-bold">Login to Aashroy</p>
       <p className="mb-6">
         Don't have an account?{" "}
@@ -54,7 +54,7 @@ const LoginFormSection = () => {
       </div>
       <button
         onClick={submitHandler}
-        className="py-3 mb-4 w-96 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
+        className="w-full py-3 mb-4 bg-blue-600 text-white rounded font-bold text-sm hover:bg-blue-700 transition duration-100"
       >
         LOGIN
       </button>
@@ -94,7 +94,7 @@ const FootLinks = ({ links }) => (
 const Registration = () => {
   return (
     <div className="flex ngo-login-root bg-blue-600">
-      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full px-20 py-16">
+      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
         <p className="text-3xl font-bold text-blue-600">Aashroy</p>
         <div className="w-full h-full flex items-center justify-center">
           <LoginFormSection />

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 
 const IconInput = ({
   onChangeText,
@@ -56,7 +56,7 @@ const IconInput = ({
         />
       )}
       {showIcon && isEditable && (
-        <FaEdit
+        <HiOutlinePencilAlt
           className="text-gray-400 text-lg cursor-pointer"
           onClick={() => {
             setShowIcon(false);

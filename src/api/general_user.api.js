@@ -10,7 +10,7 @@ const fetchUserDetails = () => {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/profile-details`, {
+  return fetch(`${ENDPOINT}/api/general-user/profile-details`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const fetchUserDetails = () => {
 
 // route to fetch user details to display on public profile
 const fetchPublicUserDetails = (id) => {
-  return fetch(`${ENDPOINT}/general-user/profile-details/${id}`, {
+  return fetch(`${ENDPOINT}/api/general-user/profile-details/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const updateUserData = (newName) => {
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
 
-  return fetch(`${ENDPOINT}/general-user/profile-details`, {
+  return fetch(`${ENDPOINT}/api/general-user/profile-details`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const fetchDonationDetails = (skip, limit) => {
   const refreshToken = getRefreshToken();
 
   return fetch(
-    `${ENDPOINT}/general-user/donation/my-donations/${skip}/${limit}`,
+    `${ENDPOINT}/api/general-user/donation/my-donations/${skip}/${limit}`,
     {
       method: "GET",
       headers: {

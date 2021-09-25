@@ -9,7 +9,7 @@ import {
 
 async function getNGOAsync({ id }) {
   try {
-    const res = await fetch(ENDPOINT + "/ngo/public/get/" + id, {
+    const res = await fetch(ENDPOINT + "/api/ngo/public/get/" + id, {
       method: "GET",
     }).then((r) => r.json());
 
@@ -31,7 +31,7 @@ async function getNearestNGOSAsync({ diameter, geo_location }) {
     //     ? getAccessTokenNGO()
     //     : getAccessToken() + " " + getRefreshToken();
 
-    const res = await fetch(ENDPOINT + "/ngo/public/nearest/", {
+    const res = await fetch(ENDPOINT + "/api/ngo/public/nearest/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ async function getNearestNGOSAsync({ diameter, geo_location }) {
       body: JSON.stringify({ diameter, geo_location }),
     }).then((r) => r.json());
 
-    handlePostFetchingNgo(res);
+    // handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {
@@ -55,7 +55,7 @@ async function searchNGOSAsync(searchQuery, skip, limit) {
     //     ? getAccessTokenNGO()
     //     : getAccessToken() + " " + getRefreshToken();
 
-    const res = await fetch(ENDPOINT + "/ngo/public/search/", {
+    const res = await fetch(ENDPOINT + "/api/ngo/public/search/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ async function searchNGOSAsync(searchQuery, skip, limit) {
       body: JSON.stringify({ searchQuery, skip, limit }),
     }).then((r) => r.json());
 
-    handlePostFetchingNgo(res);
+    // handlePostFetchingNgo(res);
 
     return res;
   } catch (error) {

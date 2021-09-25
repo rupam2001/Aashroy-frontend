@@ -13,7 +13,7 @@ async function GeneralUserLoginAsync({ tokenId }) {
    */
   try {
     const { access_token, userData, refresh_token } = await fetch(
-      ENDPOINT + "/auth/generaluser",
+      ENDPOINT + "/api/auth/generaluser",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ async function ngoLoginAsync({ email, password }) {
    */
   try {
     const { access_token, ngoData, refresh_token } = await fetch(
-      ENDPOINT + "/auth/ngo/signin",
+      ENDPOINT + "/api/auth/ngo/signin",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ async function ngoRegisterAsync({
    *
    */
   try {
-    const { success, msg } = await fetch(ENDPOINT + "/auth/ngo/register", {
+    const { success, msg } = await fetch(ENDPOINT + "/api/auth/ngo/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -83,7 +83,7 @@ async function ngoSignOutAsync({}) {
    *
    */
   try {
-    const { success } = await fetch(ENDPOINT + "/auth/ngo/signout", {
+    const { success } = await fetch(ENDPOINT + "/api/auth/ngo/signout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh_token: getRefreshToken() }),

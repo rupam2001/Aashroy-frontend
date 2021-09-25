@@ -72,14 +72,30 @@ function NGODonationCard({ donation }) {
         <span className="mr-1 text-black font-semibold">{donation.weight}</span>
 
         {/* contact number */}
-        <div className="text-sm mt-2">Contact :</div>
-        <a
-          className="flex items-center text-blue-500 mb-2"
-          href={`tel:${donation.contact_number}`}
-        >
-          <FaPhoneAlt className="text-blue-500 mr-2" />
-          {donation.contact_number}
-        </a>
+        <div className="flex item-center mt-2">
+          <div className="text-sm">Contact :</div>
+          <a
+            className="flex items-center text-blue-500 mx-1 mb-2"
+            href={`tel:${donation.contact_number}`}
+          >
+            <FaPhoneAlt className="text-blue-500 mr-2" />
+            {donation.contact_number}
+          </a>
+        </div>
+
+        {/* images */}
+        <div className="h-60 flex overflow-x-auto mb-3">
+          {donation.media_urls.map((item, index) => {
+            return (
+              <img
+                src={item.url}
+                alt="previews"
+                key={index}
+                className="h-full mr-2"
+              />
+            );
+          })}
+        </div>
 
         {/* status */}
         <span className="text-sm mr-1">Status :</span>
