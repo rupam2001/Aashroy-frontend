@@ -67,6 +67,7 @@ export default function NgoCrimeReportView() {
     if (crime_list) {
       setTopImages(topImages);
       setCrimeList(crime_list);
+      setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
     }
     // console.log(crime_list);
     setCrimeMap(crimeMap);
@@ -111,7 +112,11 @@ export default function NgoCrimeReportView() {
   const getMarkers = (crime_list) => {
     let _markers = [];
     crime_list.forEach((h) => {
-      _markers.push(h.geo_location);
+      _markers.push({
+        ...h.geo_location,
+        type: h.type,
+        type_description: h.type_description,
+      });
     });
     console.log(_markers);
     return _markers;
@@ -204,6 +209,7 @@ export default function NgoCrimeReportView() {
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
             regionColor="#ff6969"
+            customPopup={customPopup}
           />
         )}
         <div className=" md:h-screen md:w-full ">
@@ -281,7 +287,7 @@ const SearchFilterModel = ({
             <input
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
-              min="10"
+              min="1"
               max="500"
               step="5"
               value={diameter}
@@ -311,3 +317,6 @@ const SearchFilterModel = ({
     </div>
   );
 };
+
+const customPopup = (marker) =>
+  `<div><h3 style="font-weight:bold;" >${marker.address}</h3><br/><h6 style="color:red;">${marker.type}</h6><small>${marker.type_description}</small> </div>`;
