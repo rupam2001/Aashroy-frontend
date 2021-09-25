@@ -162,26 +162,27 @@ export default function NgoHomeLess() {
             handleViewPhotoClick={handleViewPhoto}
           />
         )}
-        {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY &&
-          homelessList.length && (
-            <div className="mt-4">
-              <button
-                onClick={() => {
-                  setCurrentSearchResultMode(SEARCH_RESULT_MODES.MAIN);
-                }}
-                className=" text-blue-600 "
-              >
-                &#8592; Back
-              </button>
+        {currentSearchResultMode == SEARCH_RESULT_MODES.GALLERY && (
+          <div className="mt-4">
+            <button
+              onClick={() => {
+                setCurrentSearchResultMode(SEARCH_RESULT_MODES.MAIN);
+              }}
+              className=" text-blue-600 "
+            >
+              &#8592; Back
+            </button>
 
+            {homelessList.length && (
               <SearchResultGallery
                 homelessList={homelessList}
                 handleImageClick={handleImageClick}
                 containerClass="mt-5"
                 homelessMap={homelessMap}
               />
-            </div>
-          )}
+            )}
+          </div>
+        )}
         {currentSearchResultMode == SEARCH_RESULT_MODES.PERSONS && (
           <div>
             <button
