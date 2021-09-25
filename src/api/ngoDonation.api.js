@@ -2,7 +2,7 @@
 
 import {
   getAccessTokenNGO,
-  getRefreshToken,
+  getRefreshTokenNgo,
   handlePostFetching,
 } from "../utils/storage";
 import { ENDPOINT } from "../constants/global.constants";
@@ -10,7 +10,7 @@ import { ENDPOINT } from "../constants/global.constants";
 // get donations of the NGO
 const fetchDonations = (skip, limit) => {
   const accessToken = getAccessTokenNGO();
-  const refreshToken = getRefreshToken();
+  const refreshToken = getRefreshTokenNgo();
 
   return fetch(`${ENDPOINT}/api/ngo/donation/our-donation/${skip}/${limit}`, {
     method: "GET",
@@ -34,7 +34,7 @@ const fetchDonations = (skip, limit) => {
 // function to accept donation request
 const acceptDonation = (setLoading, donationId) => {
   const accessToken = getAccessTokenNGO();
-  const refreshToken = getRefreshToken();
+  const refreshToken = getRefreshTokenNgo();
 
   return fetch(`${ENDPOINT}/api/ngo/donation/accept-donation`, {
     method: "PATCH",
@@ -63,7 +63,7 @@ const acceptDonation = (setLoading, donationId) => {
 // function to mark donation received
 const markDonationReceived = (setLoading, donationId) => {
   const accessToken = getAccessTokenNGO();
-  const refreshToken = getRefreshToken();
+  const refreshToken = getRefreshTokenNgo();
 
   return fetch(`${ENDPOINT}/api/ngo/donation/received-donation`, {
     method: "PATCH",

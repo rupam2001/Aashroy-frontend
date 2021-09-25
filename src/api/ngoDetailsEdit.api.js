@@ -4,9 +4,8 @@
 
 import { ENDPOINT } from "../constants/global.constants";
 import {
-  getAccessToken,
   getAccessTokenNGO,
-  getRefreshToken,
+  getRefreshTokenNgo,
   handlePostFetchingNgo,
 } from "../utils/storage";
 
@@ -16,7 +15,7 @@ async function updateNgoBasicInfoAsync({ name, email, phone, about, website }) {
    * @return {name: String, email: String, phone: Number, about: String, website: String} which are updated accordingly
    */
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/ngo/details/updatebasic", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: bearer },
@@ -36,7 +35,7 @@ async function addNewPhotoAsync({ imageBase64 }) {
    * @return {url: String, media_type: String} which are updated accordingly
    */
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/ngo/details/addnewphoto", {
       method: "POST",
       headers: {
@@ -55,7 +54,7 @@ async function addNewPhotoAsync({ imageBase64 }) {
 }
 async function getNGODataAsync() {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/ngo/details/getdata", {
       method: "POST",
       headers: {
@@ -73,7 +72,7 @@ async function getNGODataAsync() {
 
 async function addNewMembeNgoAsync({ name, role, profile_pic, about }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/ngo/details/addmember", {
       method: "POST",
       headers: {
@@ -93,7 +92,7 @@ async function addNewMembeNgoAsync({ name, role, profile_pic, about }) {
 }
 async function removeMembeNgoAsync({ _id }) {
   try {
-    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshToken();
+    const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/ngo/details/deletemember", {
       method: "POST",
       headers: {

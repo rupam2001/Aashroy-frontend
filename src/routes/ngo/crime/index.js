@@ -69,7 +69,7 @@ export default function NgoCrimeReportView() {
       setCrimeList(crime_list);
       setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
     }
-    // console.log(crime_list);
+    console.log(crime_list);
     setCrimeMap(crimeMap);
   };
   useEffect(() => {

@@ -13,6 +13,13 @@ const setRefreshToken = (value) => {
   Cookies.set("refresh_token", value, { expires: 30, path: "/" });
 };
 
+const getRefreshTokenNgo = () => {
+  return Cookies.get("refresh_token_ngo");
+};
+const setRefreshTokenNgo = (value) => {
+  Cookies.set("refresh_token_ngo", value, { expires: 30, path: "/" });
+};
+
 const handlePostFetching = (res) => {
   /**
    * saves new access_token if any
@@ -46,6 +53,9 @@ const removeAccessTokenNgo = () => {
 const removeRefreshToken = () => {
   Cookies.remove("refresh_token");
 };
+const removeRefreshTokenNgo = () => {
+  Cookies.remove("refresh_token_ngo");
+};
 
 export {
   getAccessToken,
@@ -58,4 +68,7 @@ export {
   removeAccessTokenNgo,
   removeRefreshToken,
   handlePostFetchingNgo,
+  getRefreshTokenNgo,
+  setRefreshTokenNgo,
+  removeRefreshTokenNgo,
 };

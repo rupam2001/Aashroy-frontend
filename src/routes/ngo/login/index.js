@@ -2,9 +2,13 @@ import React, { useContext, useState } from "react";
 import TextField from "../../../components/TextField";
 import PasswordField from "../../../components/PasswordField";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ngoLoginAsync } from "../../../api/auth.api";
-import { setAccessTokenNGO, setRefreshToken } from "../../../utils/storage";
+import {
+  setAccessTokenNGO,
+  setRefreshToken,
+  setRefreshTokenNgo,
+} from "../../../utils/storage";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { toast } from "react-toastify";
 
@@ -12,6 +16,7 @@ const LoginFormSection = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const ngocontext = useContext(NgoContext);
+  const history = useHistory();
 
   const submitHandler = async () => {
     // API Call here
@@ -24,9 +29,11 @@ const LoginFormSection = () => {
       return;
     }
     setAccessTokenNGO(access_token);
-    setRefreshToken(refresh_token);
+    setRefreshTokenNgo(refresh_token);
     ngocontext.setNgoDetails(ngoData);
     ngocontext.setIsLoggedIn(true);
+    history.push("/ngo/home");
+    history.go(0);
   };
 
   return (

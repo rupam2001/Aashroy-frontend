@@ -10,7 +10,11 @@ import {
 } from "react-icons/fa";
 import { MdError } from "react-icons/md";
 import { NgoContext } from "../contexts/ngo.context";
-import { removeAccessTokenNgo, removeRefreshToken } from "../utils/storage";
+import {
+  removeAccessTokenNgo,
+  removeRefreshToken,
+  removeRefreshTokenNgo,
+} from "../utils/storage";
 import { ngoSignOutAsync } from "../api/auth.api";
 
 export default function NgoLayout({ children }) {
@@ -34,7 +38,7 @@ export default function NgoLayout({ children }) {
     const { success } = await ngoSignOutAsync({});
     if (success) {
       removeAccessTokenNgo();
-      removeRefreshToken();
+      removeRefreshTokenNgo();
       ngocontext.setIsLoggedIn(false);
       history.push("/ngo/login");
     } else {
