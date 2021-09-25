@@ -39,7 +39,7 @@ function Comment(props) {
       <div class="flex items-center justify-center">
         <div className="mb-10 rounded-full bg-white shadow-2xl">
           <img
-            class="object-cover h-40 w-40"
+            class="object-cover h-32 w-32 p-4"
             src={logo}
             alt="Homeless people"
           />
@@ -79,23 +79,23 @@ const Contact = () => {
           <div className="w-full">
             {" "}
             <Comment
-              name={"Forheen Ahmed"}
-              year={"2nd year"}
-              branch={"Instrumentation Engineering"}
+              name={"Rupam Jyoti Das"}
+              year={"3rd year"}
+              branch={"Computer Science and Engineering"}
             />
           </div>
           <div className="w-full">
             <Comment
-              name={"Forheen Ahmed"}
-              year={"2nd year"}
-              branch={"Instrumentation Engineering"}
+              name={"Rishparn Gogoi"}
+              year={"3rd year"}
+              branch={"Computer Science and Engineering"}
             />{" "}
           </div>
           <div className="w-full">
             <Comment
-              name={"Forheen Ahmed"}
-              year={"2nd year"}
-              branch={"Instrumentation Engineering"}
+              name={"Debashish Gogoi"}
+              year={"3rd year"}
+              branch={"Computer Science and Engineering"}
             />{" "}
           </div>
           <div className="w-full">

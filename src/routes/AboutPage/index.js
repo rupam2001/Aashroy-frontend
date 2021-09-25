@@ -9,12 +9,12 @@ const DisplayName = () => (
       <div class="mb-2  tracking-widest font-bold text-gray-700 leading-snug">
         A Charitable Journey for
       </div>
-      <span className="pt-7 text-2xl leading-6 font-bold text-2xl text-gray-900 sm:leading-7">
+      <span className="pt-7 leading-6 font-bold text-2xl text-gray-900 sm:leading-7">
         HOMELESS PEOPLE
       </span>
     </p>
 
-    <button className=" py-3 mb-4 lg:w-80 w-60 bg-blue-600 tracking-widest text-white rounded-full font-bold text-sm hover:bg-red-700 transition duration-100">
+    <button className=" py-3 mb-4 lg:w-80 w-60 bg-blue-600 tracking-widest text-white rounded-full font-bold text-sm">
       TEAM AURIN
     </button>
   </div>
@@ -48,7 +48,7 @@ const AboutSection = () => (
 );
 
 const ServiceSection = () => (
-  <div class="bg-white shadow-md overflow-hidden bg-blue-500">
+  <div class="shadow-md overflow-hidden bg-blue-500">
     <div class="grid lg:grid-flow-col lg:items-center justify-center">
       <div class="flex-row mt-10 mb-10 lg:ml-32 lg:mr-32 ml-10 mr-10 items-center justify-center bg-blue-500">
         <span className="text-4xl lg:text-6xl font-bold text-white  tracking-widest">
@@ -113,12 +113,16 @@ const About = () => {
     <DefaultLayout navbarSolid={true}>
       <div className="flex flex-col w-full">
         <div className="flex flex-col lg:flex-row ">
-          <div className="bg-white flex h-screen w-full lg:w-4/5  h-full items-center justify-center">
+          <div className="bg-white flex h-screen w-full lg:w-4/5 items-center justify-center">
             <DisplayName />
           </div>
           <div className=" flex bg-blue-600 h-44 w-full lg:w-96 lg:h-screen items-center justify-center ">
             <div class="rounded-full lg:-ml-96 lg:mt-0 -mt-60 ml-0 lg:h-96 lg:w-96 h-60 w-60 flex items-center justify-center shadow-2xl  bg-white">
-              <img src={logo} alt="Homeless people" />
+              <img
+                src={logo}
+                className="object-contain h-48"
+                alt="Homeless people"
+              />
             </div>{" "}
           </div>
         </div>
