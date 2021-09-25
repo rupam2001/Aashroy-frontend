@@ -36,6 +36,8 @@ import NgoList from "./routes/ngo/list";
 import NgoHomeLess from "./routes/ngo/homeless";
 import NgoCrimeReportView from "./routes/ngo/crime";
 
+import NotFound from "./routes/404";
+
 console.warn = () => {};
 console.error = () => {};
 
@@ -49,7 +51,6 @@ function App() {
   return (
     <div>
       <GlobalRoutes />
-      <AuthSecureRoutes />
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -83,7 +84,6 @@ function GlobalRoutes() {
         <Route path="/ngo/home" component={NgoHome} />
         <Route path="/ngo/homeless" component={NgoHomeLess} />
         <Route path="/ngo/crime" component={NgoCrimeReportView} />
-
         <Route
           path="/ngo/profile/:id"
           render={(props) => <NgoProfile {...props} />}
@@ -93,21 +93,6 @@ function GlobalRoutes() {
         <Route path="/contact-us" component={Contact} />
         <Route path="/public-contribution" exact component={DonationPage} />
         <Route path="/ngo/list" component={NgoList} />
-      </Switch>
-      <RouteManager />
-    </Router>
-  );
-}
-
-function AuthSecureRoutes() {
-  /**
-   * Place all the secure routes here
-   */
-  const authcontext = useContext(AuthContext);
-  // if (!authcontext.isLoggedIn) return <></>;
-  return (
-    <Router>
-      <Switch>
         <Route path="/general" exact component={GeneralUser} />
         <Route
           path="/general/report-homeless"
@@ -120,7 +105,9 @@ function AuthSecureRoutes() {
           component={ReportAdditionalInfo}
         />
         <Route path="/general/donate/:ngoId" exact component={Donate} />
+        <Route component={NotFound} />
       </Switch>
+      <RouteManager />
     </Router>
   );
 }

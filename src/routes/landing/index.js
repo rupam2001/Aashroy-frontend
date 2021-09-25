@@ -36,14 +36,14 @@ const GalleryWall = () => {
 
 const CTAButton = ({ title, bgColor, color, containerClass, to }) => {
   return (
-    <a href={to}>
+    <Link to={to}>
       <div
-        className={`md:w-auto w-full py-3 px-10 mx-2 border-2 border-white rounded font-bold text-sm transition duration-100 cursor-pointer text-center md:mb-0 mb-5 ${containerClass}`}
+        className={`md:w-auto w-full py-3 px-10 mx-2 border-2 border-white rounded font-bold transition duration-100 cursor-pointer text-center md:mb-0 mb-5 ${containerClass}`}
         style={{ backgroundColor: bgColor, color }}
       >
         {title}
       </div>
-    </a>
+    </Link>
   );
 };
 
@@ -172,9 +172,9 @@ const DonationBoardSection = () => {
   return (
     <div>
       <DonationBoard donations={recentDonations} showImage={false} />
-      <div className="px-4 text-blue-600">
+      <Link className="px-4 text-blue-600" to="/public-contribution">
         View More →
-      </div>
+      </Link>
     </div>
   );
 };
