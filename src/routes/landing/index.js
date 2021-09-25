@@ -196,9 +196,7 @@ const Landing = () => {
                     Detect the person you saw roaming around in search of
                     Aashroy and ask the authorities to help them.
                   </p>
-                  <p className=" text-blue-600">
-                    <u>GO</u> {">>>"}
-                  </p>
+                  <p className=" text-blue-600">Report Now →</p>
                 </div>
               </Link>
               <Link to="/report-crime" className="cursor-pointer">
@@ -211,9 +209,7 @@ const Landing = () => {
                     activity against these helpless.
                   </p>
                   <p className="text-blue-600">
-                    <a href="#">
-                      <u>Make report for crime</u> {">>>"}
-                    </a>
+                    <a href="#">Make report for crime →</a>
                   </p>
                 </div>
               </Link>
@@ -231,15 +227,12 @@ const Landing = () => {
               ))}
               <div className="mb-12 mt-12">
                 <p className="mb-2 font-bold">NGO</p>
-                <p className="mb-2">By YAy</p>
+                <p className="mb-2">
+                  Get data on homeless population, crimes and more. Work for
+                  upliftment of the homeless.
+                </p>
                 <p className=" text-blue-600">
-                  <a
-                    target="_blank"
-                    href="https://news.google.com/covid19/map?hl=en-IN&gl=IN&ceid=IN%3Aen&mid=%2Fm%2F03rk0"
-                    rel="noopener noreferrer"
-                  >
-                    <u>Login</u> {">>>"}
-                  </a>
+                  <Link to="/ngo/registration">Register Now →</Link>
                 </p>
               </div>
             </div>

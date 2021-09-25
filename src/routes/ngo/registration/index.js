@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiOutlineLibrary,
   HiOutlineKey,
@@ -33,6 +33,10 @@ const RegistrationFormSection = () => {
   const onCordinateChange = (center) => setGeoLocation(center);
 
   const onAddressChange = (text) => setAddress(text);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitHandler = async () => {
     // API Call here
@@ -92,7 +96,9 @@ const RegistrationFormSection = () => {
         {password.length > 6 ? (
           <StrengthChecker password={password} containerClass="mb-5" />
         ) : password.length !== 0 ? (
-          <span className="mb-5 text-sm text-red-600">Password should be 6 or more character</span>
+          <span className="mb-5 text-sm text-red-600">
+            Password should be 6 or more character
+          </span>
         ) : null}
         <TextField
           head={<HiOutlinePhone size={ICON_SIZE} color="grey" />}
@@ -130,13 +136,13 @@ const RegistrationFormSection = () => {
 const HeroSection = () => (
   <div className="container px-20 text-gray-200">
     <h1 className="mb-6 text-4xl font-semibold leading-snug">
-      Some heading will go here, its really hot today
+      Thank you for landing in our portal.
     </h1>
     <p className="text-sm leading-relaxed">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex elit,
-      tincidunt venenatis mauris in, pretium bibendum tellus. Nullam vitae
-      maximus sem, in convallis nisi. Maecenas laoreet augue libero, nec dictum
-      dolor euismod nec. Fusce mollis et erat a ullamcorper.
+      It is a very overwhelming moment for us to work with such a high-peer
+      organizations like you. We assure, that we together will bring a change to
+      these homeless people and provide their rights as a human being in this
+      world. We request you to please login or register for this virtuous leap .
     </p>
   </div>
 );
@@ -157,7 +163,9 @@ const Registration = () => {
   return (
     <div className="flex ngo-registration-root bg-blue-600">
       <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
-        <p className="text-3xl font-bold text-blue-600 mb-16">Aashroy</p>
+        <Link className="text-3xl font-bold text-blue-600" to="/">
+          Aashroy
+        </Link>
         <div className="w-full flex justify-center">
           <RegistrationFormSection />
         </div>
