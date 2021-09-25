@@ -38,7 +38,6 @@ function UserLayout({ children }) {
     // that he currently intended to go
     if (
       getAccessToken() == null &&
-      getRefreshToken() == null &&
       location.pathname != "/general/login"
     ) {
       history.replace("/general/login", { forwardTo: location.pathname });

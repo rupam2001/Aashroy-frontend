@@ -3,6 +3,11 @@ import { NgoContext, FaCloudUploadAlt } from "../../contexts/ngo.context";
 import "./style.css";
 import IconInput from "../IconInput/IconInput.component";
 import { FaUpload, FaTrash } from "react-icons/fa";
+import {
+  HiOutlineMail,
+  HiOutlinePhone,
+  HiOutlineGlobeAlt,
+} from "react-icons/hi";
 import Resizer from "react-image-file-resizer";
 import NgoMembers from "../ngoMembers/NgoMembers.component";
 import {
@@ -121,8 +126,8 @@ export default function NgoDetails({ ngoData, forPublic }) {
 
   return (
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
-      <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white">
-        <div className="container border-b-2 border-gray-100 h-40 mb-4">
+      <div className="md:w-5/6 md:h-auto w-screen rounded-2xl bg-white">
+        <div className="border-b-2 border-gray-100 h-40 mb-4">
           {ngoData.ngoDetails?.geo_location && (
             <Map
               markers={[]}
@@ -140,44 +145,59 @@ export default function NgoDetails({ ngoData, forPublic }) {
             />
           )}
         </div>
-        <IconInput
-          placeholder={name}
-          textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 font-bold"
-          // textClass="md:text-5xl text-2xl font-bold"
-          onChangeText={(text) => setName(text)}
-          isEditable={false}
-        />
-        {ngoData.ngoDetails && (
+        <div className="px-12">
           <IconInput
-            placeholder={email}
-            // textClass="text-red-400"
-            addedClass="text-red-900"
-            onChangeText={(text) => setEmail(text)}
+            placeholder={name}
+            textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 mb-2 font-bold"
+            // textClass="md:text-5xl text-2xl font-bold"
+            onChangeText={(text) => setName(text)}
             isEditable={false}
           />
-        )}
-        <IconInput
-          placeholder={phone}
-          addedClass="text-blue-600"
-          onChangeText={(text) => setPhone(text)}
-          isEditable={!forPublic}
-        />
-        <IconInput
-          placeholder={website}
-          addedClass="text-blue-600 text-sx"
-          onChangeText={(text) => setWebsite(text)}
-          isEditable={!forPublic}
-        />
-        <textarea
-          className="min-w-full h-60 bg-transparent about focus:outline-none "
-          value={about || ""}
-          onChange={(e) => {
-            if (!forPublic) setAbout(e.target.value);
-          }}
-        />
+          {ngoData.ngoDetails && (
+            <div className="flex items-center">
+              <HiOutlineMail size={16} className="mr-2" />
+              <span>Email: </span>
+              <IconInput
+                placeholder={email}
+                addedClass="text-red-900"
+                onChangeText={(text) => setEmail(text)}
+                isEditable={false}
+              />
+            </div>
+          )}
+          <div className="flex items-center">
+            <HiOutlinePhone size={16} className="mr-2" />
+            <span>Phone: </span>
+            <IconInput
+              placeholder={phone}
+              addedClass="text-blue-600"
+              onChangeText={(text) => setPhone(text)}
+              isEditable={!forPublic}
+            />
+          </div>
+          <div className="flex items-center">
+            <HiOutlineGlobeAlt size={16} className="mr-2" />
+            <span>Website: </span>
+            <IconInput
+              placeholder={website}
+              addedClass="text-blue-600 text-sx"
+              onChangeText={(text) => setWebsite(text)}
+              isEditable={!forPublic}
+            />
+          </div>
+          <div className="mt-4 mb-2">About Us:</div>
+          <textarea
+            className="min-w-full  bg-transparent about focus:outline-none border p-3"
+            rows={3}
+            value={about || ""}
+            onChange={(e) => {
+              if (!forPublic) setAbout(e.target.value);
+            }}
+          />
+        </div>
 
         {!forPublic && (
-          <div className="flex justify-end">
+          <div className="flex px-12 mt-4 mb-12">
             <button
               onClick={handleDetailsEditSubmit}
               className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100"
@@ -193,7 +213,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
         forPublic={forPublic}
       />
 
-      <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
+      <div className="md:w-5/6 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
         <div className="md:py-10 p-4 flex justify-between items-center">
           <h1 className="text-blue-500 text-lg md:text-2xl font-medium">
             Photos

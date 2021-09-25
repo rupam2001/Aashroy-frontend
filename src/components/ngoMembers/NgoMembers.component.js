@@ -85,17 +85,19 @@ export default function NgoMembers({ membersList, forPublic }) {
   };
 
   return (
-    <div className="md:w-2/3 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-20 rounded-2xl bg-white mt-10">
-      <div className=" flex justify-between items-center">
-        <h1 className="text-blue-500 text-lg md:text-2xl font-medium mb-10">
+    <div className="md:w-5/6 md:h-auto w-screen px-4 py-4 shadow md:px-20 md:py-5 rounded-2xl bg-white mt-10">
+      <div className="flex justify-between items-center mb-10 mt-5">
+        <h1 className="text-blue-500 text-xl md:text-3xl font-medium">
           Members
         </h1>
         <div className="flex flex-col items-center">
           {!forPublic && (
-            <FaPlusCircle
-              className="text-2xl text-blue-500 cursor-pointer"
+            <button
+              className="py-2 px-3 border-2 border-blue-400  text-white rounded font-bold text-sm bg-blue-600 transition duration-100"
               onClick={handleAddMembersClick}
-            />
+            >
+              + ADD
+            </button>
           )}
           {/* {!forPublic && (
             <p className="text-sm font-medium text-blue-500">Add</p>
@@ -174,7 +176,7 @@ export default function NgoMembers({ membersList, forPublic }) {
               class="max-w-md py-4 px-8 bg-white shadow rounded-lg my-12 min-w-full"
               key={m._id}
             >
-              <div class="flex justify-center md:justify-end -mt-16">
+              <div class="flex justify-center md:justify-end">
                 <img
                   class="w-20 h-20 object-cover rounded-full border-2 border-blue-500"
                   src={m.profile_pic}
