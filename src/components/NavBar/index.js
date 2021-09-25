@@ -1,11 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { NgoContext } from "../../contexts/ngo.context";
+import { AuthContext } from "../../contexts/auth.context";
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
 
 const NavBar = ({ isSolid }) => {
   const [isMobilemenushown, setIsMobilemenushown] = useState(false);
   const [size, setSize] = useState([0, 0]);
+
+  const ContextAuth = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log(ContextAuth);
+  }, [ContextAuth]);
 
   const toggleMenu = () => {
     setIsMobilemenushown(!isMobilemenushown);
@@ -78,16 +84,22 @@ const NavBar = ({ isSolid }) => {
 
           {/* secondary nav */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link to="/myaccount">
-              <a to="#" className="py-4 px-3 text-gray-100">
-                My Account
-              </a>
-            </Link>
-            <Link to="/general/login">
-              <a className="py-2 px-3 mx-2 bg-yellow-400 text-yellow-900 rounded hover:bg-yellow-300 transition duration-100">
-                User Login
-              </a>
-            </Link>
+            {ContextAuth.isLoggedIn ? (
+              <Link to="/general">
+                <a to="#" className="py-4 px-3 text-gray-100">
+                  My Account
+                </a>
+              </Link>
+            ) : null}
+
+            {!ContextAuth.isLoggedIn ? (
+              <Link to="/general/login">
+                <a className="py-2 px-3 mx-2 bg-yellow-400 text-yellow-900 rounded hover:bg-yellow-300 transition duration-100">
+                  User Login
+                </a>
+              </Link>
+            ) : null}
+
             <Link to="/ngo/login">
               <a className="py-2 px-3 bg-black text-white rounded hover:bg-yellow-300 transition duration-100">
                 NGO Login

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
 import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
+import { BsFilter } from "react-icons/bs";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
 import "./style.css";
@@ -112,10 +113,12 @@ export default function NgoCrimeReportView() {
   const getMarkers = (crime_list) => {
     let _markers = [];
     crime_list.forEach((h) => {
+      console.log(h);
       _markers.push({
         ...h.geo_location,
         type: h.type,
         type_description: h.type_description,
+        media_url: h.media_urls
       });
     });
     console.log(_markers);
@@ -135,6 +138,7 @@ export default function NgoCrimeReportView() {
       <div className=" shadow md:flex-initial md:flex-1 md:w-1/3 bg-gray-100 md:min-h-screen flex flex-col items-center py-4 px-4 h-1/3 md:overflow-y-auto">
         <div className="flex w-full items-center h-auto sticky top-0">
           <SearchBar
+            placeholder="Search by Location"
             onChange={(text) => {
               setSearchQuery(text);
             }}
@@ -144,14 +148,15 @@ export default function NgoCrimeReportView() {
             containerClass="flex-1 rounded"
             value={searchQuery}
           />
-          <MdFilterList
-            className="text-4xl  md:mx-2 text-blue-500 cursor-pointer"
-            onClick={showModel}
-          />
+          <div className="md:ml-2 p-2 bg-white shadow rounded cursor-pointer text-blue-500 hover:bg-blue-500 hover:text-white transition duration-100">
+            <BsFilter className="text-4xl " onClick={showModel} />
+          </div>
         </div>
         {currentSearchResultMode == SEARCH_RESULT_MODES.MAIN && (
           <div className="w-full">
             <SearchResultMain
+              diameter={diameter}
+              days={days}
               topImages={_topImages}
               heading={searchResultTitle}
               info={{ totalPeople: crimeList.length }}
@@ -208,7 +213,7 @@ export default function NgoCrimeReportView() {
           <Map
             markers={markers}
             region={[markers[0].longitude, markers[0].latitude]}
-            regionColor="#ff6969"
+            regionColor="#ff000075"
             customPopup={customPopup}
           />
         )}
@@ -288,7 +293,7 @@ const SearchFilterModel = ({
               class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full"
               type="range"
               min="1"
-              max="500"
+              max="1000"
               step="5"
               value={diameter}
               onChange={(e) => {
@@ -319,4 +324,4 @@ const SearchFilterModel = ({
 };
 
 const customPopup = (marker) =>
-  `<div><h3 style="font-weight:bold;" >${marker.address}</h3><br/><h6 style="color:red;">${marker.type}</h6><small>${marker.type_description}</small> </div>`;
+  `<div><img src="${marker.media_url[0].url}" width=300 class="mb-2"/><h3 class="font-bold">${marker.address}</h3><h6 class="text-red-700 font-bold"">${marker.type}</h6><small>${marker.type_description}</small> </div>`;
