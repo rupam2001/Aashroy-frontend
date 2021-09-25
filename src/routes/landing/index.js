@@ -172,7 +172,9 @@ const DonationBoardSection = () => {
   return (
     <div>
       <DonationBoard donations={recentDonations} showImage={false} />
-      <div>View More →</div>
+      <div className="px-4 text-blue-600">
+        View More →
+      </div>
     </div>
   );
 };

@@ -126,7 +126,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
 
   return (
     <div className="min-h-full bg-gray-50 w-full px-0 py-4 flex flex-col justify-start items-center ">
-      <div className="md:w-5/6 md:h-auto w-screen rounded-2xl bg-white border">
+      <div className="md:w-5/6 md:h-auto rounded-2xl w-full bg-white border">
         <div className="border-b-2 border-gray-100 h-40 mb-4">
           {ngoData.ngoDetails?.geo_location && (
             <Map
@@ -145,7 +145,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
             />
           )}
         </div>
-        <div className="px-12">
+        <div className="md:px-12 px-5">
           <IconInput
             placeholder={name}
             textClass="md:text-5xl text-3xl mr-2 focus:outline-none px-1 py-1 mb-2 font-bold"
@@ -213,7 +213,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
         forPublic={forPublic}
       />
 
-      <div className="md:w-5/6 md:h-auto w-screen px-4 py-4 border md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
+      <div className="md:w-5/6 md:h-auto w-full px-4 py-4 border md:px-20 md:pb-4 rounded-2xl bg-white mt-10">
         <div className="md:py-10 p-4 flex justify-between items-center">
           <h1 className="text-blue-500 text-lg md:text-2xl font-medium">
             Photos
