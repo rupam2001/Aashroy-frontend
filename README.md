@@ -1,17 +1,13 @@
+![Logo](https://res.cloudinary.com/rupamcloud/image/upload/v1632588318/logo512_vkauoz.png)
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-    
 # Aashroy
 
 Mapping the homless and helping them
 
-
-## Tech Stack
+## Frontend Tech Stack
 
 **Client:** React, TailwindCSS
 
-  
 ## Run Locally / Development Setup
 
 Go to the project directory
@@ -32,7 +28,6 @@ Start the server
   npm run start
 ```
 
-  
 ## To Build for Production
 
 To build the frontend run
@@ -41,15 +36,13 @@ To build the frontend run
   npm run build
 ```
 
-  
 ## Features
 
 - Progressive Web App (PWA)
 - Interactive Maps
 - Data visualisation
-- Responsice pages
+- Responsive
 
-  
 ## Configuring Constants
 
 To quickly edit the site, you can change the constants.
@@ -58,7 +51,6 @@ To quickly edit the site, you can change the constants.
 
 `ANOTHER_API_KEY`
 
-  
 ## Contributors
 
 - [Debashish Gogoi](https://github.com/Devzard)
@@ -66,9 +58,6 @@ To quickly edit the site, you can change the constants.
 - [Rishparn Gogoi](https://github.com/RG-404)
 - [Rupam Jyoti Das](https://github.com/rupam2001)
 
-  
 ## Appendix
 
 Any additional information goes here
-
-  
