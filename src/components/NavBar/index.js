@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import {HiMenu} from "react-icons/hi"
 import { AuthContext } from "../../contexts/auth.context";
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
@@ -104,7 +103,22 @@ const NavBar = ({ isSolid }) => {
           {/* mobile button */}
           <div className="md:hidden flex items-center">
             <button onClick={toggleMenu}>
-             <HiMenu size={26} color="#fff"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                style = {{color: '#fff'}}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                  color="white"
+                />
+              </svg>
             </button>
           </div>
         </div>
