@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import "./style.css";
+import { MAPBOX_ACCESS_TOKEN } from "../../constants/map.constants";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoicmctNDA0IiwiYSI6ImNrczk5eG8yZzF1dmgydnBoZWgwNjZzZ2QifQ.hrxTaZwJoKGMxstCagV5zw";
+mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 const Map = ({ region, markers, center, pins, regionColor, customPopup }) => {
   const mapContainer = useRef(null);

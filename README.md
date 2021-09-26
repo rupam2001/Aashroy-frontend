@@ -45,6 +45,8 @@ To build the frontend run
 
 ## Configuring MapBox
 
+- [map.constants.js](src/constants/map.constants.js) [see docs](https://docs.mapbox.com/accounts/guides/tokens/) : set up Map Box access token to use the map
+
 ## Configuring Constants
 
 Set up the constants before starting running the project. Constans can also be changed to quickly edit the site :
