@@ -16,7 +16,7 @@ export default function NgoProfile(props) {
   useEffect(() => {
     fetchNGOAsync();
   }, []);
-  if (!ngo) return <div>Not found</div>;
+  if (!ngo) return <div></div>;
   return (
     <div>
       <NgoDetails forPublic={true} ngoData={{ ngoDetails: ngo }} />

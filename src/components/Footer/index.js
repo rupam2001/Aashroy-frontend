@@ -14,12 +14,15 @@ import {
   SOCIAL_MEDIA,
 } from "../../constants/footer.constats";
 
-const Footer = ({theme}) => {
-
+const Footer = ({ theme }) => {
   return (
-    <div className={`flex flex-col w-full pt-xl pb-10 ${theme=="dark"?"bg-black" : "bg-white"} items-center border-gray-200 border-t-2`}>
+    <div
+      className={`flex flex-col w-full pt-xl pb-5 ${
+        theme == "dark" ? "bg-black" : "bg-white"
+      } items-center border-gray-200 border-t-2`}
+    >
       {/* top section */}
-      <div className="mt-10 flex flex-row justify-evenly flex-wrap lg:gap-20 gap:10 text-left w-full px-20">
+      <div className="mt-10 flex flex-row justify-start md:justify-evenly flex-wrap lg:gap-20 gap:10 text-left w-full md:px-20 px-10">
         {/* main section */}
         <div className="flex flex-col text-left mx-2">
           <span className="text-3xl text-blue-600 mb-4 font-bold">
@@ -138,7 +141,7 @@ const Footer = ({theme}) => {
           {/* social media section */}
           <div className="text-black py-2 text-base hover:text-blue-600 items-center justify-left">
             <div className="flex flex-row ">
-              <span className="pr-10 pt-3">
+              <span className="pr-5 pt-3">
                 <FaAddressBook />{" "}
               </span>
               {CONTACTDETAILS.address}
@@ -146,7 +149,7 @@ const Footer = ({theme}) => {
           </div>
           <div className="text-black py-2 text-base hover:text-blue-600 ">
             <div className="flex flex-row items-center justify-left ">
-              <span className="pr-10 ">
+              <span className="pr-5 ">
                 <FaPhoneAlt />{" "}
               </span>
               <a href={`tel:${CONTACTDETAILS.phone}`}>{CONTACTDETAILS.phone}</a>
@@ -154,7 +157,7 @@ const Footer = ({theme}) => {
           </div>
           <div className="text-black py-2 text-base hover:text-blue-600 ">
             <div className="flex flex-row items-center justify-left ">
-              <span className="pr-10 ">
+              <span className="pr-5 ">
                 <FaEnvelope />{" "}
               </span>
               <a href={`mailto:${CONTACTDETAILS.email}`}>
@@ -166,8 +169,8 @@ const Footer = ({theme}) => {
       </div>
 
       {/* copyright section */}
-      <div className="text-green-500 font-bold text-center mt-5">
-        @ Copyright Reserved 2021
+      <div className="text-green-500 font-bold text-center mt-10">
+        © Copyright Reserved 2021
       </div>
     </div>
   );
