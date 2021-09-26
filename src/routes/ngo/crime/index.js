@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
-import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
 import { BsFilter } from "react-icons/bs";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
@@ -15,8 +14,14 @@ import {
 import CrimeCards from "../../../components/CrimeCards";
 import TableWrapper from "../../../components/TableWrapper";
 import { crimeColumn } from "../../../constants/table.constants";
-import Table from "../../../components/Table";
 import SearchFilterModel from "../../../components/SearchFilterModal";
+
+/**
+ *
+ * Handles Crime Reports
+ * fetches crimes according to the filter
+ * displays it with JSX
+ */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -35,7 +40,7 @@ export default function NgoCrimeReportView() {
   const [currentSearchResultMode, setCurrentSearchResultMode] = useState(
     SEARCH_RESULT_MODES.MAIN
   );
-  const [_topImages, setTopImages] = useState([""]);
+  const [_topImages, setTopImages] = useState([""]); // top images to display in the main search result
   const [days, setDays] = useState(7);
   const modelRef = useRef(null);
   const [crimeMap, setCrimeMap] = useState({});

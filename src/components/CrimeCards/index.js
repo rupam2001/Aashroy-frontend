@@ -1,5 +1,10 @@
 import React from "react";
 import moment from "moment";
+/**
+ *
+ * @param {body: String, crimeType: String, title: String, place:String, date: Date in miliseconds}
+ * @returns
+ */
 
 const CrimeCards = ({ body, crimeType, title, place, date }) => {
   return (

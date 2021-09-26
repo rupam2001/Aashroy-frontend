@@ -52,6 +52,7 @@ export default function NgoMembers({ membersList, forPublic }) {
     });
 
   const handleNewMemberAdded = async () => {
+    if (!newName || !newImage || !newAbout || !newRole) return;
     const { members } = await toast.promise(
       addNewMembeNgoAsync({
         name: newName,
@@ -70,6 +71,10 @@ export default function NgoMembers({ membersList, forPublic }) {
     }
     setMembers(members);
     setShowForm(false);
+    setNewImage(null);
+    setNewName(null);
+    setNewRole(null);
+    setNewAbout(null);
   };
   const handleRemoveMember = async (_id) => {
     const { members } = await toast.promise(removeMembeNgoAsync({ _id }), {
