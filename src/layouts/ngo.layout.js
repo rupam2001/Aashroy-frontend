@@ -59,7 +59,11 @@ export default function NgoLayout({ children }) {
           ref={sideMenuRef}
         >
           <div class="flex  items-center justify-evenly h-38 shadow  py-5">
-            <h1 class="text-3xl text-blue-500 font-bold uppercase">Aashroy</h1>
+            <Link to="/">
+              <h1 class="text-3xl text-blue-500 font-bold uppercase">
+                Aashroy
+              </h1>
+            </Link>
             <span
               className="text-4xl cursor-pointer md:hidden"
               onClick={closeNav}
