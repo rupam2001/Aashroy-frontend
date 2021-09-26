@@ -124,38 +124,53 @@ const NavBar = ({ isSolid }) => {
       </div>
       {/* mobile menu */}
       <div
-        className={`bg-white h-screen ${!isMobilemenushown ? "hidden" : null}`}
+        className={`bg-blue-800 h-screen text-white pt-10 ml-6 ${!isMobilemenushown ? "hidden" : null}`}
       >
-        <Link to="/listing">
+        <Link to="/about-us">
           <a
-            className="block py-2 px-4 text-sm hover:bg-gray-200"
+            className="block py-2 px-4 text-lg hover:bg-gray-200 mb-4 border-b-2 border-white"
             onClick={toggleMenu}
           >
-            Link 1
+            About Us
           </a>
         </Link>
-        <Link to="/plasmarequest">
+        <Link to="/contact-us">
           <a
-            className="block py-2 px-4 text-sm hover:bg-gray-200"
+            className="block py-2 px-4 text-lg hover:bg-gray-200 mb-4  border-b-2 border-white"
             onClick={toggleMenu}
           >
-            Link 2
+            Contact Us
           </a>
         </Link>
-        <Link to="/myaccount">
+
+        {ContextAuth.isLoggedIn ? (
+          <Link to="/general">
+            <a
+              className="block py-2 px-4 text-lg hover:bg-gray-200 mb-4  border-b-2 border-white"
+              onClick={toggleMenu}
+            >
+              My Account
+            </a>
+          </Link>
+        ) : null}
+
+        {!ContextAuth.isLoggedIn ? (
+          <Link to="/general/login">
+            <a
+              className="block py-2 px-4 text-lg hover:bg-gray-200 mb-4  border-b-2 border-white"
+              onClick={toggleMenu}
+            >
+              User Login
+            </a>
+          </Link>
+        ) : null}
+
+        <Link to="/ngo/login">
           <a
-            className="block py-2 px-4 text-sm hover:bg-gray-200"
+            className="block py-2 px-4 text-lg hover:bg-gray-200 mb-4  border-b-2 border-white"
             onClick={toggleMenu}
           >
-            My Account
-          </a>
-        </Link>
-        <Link to="/howitworks">
-          <a
-            className="block py-2 px-4 text-sm hover:bg-gray-200"
-            onClick={toggleMenu}
-          >
-            How it works
+            NGO Login
           </a>
         </Link>
       </div>
