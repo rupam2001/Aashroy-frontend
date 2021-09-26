@@ -40,6 +40,11 @@ const LoginFormSection = () => {
     history.go(0);
   };
 
+  if (ngocontext.isLoggedIn) {
+    history.push("/ngo/home");
+    return <></>;
+  }
+
   return (
     <div className="pb-20 md:px-0">
       <p className="text-2xl mb-2 font-bold">Login to Aashroy</p>

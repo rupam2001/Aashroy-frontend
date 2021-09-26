@@ -7,6 +7,7 @@ const IconInput = ({
   textClass,
   addedClass,
   isEditable,
+  isLink,
 }) => {
   const [showIcon, setShowIcon] = useState(true);
   const [value, setValue] = useState(placeholder);
@@ -36,9 +37,16 @@ const IconInput = ({
             makeInputOff();
           }}
         >
-          {value}
+          {isLink ? (
+            <a href={prepareUrl(value)} target="_blank">
+              {value}
+            </a>
+          ) : (
+            value
+          )}
         </h2>
       )}
+
       {!showIcon && (
         <input
           className={
@@ -68,3 +76,13 @@ const IconInput = ({
   );
 };
 export default IconInput;
+
+const prepareUrl = (website) => {
+  /**
+   * IF the website string dosnot vcontains the standar https protocol, add it
+   */
+  if (website?.search("https://") == -1) {
+    return "https://" + website;
+  }
+  return website;
+};
