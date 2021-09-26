@@ -170,9 +170,14 @@ function Donate() {
               <button
                 title="Donate Anonymously"
                 onClick={isAnonymousHandler}
-                className={"px-2" + (isAnonymous ? " text-purple-500" : " ")}
+                className={
+                  "px-2 flex" + (isAnonymous ? " text-purple-500" : " ")
+                }
               >
-                <FaGhost />
+                <span className="text-sm text-gray-400 mr-1 italic">
+                  click to donate anonymously
+                </span>
+                <FaGhost className="text-2xl" />
               </button>
             </div>
             <input

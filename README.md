@@ -64,6 +64,6 @@ Set up the constants before starting running the project. Constans can also be c
 - [Rishparn Gogoi](https://github.com/RG-404)
 - [Rupam Jyoti Das](https://github.com/rupam2001)
 
-## Appendix
+## Link to live demo
 
-Any additional information goes here
+[https://aashroy.herokuapp.com/](https://aashroy.herokuapp.com/)
