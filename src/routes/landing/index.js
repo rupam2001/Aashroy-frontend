@@ -65,7 +65,7 @@ const HeroSection = () => {
         className="hero-section-image"
         style={{ transform: `translateY(${offsetY * 0.4}px)` }}
       ></div>
-      <div className="md:px-0 px-10 md:pb-0 pb-16">
+      <div className="md:px-0 px-10 md:pb-0 pb-16 hero-section-content">
         <div className="text-3xl md:text-7xl text-white font-bold text-center hero-title mb-5">
           Help the Homeless
           <br /> Get Them their AASHROY

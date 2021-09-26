@@ -31,16 +31,14 @@ const DisplayCDetails = () => (
   </div>
 );
 
-const MemberCard = () => <div className="text-left p-10 "></div>;
-
 function Comment(props) {
   return (
     <div className="pb-20 ">
       <div class="flex items-center justify-center">
-        <div className="mb-10 rounded-full bg-white shadow-2xl">
+        <div className="mb-6 rounded-full bg-white shadow-2xl">
           <img
-            class="object-cover h-32 w-32 p-4"
-            src={logo}
+            class="object-cover h-32 w-32 rounded-full"
+            src={props.image}
             alt="Homeless people"
           />
         </div>
@@ -79,6 +77,7 @@ const Contact = () => {
           <div className="w-full">
             {" "}
             <Comment
+              image="https://avatars.githubusercontent.com/u/34038003?v=4"
               name={"Rupam Jyoti Das"}
               year={"3rd year"}
               branch={"Computer Science and Engineering"}
@@ -86,6 +85,7 @@ const Contact = () => {
           </div>
           <div className="w-full">
             <Comment
+              image="https://avatars.githubusercontent.com/u/55778353?v=4"
               name={"Rishparn Gogoi"}
               year={"3rd year"}
               branch={"Computer Science and Engineering"}
@@ -93,6 +93,7 @@ const Contact = () => {
           </div>
           <div className="w-full">
             <Comment
+              image="https://avatars.githubusercontent.com/u/52529195?v=4"
               name={"Debashish Gogoi"}
               year={"3rd year"}
               branch={"Computer Science and Engineering"}
@@ -100,6 +101,7 @@ const Contact = () => {
           </div>
           <div className="w-full">
             <Comment
+              image="https://avatars.githubusercontent.com/u/6097271?v=4"
               name={"Forheen Ahmed"}
               year={"2nd year"}
               branch={"Instrumentation Engineering"}

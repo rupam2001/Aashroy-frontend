@@ -110,7 +110,7 @@ const FootLinks = ({ links }) => (
 const Registration = () => {
   return (
     <div className="flex ngo-login-root bg-blue-600">
-      <div className="main-form-section bg-gray-100 lg:w-3/5 w-full md:px-20 px-5 py-16">
+      <div className=" bg-gray-100 lg:w-4/6 w-full md:px-20 px-5 py-16">
         <Link className="text-3xl font-bold text-blue-600" to="/">
           Aashroy
         </Link>
@@ -125,7 +125,7 @@ const Registration = () => {
           ]}
         /> */}
       </div>
-      <div className="container bg-blue-600 w-2/5 lg:block hidden">
+      <div className="container lg:w-2/6 md:block hidden ngo-login-hero-section">
         <div className="w-full h-full flex items-center justify-center">
           <HeroSection />
         </div>
