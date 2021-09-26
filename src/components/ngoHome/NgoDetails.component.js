@@ -183,6 +183,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
               addedClass="text-blue-600 text-sx"
               onChangeText={(text) => setWebsite(text)}
               isEditable={!forPublic}
+              isLink={true}
             />
           </div>
           <div className="mt-4 mb-2">About Us:</div>
@@ -193,6 +194,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
             onChange={(e) => {
               if (!forPublic) setAbout(e.target.value);
             }}
+            readOnly={forPublic}
           />
         </div>
 
