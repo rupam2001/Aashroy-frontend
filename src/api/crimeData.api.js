@@ -7,7 +7,6 @@ import {
 
 async function fetchCrimesAsync({ geo_location, diameter, days }) {
   try {
-    diameter = 50;
     const bearer = "bearer " + getAccessTokenNGO() + " " + getRefreshTokenNgo();
     const res = await fetch(ENDPOINT + "/api/crime/data/get/locationwise", {
       method: "POST",

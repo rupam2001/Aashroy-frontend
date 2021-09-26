@@ -63,7 +63,7 @@ export default function NgoCrimeReportView() {
     return await getCurrentGeoLocationAsync();
   };
 
-  const loadInitialHomelessDataAsync = async () => {
+  const loadInitialCrimeDataAsync = async () => {
     const geo_location = await getBaseLocationAsync();
     const { crime_list, topImages, crimeMap } = await fetchCrimesAsync({
       geo_location,
@@ -76,19 +76,17 @@ export default function NgoCrimeReportView() {
       setCrimeList(crime_list);
       setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
     }
-    console.log(crime_list);
     setCrimeMap(crimeMap);
   };
   useEffect(() => {
-    loadInitialHomelessDataAsync();
+    loadInitialCrimeDataAsync();
     setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
   }, [ngocontext.ngoDetails]);
 
   const handleImageClick = (homeless) => {};
   const handleSearchAsync = async () => {
     if (searchQuery == "") {
-      loadInitialHomelessDataAsync();
-
+      loadInitialCrimeDataAsync();
       return;
     }
     if (filter == "place") {
