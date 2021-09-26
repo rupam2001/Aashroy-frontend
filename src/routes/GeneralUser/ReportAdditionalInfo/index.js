@@ -26,7 +26,7 @@ function ReportAdditionalInfo() {
 
     setData((p) => {
       let newP = [...p];
-      p.push({
+      newP.push({
         name,
         gender,
         ageGroup,
