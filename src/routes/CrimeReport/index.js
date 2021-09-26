@@ -99,7 +99,7 @@ function ReportCrime() {
     (async () => {
       // obtain geo location
       const location = await getCurrentGeoLocationAsync();
-      console.log(location);
+
       setGeoLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,

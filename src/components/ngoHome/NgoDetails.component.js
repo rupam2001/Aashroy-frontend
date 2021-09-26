@@ -56,7 +56,7 @@ export default function NgoDetails({ ngoData, forPublic }) {
       setCurrenModelData({ url: image, type: "image", isUploading: true });
       showModel();
     } catch (err) {
-      console.log(err);
+      toast.error("Something went wrong");
     }
   };
   const resizeFile = (file) =>

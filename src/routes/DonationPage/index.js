@@ -21,7 +21,6 @@ function DonationPage() {
     // fetch data and pass it to top contributor to display
     (async () => {
       const tdata = await getTopContributors();
-      console.log(tdata);
       setTopContributors(tdata.donations);
     })();
   }, []);

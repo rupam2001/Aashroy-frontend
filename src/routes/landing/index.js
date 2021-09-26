@@ -164,7 +164,6 @@ const DonationBoardSection = () => {
     // fetch data and pass it to donation board to display
     (async () => {
       const rdata = await getDonationData(0, 20);
-      console.log(rdata.donations);
       setRecentDonations(rdata.donations);
     })();
   }, []);

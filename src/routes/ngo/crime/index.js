@@ -117,7 +117,6 @@ export default function NgoCrimeReportView() {
   const getMarkers = (crime_list) => {
     let _markers = [];
     crime_list.forEach((h) => {
-      console.log(h);
       _markers.push({
         ...h.geo_location,
         type: h.type,
@@ -125,7 +124,6 @@ export default function NgoCrimeReportView() {
         media_url: h.media_urls,
       });
     });
-    console.log(_markers);
     return _markers;
   };
   useEffect(() => {

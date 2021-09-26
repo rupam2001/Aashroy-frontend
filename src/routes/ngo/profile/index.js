@@ -10,7 +10,6 @@ export default function NgoProfile(props) {
     //API CALL to fetch the ngo with that ip for public view
     // alert(id);
     const { ngo } = await getNGOAsync({ id });
-    console.log(ngo);
     setNgo(ngo);
   };
   useEffect(() => {

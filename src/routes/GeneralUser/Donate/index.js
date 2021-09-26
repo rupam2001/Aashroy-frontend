@@ -116,7 +116,6 @@ function Donate() {
       try {
         const data = await fetchNGOdetails(ngoId);
         setNgoDetails(data["0"]);
-        console.log(data[0]);
       } catch (err) {
         toast.error(err);
         history.replace("/general");

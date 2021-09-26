@@ -14,9 +14,6 @@ const SearchResultMain = ({
 }) => {
   const imgRef = useRef(null);
 
-  useEffect(() => {
-    console.log("HEREE!!!!", topImages);
-  }, []);
   return (
     <div className="w-full h-auto mt-2 rounded">
       <div className="w-full  max-h-64 overflow-hidden bg-red-500">
@@ -33,7 +30,9 @@ const SearchResultMain = ({
 
         <div>
           <h1 className="text-xl text-blue-600 font-bold">{heading}</h1>
-          <div className="text-black">Showing within {diameter} km and {days} days</div>
+          <div className="text-black">
+            Showing within {diameter} km and {days} days
+          </div>
         </div>
       </div>
       <hr />

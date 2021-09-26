@@ -67,7 +67,6 @@ function NGODonations() {
     // fetch donations of the NGO
     (async () => {
       const resData = await fetchDonations(0, 1000);
-      console.log(resData.donations);
       setDonations(resData.donations || []);
     })();
   }, []);

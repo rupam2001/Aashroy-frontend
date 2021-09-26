@@ -9,10 +9,6 @@ const NavBar = ({ isSolid }) => {
 
   const ContextAuth = useContext(AuthContext);
 
-  useEffect(() => {
-    console.log(ContextAuth);
-  }, [ContextAuth]);
-
   const toggleMenu = () => {
     setIsMobilemenushown(!isMobilemenushown);
   };
@@ -109,7 +105,7 @@ const NavBar = ({ isSolid }) => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                style = {{color: '#fff'}}
+                style={{ color: "#fff" }}
               >
                 <path
                   strokeLinecap="round"
@@ -125,7 +121,9 @@ const NavBar = ({ isSolid }) => {
       </div>
       {/* mobile menu */}
       <div
-        className={`bg-blue-800 h-screen text-white pt-10 ml-6 ${!isMobilemenushown ? "hidden" : null}`}
+        className={`bg-blue-800 h-screen text-white pt-10 ml-6 ${
+          !isMobilemenushown ? "hidden" : null
+        }`}
       >
         <Link to="/about-us">
           <a

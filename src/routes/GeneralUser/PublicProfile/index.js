@@ -13,7 +13,6 @@ function PublicProfile() {
     // fetch the user data first
     (async () => {
       const data = await fetchPublicUserDetails(id);
-      console.log(data);
       setUserData(data);
     })();
   }, []);
