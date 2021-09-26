@@ -1,7 +1,16 @@
-.ngo-login-root{
-    height: 100vh;
+.ngo-login-root {
+  height: 100vh;
 }
 
-.main-form-section {
-    border-radius: 0 0 8rem 0;
+.ngo-login-hero-section {
+  min-height: 100%;
+  background: linear-gradient(
+      0deg,
+      rgba(38, 0, 255, 0.76),
+      rgba(17, 0, 255, 0.658)
+    ),
+    url(https://source.unsplash.com/i__uqGnARyI/);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
