@@ -48,17 +48,17 @@ function UserNavbar({ NavbarLinks }) {
         }
         id="example-navbar-danger"
       >
-        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto mt-5 md:mt-0">
           {NavbarLinks.map((item, index) => {
             return (
-              <li className="nav-item" key={index}>
+              <li className="nav-item my-3 md:my-0" key={index}>
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href={item.link}
                 >
                   <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
                   <span className="ml-2 flex item-center">
-                    <span className="mr-1">{item.icon}</span>
+                    <span className="mr-3">{item.icon}</span>
                     {item.name}
                   </span>
                 </a>
