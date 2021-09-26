@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
-import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
 import { BsFilter } from "react-icons/bs";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
@@ -8,7 +7,6 @@ import {
   fetchHomelessAsync,
   getHomelessPersonAsync,
   searchHomelessAsync,
-  searchHomelessPeopleAsync,
 } from "../../../api/homeless.api";
 import "./style.css";
 import SearchResultGallery from "../../../components/SeachResultGallery";
@@ -17,6 +15,12 @@ import Map from "../../../components/Map";
 import HomelessPerson from "../../../components/HomelessPerson";
 import SearchFilterModel from "../../../components/SearchFilterModal";
 
+/**
+ *
+ * Handles Homeless Reports
+ * fetches Homeless according to the filter
+ * displays it with JSX
+ */
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoHomeLess() {
   const SEARCH_RESULT_MODES = {
@@ -25,21 +29,21 @@ export default function NgoHomeLess() {
     PERSONS: "persons",
   };
 
-  const [homelessPersons, setHomelessPersons] = useState([]);
+  const [homelessPersons, setHomelessPersons] = useState([]); // contains the homeless persons (not in use)
   const [days, setDays] = useState(1);
   const ngocontext = useContext(NgoContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("place");
   const [searchResultTitle, setSearchResultTitle] = useState("People arround ");
   const [diameter, setDiameter] = useState(20);
-  const [homelessList, setHomelessList] = useState([]);
+  const [homelessList, setHomelessList] = useState([]); // contains the homless reports
   const [markers, setMarkers] = useState([]);
   const [currentSearchResultMode, setCurrentSearchResultMode] = useState(
     SEARCH_RESULT_MODES.MAIN
-  );
-  const [_topImages, setTopImages] = useState([""]);
+  ); // contains the modes
+  const [_topImages, setTopImages] = useState([""]); // top images to display in the main search result
   const modelRef = useRef(null);
-  const [homelessMap, setHomelessMap] = useState({});
+  const [homelessMap, setHomelessMap] = useState({}); // Array of { "location": [ {homless} ] } group of homless reports by location
   const showModel = () => {
     modelRef.current.style.display = "flex";
   };
@@ -60,20 +64,20 @@ export default function NgoHomeLess() {
   };
 
   const loadInitialHomelessDataAsync = async () => {
+    /**
+     * Loads the homeless peoples near to the NGO
+     */
     const geo_location = await getBaseLocationAsync();
     const { homeless_list, topImages, homelessMap } = await fetchHomelessAsync({
       geo_location,
       diameter,
       days,
     });
-    // alert(JSON.stringify(homeless_list));
     if (homeless_list) {
       setTopImages(topImages);
-      console.log(topImages);
       setHomelessList(homeless_list);
       setSearchResultTitle("Near " + ngocontext.ngoDetails?.name);
     }
-    // console.log(homeless_list);
     setHomelessMap(homelessMap);
   };
   useEffect(() => {
@@ -82,13 +86,15 @@ export default function NgoHomeLess() {
   }, [ngocontext.ngoDetails]);
 
   const handleImageClick = async (homeless) => {
+    /**
+     * Show the homeless persons based on the image click of the report
+     */
     const { _id } = homeless;
     const { homeless_person, notfound } = await getHomelessPersonAsync({ _id });
 
     if (notfound) {
       return;
     }
-    console.log(homeless_person);
     setHomelessPersons(homeless_person);
     setCurrentSearchResultMode(SEARCH_RESULT_MODES.PERSONS);
   };
@@ -99,8 +105,6 @@ export default function NgoHomeLess() {
     }
     if (filter == "place") {
       placeWiseSearchAsync();
-    }
-    if (filter == "people") {
     }
   };
 
@@ -124,11 +128,11 @@ export default function NgoHomeLess() {
   };
 
   const getMarkers = (homeless_list) => {
+    // returns the markers for the map with extra infos
     let _markers = [];
     homeless_list.forEach((h) => {
       _markers.push({ ...h.geo_location, media_url: h.media_url });
     });
-    console.log(_markers);
     return _markers;
   };
   useEffect(() => {
@@ -224,10 +228,8 @@ export default function NgoHomeLess() {
       <SearchFilterModel
         diameter={diameter}
         setDiameter={setDiameter}
-        showModel={showModel}
         hideModel={hideModel}
         modelRef={modelRef}
-        onSelectFilter={(f) => setFilter(f)}
         days={days}
         setDays={setDays}
       />
@@ -235,5 +237,6 @@ export default function NgoHomeLess() {
   );
 }
 
+//for the map pop
 const customPopup = (marker) =>
   `<div><img src="${marker.media_url[0].url}" width=300/><h2 class="text-center mt-4 font-bold"> ${marker.address}</h2></div>`;

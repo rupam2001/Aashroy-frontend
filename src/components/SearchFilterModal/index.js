@@ -1,12 +1,22 @@
 import React from "react";
 
+/**
+ * Opens a Model containing two sliders for setting diameter and days
+ * @param {
+ * diameter: Number,
+ * setDiameter: Callback(Number),
+ * hideModel: Callback(void),
+ * modelRef: React.useRef(),
+ * days:Number,
+ * setDays: Callback(NUmber)  }
+ * @returns {JSX}
+ */
+
 const SearchFilterModel = ({
   diameter,
   setDiameter,
-  showModel,
   hideModel,
   modelRef,
-  onSelectFilter,
   days,
   setDays,
 }) => {
@@ -26,26 +36,7 @@ const SearchFilterModel = ({
               &times;
             </span>
           </div>
-          <ol className="w-full mx-2 mt-2 ">
-            {/* <li
-              className=" flex items-center  my-0  bg-white p-4 font-bold  shadow cursor-pointer hover:shadow-lg"
-              onClick={() => {
-                onSelectFilter("place");
-              }}
-            >
-              <MdPlace className="text-lg text-green-500 mr-2" />
-              <h2 className="text-blue-500"> Place Name</h2>
-            </li>
-            <li
-              className=" flex items-center  my-0  bg-white p-4 font-bold  shadow cursor-pointer hover:shadow-lg"
-              onClick={() => {
-                onSelectFilter("person");
-              }}
-            >
-              <MdPerson className="text-lg text-green-500 mr-2" />
-              <h2 className="text-blue-500"> Person's Name</h2>
-            </li> */}
-          </ol>
+          <ol className="w-full mx-2 mt-2 "></ol>
           <div className="bg-white w-full px-2 py-8">
             <h2 className="font-bold">
               Diameter of area :{" "}

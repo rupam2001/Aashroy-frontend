@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBar from "../../../components/SearchBar";
-import { MdFilterList, MdPlace, MdPerson } from "react-icons/md";
 import { BsFilter } from "react-icons/bs";
 import { NgoContext } from "../../../contexts/ngo.context";
 import { getCurrentGeoLocationAsync } from "../../../utils/location";
@@ -15,8 +14,14 @@ import {
 import CrimeCards from "../../../components/CrimeCards";
 import TableWrapper from "../../../components/TableWrapper";
 import { crimeColumn } from "../../../constants/table.constants";
-import Table from "../../../components/Table";
 import SearchFilterModel from "../../../components/SearchFilterModal";
+
+/**
+ *
+ * Handles Crime Reports
+ * fetches crimes according to the filter
+ * displays it with JSX
+ */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default function NgoCrimeReportView() {
@@ -35,7 +40,7 @@ export default function NgoCrimeReportView() {
   const [currentSearchResultMode, setCurrentSearchResultMode] = useState(
     SEARCH_RESULT_MODES.MAIN
   );
-  const [_topImages, setTopImages] = useState([""]);
+  const [_topImages, setTopImages] = useState([""]); // top images to display in the main search result
   const [days, setDays] = useState(7);
   const modelRef = useRef(null);
   const [crimeMap, setCrimeMap] = useState({});
@@ -58,7 +63,7 @@ export default function NgoCrimeReportView() {
     return await getCurrentGeoLocationAsync();
   };
 
-  const loadInitialHomelessDataAsync = async () => {
+  const loadInitialCrimeDataAsync = async () => {
     const geo_location = await getBaseLocationAsync();
     const { crime_list, topImages, crimeMap } = await fetchCrimesAsync({
       geo_location,
@@ -71,19 +76,17 @@ export default function NgoCrimeReportView() {
       setCrimeList(crime_list);
       setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
     }
-    console.log(crime_list);
     setCrimeMap(crimeMap);
   };
   useEffect(() => {
-    loadInitialHomelessDataAsync();
+    loadInitialCrimeDataAsync();
     setSearchResultTitle("Crimes near " + ngocontext.ngoDetails?.name);
   }, [ngocontext.ngoDetails]);
 
   const handleImageClick = (homeless) => {};
   const handleSearchAsync = async () => {
     if (searchQuery == "") {
-      loadInitialHomelessDataAsync();
-
+      loadInitialCrimeDataAsync();
       return;
     }
     if (filter == "place") {

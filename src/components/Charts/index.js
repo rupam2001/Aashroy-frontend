@@ -11,6 +11,13 @@ import {
   AreaChart,
   ResponsiveContainer,
 } from "recharts";
+
+/**
+ * Draws line chart and area chart
+ * @param { data: crime_report schema }
+ * @returns {JSX}
+ */
+
 export default function Charts({ data }) {
   const [preParedDataByDate, setPreparedDataByDate] = useState([]);
 
