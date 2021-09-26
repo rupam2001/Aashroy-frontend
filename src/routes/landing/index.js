@@ -185,7 +185,7 @@ const Landing = () => {
       <HeroSection />
       <div className="bg-white pt-20 pb-20">
         <div className=" max-w-6xl mx-auto md:px-4 px-7 ">
-          <div className="flex">
+          <div className="flex flex-col  md:flex-row">
             <div className="md:w-1/2">
               <Link to="/general/report-homeless">
                 <div className="mb-12 cursor-pointer">
@@ -236,8 +236,8 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-            <div className="md:w-1/2 md:block hidden">
-              <div className="px-16">
+            <div className="md:w-1/2">
+              <div className="md:px-16">
                 <DonationBoardSection />
               </div>
             </div>
